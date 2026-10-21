@@ -1,0 +1,1487 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Switchboards · VoltNest Classic Home Wiring Services</title>
+
+    <!-- Favicon (Thunder Icon) -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23b45309' rx='20'/%3E%3Ctext x='50' y='68' font-size='56' text-anchor='middle' fill='white' font-family='Arial'%3E⚡%3C/text%3E%3C/svg%3E" />
+
+    <!-- Fonts & Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Inter"', 'system-ui', 'sans-serif'],
+                        display: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Custom Professional Styles -->
+    <style>
+        :root {
+            --bg-color: #f8fafc;
+            --bg-secondary: #f0f7ff;
+            --bg-card: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --text-dim: #94a3b8;
+            --accent: #b45309;
+            --accent-dark: #78350f;
+            --accent-light: #fef3c7;
+            --border-light: rgba(180, 83, 9, 0.22);
+            --border-strong: rgba(180, 83, 9, 0.42);
+            --nav-bg: rgba(248, 250, 252, 0.94);
+            --drawer-bg: rgba(255, 255, 255, 0.98);
+            --menu-hover-bg: rgba(180, 83, 9, 0.10);
+            --shadow-color: rgba(180, 83, 9, 0.16);
+            --gradient-accent: linear-gradient(135deg, #b45309 0%, #78350f 100%);
+        }
+
+        body.dark-mode {
+            --bg-color: #0f172a;
+            --bg-secondary: #1e293b;
+            --bg-card: #0f172a;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --text-dim: #64748b;
+            --accent: #f59e0b;
+            --accent-dark: #b45309;
+            --border-light: rgba(245, 158, 11, 0.22);
+            --border-strong: rgba(245, 158, 11, 0.42);
+            --nav-bg: rgba(15, 23, 42, 0.94);
+            --drawer-bg: rgba(15, 23, 42, 0.98);
+            --menu-hover-bg: rgba(245, 158, 11, 0.12);
+            --gradient-accent: linear-gradient(135deg, #f59e0b 0%, #b45309 100%);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            padding-top: 84px;
+            transition: background-color .3s ease, color .3s ease;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, .brand-logo, .font-display { font-family: 'Plus Jakarta Sans', sans-serif; letter-spacing: -0.02em; }
+
+        /* ============ NAVBAR ============ */
+        .navbar {
+            position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
+            background: var(--nav-bg); height: 84px; display: flex; align-items: center;
+            backdrop-filter: blur(16px); transition: all 0.3s ease; border-bottom: 1px solid transparent;
+        }
+        .navbar.scrolled {
+            height: 70px; border-bottom: 1px solid var(--border-light);
+            box-shadow: 0 10px 40px var(--shadow-color);
+        }
+        .brand-link { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+        .brand-icon-wrapper { width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(180, 83, 9, 0.35); background: rgba(180, 83, 9, 0.10); color: var(--accent); font-size: 1.15rem; transition: transform 0.3s ease; }
+        .brand-link:hover .brand-icon-wrapper { transform: scale(1.05) rotate(5deg); }
+        .brand-logo { font-size: 1.6rem; font-weight: 800; color: var(--text-main); }
+        .brand-logo span { color: var(--accent); }
+
+        .nav-pills {
+            display: flex; align-items: center; gap: 4px;
+            background: var(--bg-card); padding: 6px; border-radius: 60px;
+            border: 1px solid var(--border-light); box-shadow: 0 4px 20px var(--shadow-color);
+        }
+        .nav-pill {
+            padding: 10px 18px; color: var(--text-main); font-size: 12px; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 0.5px; border-radius: 40px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none; display: inline-flex; align-items: center; gap: 6px; white-space: nowrap;
+        }
+        .nav-pill:hover { color: var(--accent); background: var(--menu-hover-bg); transform: translateY(-2px); }
+        .nav-pill.active {
+            background: var(--gradient-accent); color: #ffffff !important;
+            box-shadow: 0 6px 16px rgba(180, 83, 9, 0.35); transform: translateY(-1px);
+        }
+
+        .dropdown-pill { position: relative; display: flex; align-items: center; }
+        .dropdown-pill .nav-pill { padding-right: 14px; }
+        .dropdown-pill .nav-pill .fa-chevron-down { font-size: 10px; margin-left: 2px; transition: transform 0.25s ease; opacity: 0.7; }
+        .dropdown-pill:hover .nav-pill .fa-chevron-down { transform: rotate(180deg); opacity: 1; }
+        .dropdown-pill-menu {
+            position: absolute; top: calc(100% + 12px); left: 0; min-width: 190px;
+            background: var(--bg-card); border: 1px solid var(--border-light); border-radius: 16px;
+            padding: 8px; box-shadow: 0 20px 48px rgba(0, 0, 0, 0.15);
+            opacity: 0; visibility: hidden; transform: translateY(10px) scale(0.96);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); z-index: 100;
+        }
+        .dropdown-pill:hover .dropdown-pill-menu { opacity: 1; visibility: visible; transform: translateY(0) scale(1); }
+        .dropdown-pill-item {
+            display: block; padding: 12px 18px; color: var(--text-main); text-decoration: none;
+            font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px;
+            border-radius: 12px; transition: all 0.2s ease;
+        }
+        .dropdown-pill-item:hover { background: var(--menu-hover-bg); color: var(--accent); padding-left: 24px; }
+        .dropdown-pill-item.active { color: var(--accent); background: rgba(180, 83, 9, 0.08); }
+
+        .btn { padding: 12px 26px; font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: 1.2px; border-radius: 40px; transition: all 0.3s ease; display: inline-flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none; text-align: center; }
+        .btn-solid { background: var(--gradient-accent); color: #ffffff !important; border: none; box-shadow: 0 4px 15px rgba(180, 83, 9, 0.25); }
+        .btn-solid:hover { transform: translateY(-3px); box-shadow: 0 8px 26px rgba(180, 83, 9, 0.4); }
+        .btn-outline { background: var(--bg-card); border: 2px solid var(--border-light); color: var(--text-main); box-shadow: 0 4px 15px var(--shadow-color); }
+        .btn-outline:hover { border-color: var(--accent); color: var(--accent) !important; background: var(--menu-hover-bg); transform: translateY(-2px); }
+
+        .theme-btn, .rtl-toggle { height: 42px; border-radius: 40px; background: var(--bg-card); border: 1px solid var(--border-light); color: var(--text-main); cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px var(--shadow-color); }
+        .theme-btn { width: 42px; border-radius: 50%; font-size: 14px; }
+        .rtl-toggle { padding: 0 18px; font-size: 11px; font-weight: 800; gap: 6px; letter-spacing: 0.5px; }
+        .theme-btn:hover, .rtl-toggle:hover { background: var(--accent); border-color: var(--accent); color: #fff; transform: translateY(-2px); }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--bg-secondary); }
+        ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 3px; }
+
+        /* ============ MOBILE DRAWER ============ */
+        .drawer-overlay { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.75); z-index: 999; opacity: 0; visibility: hidden; transition: all 0.4s ease; backdrop-filter: blur(6px); }
+        .drawer-overlay.active { opacity: 1; visibility: visible; }
+        .fullscreen-menu { position: fixed; top: 0; right: 0; width: 100%; max-width: 380px; height: 100dvh; background: var(--drawer-bg); z-index: 1001; display: flex; flex-direction: column; transform: translateX(100%); transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); border-left: 1px solid var(--border-light); box-shadow: -10px 0 40px rgba(0,0,0,0.1); }
+        .fullscreen-menu.active { transform: translateX(0); }
+        .mobile-link { display: block; padding: 18px 28px; font-weight: 700; color: var(--text-main); font-size: 15px; border-bottom: 1px solid var(--border-light); transition: all 0.2s; text-decoration: none; }
+        .mobile-link:hover { color: var(--accent); padding-left: 36px; background: var(--menu-hover-bg); }
+        .mobile-link.active { color: var(--accent); background: var(--menu-hover-bg); border-left: 3px solid var(--accent); padding-left: 25px; }
+        .mobile-dropdown-items { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; background: var(--bg-secondary); }
+        .mobile-dropdown-items.open { max-height: 150px; padding: 6px 0 10px 16px; }
+
+        /* ============ HERO ============ */
+        .page-hero {
+            position: relative;
+            min-height: calc(100vh - 84px);
+            display: flex; align-items: center; justify-content: center;
+            overflow: hidden; isolation: isolate;
+        }
+        .page-hero-bg {
+            position: absolute; inset: 0;
+            background-image: url('https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&q=80&w=2000');
+            background-size: cover; background-position: center; background-repeat: no-repeat;
+            z-index: -2; transform: scale(1.04);
+            animation: heroZoom 18s ease-in-out infinite alternate;
+        }
+        @keyframes heroZoom { from { transform: scale(1.04); } to { transform: scale(1.14); } }
+        .page-hero-overlay {
+            position: absolute; inset: 0; z-index: -1;
+            background:
+                linear-gradient(180deg, rgba(15, 23, 42, 0.90) 0%, rgba(15, 23, 42, 0.70) 45%, rgba(15, 23, 42, 0.95) 100%),
+                radial-gradient(circle at 80% 24%, rgba(180, 83, 9, 0.44) 0%, transparent 58%),
+                radial-gradient(circle at 10% 84%, rgba(180, 83, 9, 0.26) 0%, transparent 52%);
+        }
+        .page-hero-inner {
+            position: relative; z-index: 2; width: 100%; max-width: 1100px;
+            padding: 70px 24px; text-align: center; color: #ffffff;
+        }
+        .hero-breadcrumb {
+            display: inline-flex; align-items: center; gap: 10px;
+            padding: 9px 20px; border-radius: 999px;
+            background: rgba(255, 255, 255, 0.10);
+            border: 1px solid rgba(255, 255, 255, 0.22);
+            backdrop-filter: blur(10px);
+            font-size: 11px; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 1.6px; color: #fef3c7;
+        }
+        .hero-breadcrumb a { color: #fef3c7; text-decoration: none; transition: color 0.25s ease; }
+        .hero-breadcrumb a:hover { color: #ffffff; }
+        .hero-breadcrumb .sep { opacity: 0.55; font-size: 9px; }
+        .hero-breadcrumb .current { color: #ffffff; }
+
+        .page-hero h1 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 800; letter-spacing: -0.03em; line-height: 1.05;
+            font-size: clamp(2.2rem, 5.6vw, 4.6rem);
+            margin-top: 26px;
+            text-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
+        }
+        .page-hero h1 em { font-style: italic; font-weight: 400; color: #fbbf24; }
+
+        .page-hero p.lead {
+            max-width: 660px; margin: 22px auto 0;
+            font-size: 0.95rem; line-height: 1.8;
+            color: rgba(241, 245, 249, 0.88);
+        }
+        @media (min-width: 640px) { .page-hero p.lead { font-size: 1.075rem; } }
+
+        .page-hero-cta { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; margin-top: 34px; }
+        .page-hero-cta .btn-solid { box-shadow: 0 12px 34px rgba(180, 83, 9, 0.45); }
+        .page-hero-cta .btn-ghost {
+            padding: 12px 26px; border-radius: 40px;
+            font-weight: 700; font-size: 11px;
+            text-transform: uppercase; letter-spacing: 1.2px;
+            display: inline-flex; align-items: center; gap: 8px;
+            text-decoration: none; color: #ffffff;
+            background: rgba(255, 255, 255, 0.09);
+            border: 1px solid rgba(255, 255, 255, 0.28);
+            backdrop-filter: blur(10px); transition: all 0.3s ease;
+        }
+        .page-hero-cta .btn-ghost:hover {
+            background: rgba(255, 255, 255, 0.18);
+            border-color: rgba(255, 255, 255, 0.55);
+            transform: translateY(-2px);
+        }
+
+        .hero-trustline {
+            display: flex; flex-wrap: wrap; align-items: center; justify-content: center;
+            gap: 10px 22px; margin-top: 30px;
+            font-size: 10.5px; font-weight: 700; letter-spacing: 1.3px;
+            text-transform: uppercase; color: rgba(226, 232, 240, 0.72);
+        }
+        .hero-trustline i { color: #fbbf24; margin-right: 6px; }
+        .hero-trustline .stars { color: #fbbf24; letter-spacing: 2px; }
+
+        .hero-stat-strip {
+            display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 12px; max-width: 660px;
+            margin: 42px auto 0; padding-top: 26px;
+            border-top: 1px solid rgba(255, 255, 255, 0.18);
+        }
+        .hero-stat-strip .num { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.5rem; font-weight: 800; color: #ffffff; }
+        .hero-stat-strip .lbl { font-size: 9.5px; font-weight: 700; letter-spacing: 1.4px; text-transform: uppercase; color: rgba(254, 243, 199, 0.78); margin-top: 4px; }
+
+        .scroll-cue {
+            position: absolute; bottom: 24px; left: 50%; transform: translateX(-50%);
+            z-index: 3; display: flex; flex-direction: column; align-items: center; gap: 8px;
+            color: rgba(255, 255, 255, 0.62);
+            font-size: 9px; font-weight: 700;
+            letter-spacing: 2px; text-transform: uppercase;
+            text-decoration: none;
+            animation: cueFloat 2.4s ease-in-out infinite;
+        }
+        .scroll-cue:hover { color: #fbbf24; }
+        @keyframes cueFloat { 0%, 100% { transform: translate(-50%, 0); } 50% { transform: translate(-50%, 8px); } }
+
+        @media (prefers-reduced-motion: reduce) {
+            .page-hero-bg { animation: none; }
+            .scroll-cue { animation: none; }
+        }
+
+        /* ============ SHARED SECTION SYSTEM ============ */
+        .sb-section { padding: 56px 0; }
+        @media (min-width: 768px) { .sb-section { padding: 80px 0; } }
+
+        .sb-eyebrow {
+            display: inline-flex; align-items: center; gap: 9px;
+            font-size: 10.5px; font-weight: 800; letter-spacing: 2px;
+            text-transform: uppercase; color: var(--accent);
+        }
+        .sb-eyebrow::before { content: ''; width: 24px; height: 2px; background: var(--accent); border-radius: 2px; }
+
+        .sb-title {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 800; letter-spacing: -0.03em;
+            font-size: clamp(1.7rem, 3.4vw, 2.6rem);
+            line-height: 1.14; color: var(--text-main);
+        }
+
+        .sb-img-card {
+            position: relative; border-radius: 26px; overflow: hidden;
+            border: 1px solid var(--border-light);
+            box-shadow: 0 32px 64px -28px rgba(180, 83, 9, 0.38);
+        }
+        .sb-img-card img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.9s cubic-bezier(0.4,0,0.2,1); }
+        .sb-img-card:hover img { transform: scale(1.05); }
+
+        /* ============ SECTION 1 · INTRO ============ */
+        .sb-stat-tile {
+            position: relative;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-light);
+            border-radius: 18px;
+            padding: 18px 14px;
+            transition: all 0.35s cubic-bezier(0.4,0,0.2,1);
+        }
+        .sb-stat-tile:hover {
+            background: var(--menu-hover-bg);
+            border-color: var(--border-strong);
+            transform: translateY(-4px);
+            box-shadow: 0 18px 38px -20px rgba(180, 83, 9, 0.32);
+        }
+        .sb-stat-tile .val {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: clamp(1.05rem, 2.4vw, 1.5rem); font-weight: 800;
+            background: var(--gradient-accent);
+            -webkit-background-clip: text; background-clip: text;
+            color: transparent; line-height: 1.1;
+        }
+        .sb-stat-tile .key {
+            font-size: 9px; font-weight: 700;
+            letter-spacing: 1.2px; text-transform: uppercase;
+            color: var(--text-muted); margin-top: 7px; line-height: 1.4;
+        }
+
+        .sb-float-tag {
+            position: absolute;
+            bottom: 18px; left: 18px; right: 18px;
+            padding: 14px 16px;
+            border-radius: 18px;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(14px);
+            border: 1px solid var(--border-light);
+            box-shadow: 0 18px 40px rgba(0,0,0,0.18);
+            display: flex; align-items: center; gap: 12px;
+        }
+        body.dark-mode .sb-float-tag { background: rgba(15,23,42,0.95); }
+
+        .sb-check-list { display: grid; gap: 12px; }
+        @media (min-width: 640px) { .sb-check-list { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+        .sb-check {
+            display: flex; align-items: flex-start; gap: 11px;
+            font-size: 0.845rem; line-height: 1.55;
+            color: var(--text-muted); font-weight: 500;
+        }
+        .sb-check-icon {
+            flex-shrink: 0; width: 24px; height: 24px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            background: var(--gradient-accent); color: #fff; font-size: 9px;
+            box-shadow: 0 5px 14px rgba(180,83,9,0.30); margin-top: 1px;
+        }
+
+        /* ============ SECTION 2 · SHOWCASE ============ */
+        .sb-showcase {
+            position: relative; border-radius: 28px; overflow: hidden; isolation: isolate;
+            border: 1px solid var(--border-strong);
+            box-shadow: 0 36px 80px -34px rgba(15, 23, 42, 0.65);
+        }
+        @media (min-width: 768px) { .sb-showcase { border-radius: 32px; } }
+        .sb-showcase-bg {
+            position: absolute; inset: 0; z-index: -2;
+            background-image: url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&q=80&w=2000');
+            background-size: cover; background-position: center;
+            transform: scale(1.04); transition: transform 1.2s ease;
+        }
+        .sb-showcase:hover .sb-showcase-bg { transform: scale(1.1); }
+        .sb-showcase-overlay {
+            position: absolute; inset: 0; z-index: -1;
+            background:
+                linear-gradient(180deg, rgba(15,23,42,0.74) 0%, rgba(15,23,42,0.87) 55%, rgba(15,23,42,0.95) 100%),
+                radial-gradient(circle at 18% 20%, rgba(180,83,9,0.40) 0%, transparent 58%);
+        }
+        .sb-showcase-inner { padding: 52px 22px; text-align: center; color: #ffffff; }
+        @media (min-width: 768px) { .sb-showcase-inner { padding: 78px 54px; } }
+
+        .sb-showcase h2 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 800; letter-spacing: -0.03em;
+            font-size: clamp(1.75rem, 4vw, 3rem);
+            line-height: 1.12;
+            text-shadow: 0 12px 36px rgba(0,0,0,0.4);
+        }
+        .sb-showcase h2 em { font-style: italic; font-weight: 400; color: #fbbf24; }
+
+        .sb-feature-grid {
+            display: grid; grid-template-columns: 1fr; gap: 0;
+            margin-top: 40px; border-top: 1px solid rgba(255,255,255,0.16);
+        }
+        @media (min-width: 768px) { .sb-feature-grid { grid-template-columns: repeat(4, 1fr); } }
+
+        .sb-feature-cell {
+            padding: 26px 14px;
+            border-bottom: 1px solid rgba(255,255,255,0.14);
+            text-align: center;
+        }
+        @media (min-width: 768px) {
+            .sb-feature-cell { border-bottom: none; border-right: 1px solid rgba(255,255,255,0.14); }
+            .sb-feature-cell:last-child { border-right: none; }
+        }
+        .sb-feature-cell:last-child { border-bottom: none; }
+        .sb-feature-cell i { font-size: 19px; color: #fbbf24; margin-bottom: 11px; display: block; }
+        .sb-feature-cell .t {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 700; font-size: 0.92rem; color: #ffffff;
+        }
+        .sb-feature-cell .d {
+            font-size: 10px; font-weight: 600;
+            letter-spacing: 1px; text-transform: uppercase;
+            color: rgba(148,163,184,0.95); margin-top: 6px; line-height: 1.5;
+        }
+
+        .sb-showcase-chiprow {
+            display: flex; flex-wrap: wrap; justify-content: center;
+            gap: 8px; margin-top: 32px;
+        }
+        .sb-showcase-chip {
+            display: inline-flex; align-items: center; gap: 7px;
+            padding: 8px 15px; border-radius: 999px;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.20);
+            font-size: 9.5px; font-weight: 700; letter-spacing: 1.1px;
+            text-transform: uppercase; color: rgba(254,243,199,0.92);
+            backdrop-filter: blur(8px);
+        }
+        .sb-showcase-chip i { color: #fbbf24; font-size: 9px; }
+
+        /* ============ SECTION 3 · SERVICE CARDS ============ */
+        .sb-card {
+            position: relative; overflow: hidden;
+            background: var(--bg-card);
+            border: 1px solid var(--border-light);
+            border-radius: 22px;
+            padding: 28px 24px 24px;
+            display: flex; flex-direction: column;
+            transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
+        }
+        .sb-card:hover {
+            border-color: var(--border-strong);
+            transform: translateY(-6px);
+            box-shadow: 0 28px 56px -28px rgba(180,83,9,0.42);
+        }
+        .sb-card::after {
+            content: ''; position: absolute; left: 0; top: 0; height: 3px; width: 0;
+            background: var(--gradient-accent); border-radius: 0 0 3px 0;
+            transition: width 0.45s cubic-bezier(0.4,0,0.2,1);
+        }
+        .sb-card:hover::after { width: 100%; }
+
+        .sb-card-num {
+            position: absolute; top: 18px; right: 20px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 2.2rem; font-weight: 800; line-height: 1;
+            color: var(--accent); opacity: 0.12;
+        }
+        .sb-card-icon {
+            width: 52px; height: 52px; border-radius: 15px;
+            display: flex; align-items: center; justify-content: center;
+            background: rgba(180,83,9,0.10);
+            border: 1px solid var(--border-light);
+            color: var(--accent); font-size: 18px;
+            transition: all 0.35s ease; flex-shrink: 0;
+        }
+        .sb-card:hover .sb-card-icon {
+            background: var(--gradient-accent); color: #fff;
+            transform: rotate(-6deg) scale(1.06);
+            box-shadow: 0 10px 24px rgba(180,83,9,0.35);
+        }
+        .sb-card-title {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 700; font-size: 1rem; line-height: 1.35;
+            color: var(--text-main); margin-top: 18px;
+        }
+        .sb-card-desc {
+            font-size: 0.835rem; line-height: 1.68;
+            color: var(--text-muted); margin-top: 9px; flex: 1;
+        }
+        .sb-card-link {
+            display: inline-flex; align-items: center; gap: 8px;
+            margin-top: 18px; padding-top: 15px;
+            border-top: 1px dashed var(--border-light);
+            font-size: 10px; font-weight: 800;
+            letter-spacing: 1.3px; text-transform: uppercase;
+            color: var(--accent); text-decoration: none;
+        }
+        .sb-card-link i { transition: transform 0.3s ease; font-size: 9px; }
+        .sb-card:hover .sb-card-link i { transform: translateX(4px); }
+
+        /* ============ SECTION 4 · COMPARISON ============ */
+        .cmp-panel {
+            position: relative; border-radius: 24px;
+            padding: 28px 24px; height: 100%;
+            display: flex; flex-direction: column;
+        }
+        @media (min-width: 768px) { .cmp-panel { padding: 32px 30px; } }
+        .cmp-old { background: var(--bg-secondary); border: 1px dashed rgba(148,163,184,0.45); }
+        .cmp-new {
+            background: var(--bg-card);
+            border: 1px solid var(--border-strong);
+            box-shadow: 0 26px 56px -26px rgba(180,83,9,0.36);
+        }
+        .cmp-head {
+            display: flex; align-items: center; gap: 13px;
+            padding-bottom: 18px; margin-bottom: 12px;
+            border-bottom: 1px dashed var(--border-light);
+        }
+        .cmp-head-icon {
+            width: 46px; height: 46px; border-radius: 14px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 17px; flex-shrink: 0;
+        }
+        .cmp-old .cmp-head-icon { background: rgba(148,163,184,0.16); color: #64748b; border: 1px solid rgba(148,163,184,0.32); }
+        .cmp-new .cmp-head-icon { background: var(--gradient-accent); color: #ffffff; box-shadow: 0 8px 20px rgba(180,83,9,0.30); }
+        .cmp-head-title {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 700; font-size: 1.02rem; color: var(--text-main);
+        }
+        .cmp-head-sub {
+            font-size: 9px; font-weight: 700;
+            letter-spacing: 1.2px; text-transform: uppercase;
+            color: var(--text-muted); margin-top: 3px;
+        }
+        .cmp-item {
+            display: flex; align-items: flex-start; gap: 11px;
+            padding: 9px 0; font-size: 0.835rem; line-height: 1.58;
+            color: var(--text-muted);
+        }
+        .cmp-item i {
+            flex-shrink: 0; width: 20px; height: 20px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 8px; margin-top: 2px;
+        }
+        .cmp-old .cmp-item i { background: rgba(148,163,184,0.18); color: #64748b; }
+        .cmp-new .cmp-item i { background: rgba(180,83,9,0.14); color: var(--accent); }
+
+        .cmp-arrow {
+            width: 56px; height: 56px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            background: var(--gradient-accent); color: #fff; font-size: 16px;
+            box-shadow: 0 14px 32px rgba(180,83,9,0.40);
+            border: 4px solid var(--bg-color);
+        }
+
+        /* ============ SECTION 5 · TIMELINE ============ */
+        .tl-wrap { position: relative; }
+        .tl-item { position: relative; padding-left: 72px; padding-bottom: 30px; }
+        .tl-item:last-child { padding-bottom: 0; }
+        .tl-item::before {
+            content: ''; position: absolute;
+            left: 22px; top: 50px; bottom: 4px; width: 2px;
+            background: repeating-linear-gradient(
+                to bottom,
+                var(--border-light) 0, var(--border-light) 5px,
+                transparent 5px, transparent 10px
+            );
+        }
+        .tl-item:last-child::before { display: none; }
+
+        .tl-dot {
+            position: absolute; left: 0; top: 0;
+            width: 46px; height: 46px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 800; font-size: 0.85rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border-strong);
+            color: var(--accent);
+            box-shadow: 0 8px 22px var(--shadow-color);
+            transition: all 0.35s ease;
+        }
+        .tl-item:hover .tl-dot {
+            background: var(--gradient-accent); color: #ffffff; transform: scale(1.06);
+        }
+        .tl-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-light);
+            border-radius: 18px;
+            padding: 20px 22px;
+            transition: all 0.35s cubic-bezier(0.4,0,0.2,1);
+        }
+        .tl-item:hover .tl-card {
+            border-color: var(--border-strong);
+            box-shadow: 0 20px 44px -24px rgba(180,83,9,0.32);
+            transform: translateX(4px);
+        }
+        .tl-time {
+            display: inline-flex; align-items: center; gap: 6px;
+            font-size: 9px; font-weight: 800;
+            letter-spacing: 1.2px; text-transform: uppercase;
+            color: var(--accent);
+            background: var(--menu-hover-bg);
+            border: 1px solid var(--border-light);
+            border-radius: 999px; padding: 5px 11px;
+            margin-top: 11px;
+        }
+        @media (max-width: 639px) {
+            .tl-item { padding-left: 60px; padding-bottom: 24px; }
+            .tl-dot { width: 40px; height: 40px; font-size: 0.76rem; }
+            .tl-item::before { left: 19px; top: 44px; }
+            .tl-card { padding: 17px 18px; }
+        }
+
+        /* ============ SECTION 6 · GUARANTEE + CTA ============ */
+        .sb-guarantee {
+            display: grid; grid-template-columns: 1fr; gap: 0;
+            border: 1px solid var(--border-light);
+            border-radius: 24px; overflow: hidden;
+            background: var(--bg-card);
+            box-shadow: 0 24px 56px -30px var(--shadow-color);
+        }
+        @media (min-width: 640px) { .sb-guarantee { grid-template-columns: repeat(2, 1fr); } }
+        @media (min-width: 1024px) { .sb-guarantee { grid-template-columns: repeat(4, 1fr); } }
+
+        .sb-guarantee-cell {
+            display: flex; align-items: flex-start; gap: 13px;
+            padding: 22px 20px;
+            border-bottom: 1px solid var(--border-light);
+            transition: background 0.3s ease;
+        }
+        .sb-guarantee-cell:hover { background: var(--menu-hover-bg); }
+        .sb-guarantee-cell:last-child { border-bottom: none; }
+        @media (min-width: 640px) and (max-width: 1023px) {
+            .sb-guarantee-cell:nth-child(odd) { border-right: 1px solid var(--border-light); }
+            .sb-guarantee-cell:nth-last-child(-n+2) { border-bottom: none; }
+        }
+        @media (min-width: 1024px) {
+            .sb-guarantee-cell {
+                border-bottom: none;
+                border-right: 1px solid var(--border-light);
+            }
+            .sb-guarantee-cell:last-child { border-right: none; }
+        }
+        .sb-guarantee-icon {
+            flex-shrink: 0; width: 40px; height: 40px; border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            background: rgba(180,83,9,0.10);
+            border: 1px solid var(--border-light);
+            color: var(--accent); font-size: 15px;
+        }
+
+        .sb-cta {
+            position: relative; margin-top: 26px;
+            border-radius: 26px; overflow: hidden;
+            border: 1px solid var(--border-light);
+            background: var(--bg-card);
+            box-shadow: 0 30px 64px -30px rgba(180,83,9,0.30);
+            display: grid; grid-template-columns: 1fr;
+        }
+        @media (min-width: 1024px) { .sb-cta { grid-template-columns: 1.3fr 1fr; } }
+
+        .sb-cta-content {
+            position: relative;
+            padding: 38px 24px 38px 32px;
+            background:
+                radial-gradient(circle at 90% 10%, rgba(251,191,36,0.16) 0%, transparent 60%),
+                var(--bg-card);
+        }
+        @media (min-width: 768px) { .sb-cta-content { padding: 52px 50px 52px 56px; } }
+
+        .sb-cta-content::before {
+            content: ''; position: absolute;
+            left: 0; top: 30px; bottom: 30px;
+            width: 5px; border-radius: 0 6px 6px 0;
+            background: var(--gradient-accent);
+        }
+
+        .sb-cta h2 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 800; letter-spacing: -0.03em;
+            font-size: clamp(1.6rem, 3vw, 2.35rem);
+            line-height: 1.14; color: var(--text-main);
+        }
+        .sb-cta h2 em { font-style: italic; font-weight: 400; color: var(--accent); }
+
+        .sb-cta-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
+
+        .sb-cta-image {
+            position: relative; min-height: 230px;
+            overflow: hidden; background: #0f172a;
+        }
+        .sb-cta-image img {
+            width: 100%; height: 100%; object-fit: cover; display: block;
+            transition: transform 1s ease;
+        }
+        .sb-cta:hover .sb-cta-image img { transform: scale(1.06); }
+        .sb-cta-image::after {
+            content: ''; position: absolute; inset: 0;
+            background: linear-gradient(135deg, rgba(180,83,9,0.28) 0%, rgba(15,23,42,0.62) 100%);
+            pointer-events: none;
+        }
+        @media (min-width: 1024px) { .sb-cta-image { min-height: auto; } }
+
+        .sb-cta-badge {
+            position: absolute; z-index: 2; top: 18px; right: 18px;
+            padding: 8px 15px; border-radius: 999px;
+            background: rgba(255,255,255,0.95);
+            border: 1px solid var(--border-light);
+            color: var(--accent-dark);
+            font-size: 9px; font-weight: 800;
+            letter-spacing: 1.3px; text-transform: uppercase;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 24px rgba(0,0,0,0.22);
+        }
+        body.dark-mode .sb-cta-badge { background: rgba(15,23,42,0.94); color: var(--accent); }
+
+        /* ============ FOOTER ============ */
+        footer { background: #0f172a; border-top: 1px solid rgba(180, 83, 9, 0.25); padding-top: 60px; color: #f1f5f9; }
+        footer h4 { color: #f8fafc; font-weight: 700; font-size: 1.1rem; margin-bottom: 18px; }
+        footer a, footer li { color: #94a3b8; text-decoration: none; transition: all 0.3s; font-size: 0.9rem; }
+        footer a:hover { color: var(--accent); }
+        footer .social-circle { width: 40px; height: 40px; border-radius: 50%; border: 1px solid rgba(180, 83, 9, 0.25); display: flex; align-items: center; justify-content: center; transition: all 0.3s; color: #94a3b8; }
+        footer .social-circle:hover { background: var(--gradient-accent); border-color: var(--accent); color: #fff; transform: translateY(-3px); }
+    </style>
+</head>
+<body>
+
+    <!-- ========================================== -->
+    <!-- NAVBAR COMPONENT (Switchboards active)     -->
+    <!-- ========================================== -->
+    <nav class="navbar" id="main-nav">
+        <div class="w-full flex items-center justify-between max-w-[1440px] mx-auto px-5 sm:px-6">
+            <a href="index.html" class="brand-link">
+                <div class="brand-icon-wrapper"><i class="fa-solid fa-bolt"></i></div>
+                <div class="brand-logo"><span>Volt</span>Nest</div>
+            </a>
+
+            <div class="hidden xl:flex items-center justify-center flex-1 px-4">
+                <div class="nav-pills">
+                    <div class="dropdown-pill">
+                        <a href="#" class="nav-pill">
+                            Home <i class="fas fa-chevron-down"></i>
+                        </a>
+                        <div class="dropdown-pill-menu">
+                            <a href="index.html" class="dropdown-pill-item">Home 1</a>
+                            <a href="home-2.html" class="dropdown-pill-item">Home 2</a>
+                        </div>
+                    </div>
+                    <a href="about.html" class="nav-pill">About Us</a>
+                    <a href="services.html" class="nav-pill">Services</a>
+                    <a href="fittings.html" class="nav-pill">Fan &amp; Light</a>
+                    <a href="switchboards.html" class="nav-pill active">Switchboards</a>
+                    <a href="price.html" class="nav-pill">Price</a>
+                    <a href="contact.html" class="nav-pill">Contact</a>
+                </div>
+            </div>
+
+            <div class="hidden xl:flex items-center gap-4">
+                <a href="contact.html" class="btn btn-outline"><i class="fas fa-calendar-check text-[var(--accent)]"></i> Book</a>
+                <div class="w-px h-6 bg-[var(--border-light)] mx-1"></div>
+                <button id="theme-toggle" class="theme-btn" aria-label="Toggle theme"><i class="fas fa-moon"></i></button>
+                <button id="rtl-btn" class="rtl-toggle">LTR</button>
+            </div>
+
+            <button class="xl:hidden text-2xl text-[var(--text-main)] w-10 h-10 flex items-center justify-center rounded-full bg-[var(--bg-card)] border border-[var(--border-light)] shadow-md" onclick="toggleMenu()" aria-label="Open menu">
+                <i class="fas fa-bars text-[var(--accent)]"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Drawer -->
+    <div class="drawer-overlay" id="drawer-overlay" onclick="toggleMenu()"></div>
+    <div class="fullscreen-menu" id="fullscreen-menu">
+        <div class="p-6 flex justify-between items-center border-b border-[var(--border-light)]">
+            <a href="index.html" class="brand-link"><div class="brand-icon-wrapper"><i class="fa-solid fa-bolt"></i></div><div class="brand-logo"><span>Volt</span>Nest</div></a>
+            <button class="text-2xl text-[var(--text-main)] hover:text-[var(--accent)] transition-colors w-10 h-10 flex items-center justify-center rounded-full bg-[var(--bg-secondary)]" onclick="toggleMenu()" aria-label="Close menu"><i class="fas fa-times"></i></button>
+        </div>
+
+        <div class="flex-1 overflow-y-auto py-4">
+            <div class="px-8 py-4 font-bold text-[15px] text-[var(--text-main)] flex justify-between items-center cursor-pointer border-b border-[var(--border-light)]" onclick="document.getElementById('mobile-home-menu').classList.toggle('open')">
+                Home <i class="fas fa-chevron-down text-sm text-[var(--accent)]"></i>
+            </div>
+            <div id="mobile-home-menu" class="mobile-dropdown-items">
+                <a href="index.html" class="mobile-link !text-[13px] !py-3 !border-none text-[var(--text-muted)] hover:text-[var(--accent)]"><i class="fas fa-arrow-right text-[10px] mr-2"></i> Home 1</a>
+                <a href="home-2.html" class="mobile-link !text-[13px] !py-3 !border-none text-[var(--text-muted)] hover:text-[var(--accent)]"><i class="fas fa-arrow-right text-[10px] mr-2"></i> Home 2</a>
+            </div>
+            <a href="about.html" class="mobile-link">About Us</a>
+            <a href="services.html" class="mobile-link">Services</a>
+            <a href="fittings.html" class="mobile-link">Fan &amp; Light</a>
+            <a href="switchboards.html" class="mobile-link active">Switchboards</a>
+            <a href="price.html" class="mobile-link">Price</a>
+            <a href="contact.html" class="mobile-link">Contact</a>
+        </div>
+
+        <div class="p-6 border-t border-[var(--border-light)] bg-[var(--bg-secondary)] space-y-5">
+            <div class="flex justify-between items-center w-full pb-2">
+                <div class="flex items-center gap-3">
+                    <span class="text-[var(--text-main)] font-bold text-[11px] uppercase tracking-widest">Theme</span>
+                    <button id="theme-toggle-mobile" class="theme-btn" aria-label="Toggle theme">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </div>
+                <div class="flex items-center gap-3">
+                    <span class="text-[var(--text-main)] font-bold text-[11px] uppercase tracking-widest">Layout</span>
+                    <button id="rtl-btn-mobile" class="rtl-toggle">LTR</button>
+                </div>
+            </div>
+            <a href="contact.html" class="btn btn-outline w-full !py-3.5 justify-center"><i class="fas fa-calendar-check mr-2 text-[var(--accent)]"></i> Book Service</a>
+            <a href="tel:+18005559473" class="btn btn-solid w-full !py-3.5 justify-center"><i class="fas fa-phone-volume mr-2"></i> Emergency Call</a>
+        </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- HERO                                       -->
+    <!-- ========================================== -->
+    <section class="page-hero" id="switchboards-hero">
+        <div class="page-hero-bg" aria-hidden="true"></div>
+        <div class="page-hero-overlay" aria-hidden="true"></div>
+
+        <div class="page-hero-inner">
+            <div class="hero-breadcrumb">
+                <a href="index.html">Home</a>
+                <i class="fas fa-chevron-right sep"></i>
+                <span class="current">Switchboards</span>
+            </div>
+
+            <h1>
+                Safe, modern switchboards<br />
+                <em>built to protect your home.</em>
+            </h1>
+
+            <p class="lead">
+                From ageing fuse-box replacements to full consumer unit upgrades, our licensed
+                master electricians deliver neatly wired, fully certified switchboards — with
+                RCD and surge protection fitted as standard on every board we build.
+            </p>
+
+            <div class="page-hero-cta">
+                <a href="contact.html" class="btn btn-solid !py-3.5 !px-8">
+                    <span>Book a Switchboard Check</span> <i class="fas fa-arrow-right"></i>
+                </a>
+                <a href="price.html" class="btn-ghost">
+                    <i class="fas fa-tags"></i> <span>View Pricing</span>
+                </a>
+            </div>
+
+            <div class="hero-trustline">
+                <span><i class="fas fa-shield-halved"></i>18th Edition Compliant</span>
+                <span><i class="fas fa-certificate"></i>NICEIC Registered</span>
+                <span><span class="stars">★★★★★</span> 4.9 / 5 · 2,400+ homes</span>
+            </div>
+
+            <div class="hero-stat-strip">
+                <div>
+                    <div class="num">100%</div>
+                    <div class="lbl">Code Compliant</div>
+                </div>
+                <div>
+                    <div class="num">RCD</div>
+                    <div class="lbl">Surge Protected</div>
+                </div>
+                <div>
+                    <div class="num">12 mo</div>
+                    <div class="lbl">Workmanship Warranty</div>
+                </div>
+            </div>
+        </div>
+
+        <a href="#board-intro" class="scroll-cue" aria-label="Scroll to content">
+            <span>Scroll</span>
+            <i class="fas fa-chevron-down text-[11px]"></i>
+        </a>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SECTION 1 · INTRO SPLIT + STAT TILES       -->
+    <!-- ========================================== -->
+    <section class="sb-section" id="board-intro">
+        <div class="max-w-[1380px] mx-auto px-5 sm:px-8 lg:px-12">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
+
+                <!-- Image -->
+                <div class="lg:col-span-5 min-w-0">
+                    <div class="sb-img-card h-[340px] sm:h-[440px] lg:h-[540px]">
+                        <img src="img/ll2.webp"
+                             alt="Licensed electrician working on a residential consumer unit" />
+                        <div class="sb-float-tag">
+                            <div class="w-11 h-11 rounded-full bg-[var(--bg-secondary)] border border-[var(--border-light)] flex items-center justify-center shrink-0">
+                                <i class="fas fa-shield-halved text-[var(--accent)] text-base"></i>
+                            </div>
+                            <div class="min-w-0">
+                                <div class="text-[11px] font-bold text-[var(--text-main)] tracking-wide">Licensed &amp; Certified</div>
+                                <div class="text-[9.5px] font-medium text-[var(--text-muted)] mt-0.5">18th Edition Wiring Regulations</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Copy -->
+                <div class="lg:col-span-7 min-w-0">
+                    <span class="sb-eyebrow">Precision Board Work</span>
+                    <h2 class="sb-title mt-4">
+                        Engineered for safety,<br class="hidden sm:block" /> finished with precision.
+                    </h2>
+                    <p class="text-[var(--text-muted)] leading-relaxed mt-6">
+                        Your switchboard is the heart of your home's electrical system — and it
+                        deserves far more than a quick fix. Every board we install is wired to
+                        current regulations, tested circuit by circuit, and labelled so clearly
+                        that anyone can read it at a glance.
+                    </p>
+                    <p class="text-[var(--text-muted)] leading-relaxed mt-4">
+                        From a straightforward fuse-box replacement to a complete consumer unit
+                        upgrade, our master electricians work cleanly, explain everything in plain
+                        language, and leave a certified safety report behind.
+                    </p>
+
+                    <!-- Check list -->
+                    <div class="sb-check-list mt-7">
+                        <div class="sb-check"><span class="sb-check-icon"><i class="fas fa-check"></i></span><span>Full circuit-by-circuit testing</span></div>
+                        <div class="sb-check"><span class="sb-check-icon"><i class="fas fa-check"></i></span><span>Permanent, printed circuit labels</span></div>
+                        <div class="sb-check"><span class="sb-check-icon"><i class="fas fa-check"></i></span><span>RCD &amp; surge protection as standard</span></div>
+                        <div class="sb-check"><span class="sb-check-icon"><i class="fas fa-check"></i></span><span>Written safety certificate on handover</span></div>
+                    </div>
+
+                    <!-- Stat tiles -->
+                    <div class="grid grid-cols-3 gap-2.5 sm:gap-3 mt-8">
+                        <div class="sb-stat-tile">
+                            <div class="val">18th Ed.</div>
+                            <div class="key">Compliant</div>
+                        </div>
+                        <div class="sb-stat-tile">
+                            <div class="val">100%</div>
+                            <div class="key">Circuit Tested</div>
+                        </div>
+                        <div class="sb-stat-tile">
+                            <div class="val">12 mo</div>
+                            <div class="key">Warranty</div>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-wrap gap-3 sm:gap-4 pt-8">
+                        <a href="contact.html" class="btn btn-solid !py-3.5 !px-8"><span>Book an Inspection</span> <i class="fas fa-arrow-right"></i></a>
+                        <a href="services.html" class="btn btn-outline !py-3.5 !px-7"><i class="fas fa-plug text-[var(--accent)]"></i> <span>All Services</span></a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SECTION 2 · FULL-WIDTH IMAGE SHOWCASE      -->
+    <!-- ========================================== -->
+    <section class="sb-section !pt-0" id="board-showcase">
+        <div class="max-w-[1380px] mx-auto px-5 sm:px-8 lg:px-12">
+            <div class="sb-showcase">
+                <div class="sb-showcase-bg" aria-hidden="true"></div>
+                <div class="sb-showcase-overlay" aria-hidden="true"></div>
+
+                <div class="sb-showcase-inner">
+                    <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white/10 border border-white/25 backdrop-blur">
+                        <span class="w-2 h-2 rounded-full bg-[#fbbf24] animate-pulse"></span>
+                        <span class="text-[10px] font-bold tracking-[0.18em] uppercase text-[#fef3c7]">Inside Every Board We Build</span>
+                    </div>
+
+                    <h2 class="mt-6">
+                        Every board, wired<br /> <em>to the same standard.</em>
+                    </h2>
+
+                    <p class="text-[#cbd5e1] max-w-2xl mx-auto leading-relaxed mt-5 text-sm sm:text-base">
+                        No shortcuts and no guesswork. Every consumer unit we install follows the
+                        same disciplined process — protection first, clarity always, certification
+                        without exception.
+                    </p>
+
+                    <div class="sb-feature-grid">
+                        <div class="sb-feature-cell">
+                            <i class="fas fa-shield-halved"></i>
+                            <div class="t">RCD Protection</div>
+                            <div class="d">Life-Saving Trip Speed</div>
+                        </div>
+                        <div class="sb-feature-cell">
+                            <i class="fas fa-bolt"></i>
+                            <div class="t">Surge Protection</div>
+                            <div class="d">Whole-Home Defence</div>
+                        </div>
+                        <div class="sb-feature-cell">
+                            <i class="fas fa-tags"></i>
+                            <div class="t">Clear Labelling</div>
+                            <div class="d">Every Circuit Named</div>
+                        </div>
+                        <div class="sb-feature-cell">
+                            <i class="fas fa-file-signature"></i>
+                            <div class="t">Certification</div>
+                            <div class="d">Documented Handover</div>
+                        </div>
+                    </div>
+
+                    <div class="sb-showcase-chiprow">
+                        <span class="sb-showcase-chip"><i class="fas fa-check"></i> Type 2 SPD</span>
+                        <span class="sb-showcase-chip"><i class="fas fa-check"></i> RCBO Per Circuit</span>
+                        <span class="sb-showcase-chip"><i class="fas fa-check"></i> Spare Ways Left</span>
+                        <span class="sb-showcase-chip"><i class="fas fa-check"></i> Torque-Tested Terminals</span>
+                    </div>
+
+                    <div class="flex flex-wrap gap-3 sm:gap-4 justify-center mt-10">
+                        <a href="contact.html" class="btn btn-solid !py-3.5 !px-8"><span>Book a Board Upgrade</span> <i class="fas fa-arrow-right"></i></a>
+                        <a href="tel:+18005559473" class="btn-ghost">
+                            <i class="fas fa-phone-volume"></i> <span>(800) 555-9473</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SECTION 3 · SERVICE CARDS                  -->
+    <!-- ========================================== -->
+    <section class="sb-section !pt-0" id="board-services">
+        <div class="max-w-[1380px] mx-auto px-5 sm:px-8 lg:px-12">
+
+            <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-9">
+                <div class="max-w-2xl min-w-0">
+                    <span class="sb-eyebrow">What We Handle</span>
+                    <h2 class="sb-title mt-4">Every board job, one dedicated team.</h2>
+                    <p class="text-[var(--text-muted)] leading-relaxed mt-5">
+                        From emergency repairs to planned upgrades, here's the full range of
+                        switchboard work we complete — all under one certified roof.
+                    </p>
+                </div>
+                <a href="contact.html" class="btn btn-outline !py-3.5 !px-7 self-start md:self-auto shrink-0">
+                    <i class="fas fa-calendar-check text-[var(--accent)]"></i> <span>Book a Visit</span>
+                </a>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-5">
+
+                <a href="contact.html" class="sb-card">
+                    <span class="sb-card-num">01</span>
+                    <div class="sb-card-icon"><i class="fas fa-table-cells-large"></i></div>
+                    <div class="sb-card-title">Consumer Unit Replacement</div>
+                    <p class="sb-card-desc">Old fuse boxes swapped for a modern, fully compliant consumer unit with clear circuit labelling and spare ways for the future.</p>
+                    <span class="sb-card-link">Book this service <i class="fas fa-arrow-right"></i></span>
+                </a>
+
+                <a href="contact.html" class="sb-card">
+                    <span class="sb-card-num">02</span>
+                    <div class="sb-card-icon"><i class="fas fa-shield-halved"></i></div>
+                    <div class="sb-card-title">RCD &amp; RCBO Protection</div>
+                    <p class="sb-card-desc">Individual RCBO protection on every circuit, so a single fault never takes down the whole house — and every socket is covered.</p>
+                    <span class="sb-card-link">Book this service <i class="fas fa-arrow-right"></i></span>
+                </a>
+
+                <a href="contact.html" class="sb-card">
+                    <span class="sb-card-num">03</span>
+                    <div class="sb-card-icon"><i class="fas fa-bolt"></i></div>
+                    <div class="sb-card-title">Surge Protection Devices</div>
+                    <p class="sb-card-desc">Type 2 whole-home surge protection shielding appliances, heat pumps and electronics from spikes and lightning strikes.</p>
+                    <span class="sb-card-link">Book this service <i class="fas fa-arrow-right"></i></span>
+                </a>
+
+                <a href="contact.html" class="sb-card">
+                    <span class="sb-card-num">04</span>
+                    <div class="sb-card-icon"><i class="fas fa-screwdriver-wrench"></i></div>
+                    <div class="sb-card-title">Fault Finding &amp; Repairs</div>
+                    <p class="sb-card-desc">Tripping breakers, burning smells and dead circuits traced to the root cause and repaired properly — usually the same day.</p>
+                    <span class="sb-card-link">Book this service <i class="fas fa-arrow-right"></i></span>
+                </a>
+
+                <a href="contact.html" class="sb-card">
+                    <span class="sb-card-num">05</span>
+                    <div class="sb-card-icon"><i class="fas fa-plug-circle-bolt"></i></div>
+                    <div class="sb-card-title">New Circuit Additions</div>
+                    <p class="sb-card-desc">Extra capacity for EV chargers, garden offices, extensions and home gyms — correctly loaded, protected and tested.</p>
+                    <span class="sb-card-link">Book this service <i class="fas fa-arrow-right"></i></span>
+                </a>
+
+                <a href="contact.html" class="sb-card">
+                    <span class="sb-card-num">06</span>
+                    <div class="sb-card-icon"><i class="fas fa-clipboard-check"></i></div>
+                    <div class="sb-card-title">Safety Inspections &amp; Certificates</div>
+                    <p class="sb-card-desc">Full board condition report with thermal checks and a written EICR certificate — ideal before buying or renting a property.</p>
+                    <span class="sb-card-link">Book this service <i class="fas fa-arrow-right"></i></span>
+                </a>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SECTION 4 · OLD vs MODERN COMPARISON       -->
+    <!-- ========================================== -->
+    <section class="sb-section !pt-0" id="board-compare">
+        <div class="max-w-[1380px] mx-auto px-5 sm:px-8 lg:px-12">
+
+            <div class="max-w-2xl mb-9">
+                <span class="sb-eyebrow">Old vs Modern</span>
+                <h2 class="sb-title mt-4">What actually changes in an upgrade.</h2>
+                <p class="text-[var(--text-muted)] leading-relaxed mt-5">
+                    A modern consumer unit isn't simply newer — it delivers protection an older
+                    fuse board physically cannot. Here's the difference, side by side.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-[1fr_auto_1fr] gap-5 lg:gap-6 items-stretch">
+
+                <!-- Old -->
+                <div class="cmp-panel cmp-old">
+                    <div class="cmp-head">
+                        <div class="cmp-head-icon"><i class="fas fa-triangle-exclamation"></i></div>
+                        <div class="min-w-0">
+                            <div class="cmp-head-title">Older Fuse Board</div>
+                            <div class="cmp-head-sub">Legacy Installation</div>
+                        </div>
+                    </div>
+
+                    <div class="cmp-item"><i class="fas fa-xmark"></i><span>Rewireable fuses that can be slow to react to faults</span></div>
+                    <div class="cmp-item"><i class="fas fa-xmark"></i><span>No RCD protection on most or all circuits</span></div>
+                    <div class="cmp-item"><i class="fas fa-xmark"></i><span>No surge protection for appliances or electronics</span></div>
+                    <div class="cmp-item"><i class="fas fa-xmark"></i><span>Unlabelled or faded circuit descriptions</span></div>
+                    <div class="cmp-item"><i class="fas fa-xmark"></i><span>Limited spare capacity for EV chargers or extensions</span></div>
+                    <div class="cmp-item"><i class="fas fa-xmark"></i><span>May affect insurance validity or property sales</span></div>
+                </div>
+
+                <!-- Arrow -->
+                <div class="flex items-center justify-center py-1 lg:py-0">
+                    <div class="cmp-arrow rotate-90 lg:rotate-0">
+                        <i class="fas fa-arrow-right lg:block hidden"></i>
+                        <i class="fas fa-arrow-down lg:hidden"></i>
+                    </div>
+                </div>
+
+                <!-- New -->
+                <div class="cmp-panel cmp-new">
+                    <div class="cmp-head">
+                        <div class="cmp-head-icon"><i class="fas fa-circle-check"></i></div>
+                        <div class="min-w-0">
+                            <div class="cmp-head-title">Modern Consumer Unit</div>
+                            <div class="cmp-head-sub">18th Edition Compliant</div>
+                        </div>
+                    </div>
+
+                    <div class="cmp-item"><i class="fas fa-check"></i><span>MCBs and RCBOs that trip instantly on faults</span></div>
+                    <div class="cmp-item"><i class="fas fa-check"></i><span>RCD protection on every circuit that needs it</span></div>
+                    <div class="cmp-item"><i class="fas fa-check"></i><span>Type 2 surge protection built in as standard</span></div>
+                    <div class="cmp-item"><i class="fas fa-check"></i><span>Every circuit clearly and permanently labelled</span></div>
+                    <div class="cmp-item"><i class="fas fa-check"></i><span>Spare ways ready for future additions</span></div>
+                    <div class="cmp-item"><i class="fas fa-check"></i><span>Certified installation with full safety documentation</span></div>
+                </div>
+
+            </div>
+
+            <div class="flex flex-wrap gap-3 sm:gap-4 justify-center mt-9">
+                <a href="contact.html" class="btn btn-solid !py-3.5 !px-8"><span>Upgrade My Board</span> <i class="fas fa-arrow-right"></i></a>
+                <a href="price.html" class="btn btn-outline !py-3.5 !px-7"><i class="fas fa-tags text-[var(--accent)]"></i> <span>See Upgrade Prices</span></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SECTION 4.5 · PROJECT SPOTLIGHT (NEW)      -->
+    <!-- ========================================== -->
+    <section class="sb-section !pt-0" id="board-spotlight">
+        <div class="max-w-[1380px] mx-auto px-5 sm:px-8 lg:px-12">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+
+                <!-- Image -->
+                <div class="min-w-0">
+                    <div class="sb-img-card h-[320px] sm:h-[420px] lg:h-[480px]">
+                        <img src="img/ll3.webp"
+                             alt="Recently completed modern consumer unit installation" />
+                        <div class="sb-float-tag">
+                            <div class="w-11 h-11 rounded-full bg-[var(--bg-secondary)] border border-[var(--border-light)] flex items-center justify-center shrink-0">
+                                <i class="fas fa-circle-check text-[var(--accent)] text-base"></i>
+                            </div>
+                            <div class="min-w-0">
+                                <div class="text-[11px] font-bold text-[var(--text-main)] tracking-wide">Recently Completed</div>
+                                <div class="text-[9.5px] font-medium text-[var(--text-muted)] mt-0.5">Full consumer unit upgrade · 3-bed semi</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Text -->
+                <div class="min-w-0">
+                    <span class="sb-eyebrow">Project Spotlight</span>
+                    <h2 class="sb-title mt-4">A real board,<br class="hidden sm:block" /> real results.</h2>
+                    <p class="text-[var(--text-muted)] leading-relaxed mt-6">
+                        This recent install replaced a dated fuse board with a fully populated
+                        18th Edition consumer unit — individual RCBOs on every circuit, Type 2
+                        surge protection, and a clearly labelled schedule inside the door. The
+                        homeowner now has spare capacity for a future EV charger and complete
+                        peace of mind.
+                    </p>
+
+                    <div class="flex flex-wrap gap-4 mt-7">
+                        <div class="flex items-center gap-2 text-[10px] font-bold uppercase tracking-wider text-[var(--text-muted)]">
+                            <i class="fas fa-check text-[var(--accent)] text-[9px]"></i> 14 circuits protected
+                        </div>
+                        <div class="flex items-center gap-2 text-[10px] font-bold uppercase tracking-wider text-[var(--text-muted)]">
+                            <i class="fas fa-check text-[var(--accent)] text-[9px]"></i> Surge protection fitted
+                        </div>
+                        <div class="flex items-center gap-2 text-[10px] font-bold uppercase tracking-wider text-[var(--text-muted)]">
+                            <i class="fas fa-check text-[var(--accent)] text-[9px]"></i> Completed in one day
+                        </div>
+                    </div>
+
+                    <div class="pt-7">
+                        <a href="contact.html" class="btn btn-solid !py-3.5 !px-8">
+                            <span>Request a Similar Install</span> <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SECTION 5 · VERTICAL TIMELINE              -->
+    <!-- ========================================== -->
+    <section class="sb-section !pt-0" id="board-journey">
+        <div class="max-w-[1380px] mx-auto px-5 sm:px-8 lg:px-12">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16">
+
+                <div class="lg:col-span-4 min-w-0">
+                    <span class="sb-eyebrow">The Journey</span>
+                    <h2 class="sb-title mt-4">From first call<br class="hidden sm:block" /> to certification.</h2>
+                    <p class="text-[var(--text-muted)] leading-relaxed mt-5">
+                        Most board upgrades are completed in a single day — and you'll know exactly
+                        what's happening at every stage.
+                    </p>
+
+                    <div class="mt-8 p-6 rounded-2xl bg-[var(--bg-secondary)] border border-[var(--border-light)]">
+                        <div class="flex items-center gap-3">
+                            <i class="fas fa-clock text-[var(--accent)] text-base"></i>
+                            <div class="text-[10px] font-extrabold uppercase tracking-[0.16em] text-[var(--accent)]">Typical Timeline</div>
+                        </div>
+                        <p class="text-sm text-[var(--text-muted)] leading-relaxed mt-3">
+                            Inspection: 45 minutes · Board swap: 4–6 hours · Certification: same day.
+                        </p>
+                    </div>
+
+                    <div class="pt-7">
+                        <a href="contact.html" class="btn btn-outline !py-3.5 !px-7">
+                            <i class="fas fa-calendar-check text-[var(--accent)]"></i> <span>Book a Slot</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-8 min-w-0">
+                    <div class="tl-wrap">
+
+                        <div class="tl-item">
+                            <div class="tl-dot">01</div>
+                            <div class="tl-card">
+                                <h3 class="font-display font-bold text-[0.98rem] text-[var(--text-main)]">Free on-site inspection</h3>
+                                <p class="text-sm text-[var(--text-muted)] leading-relaxed mt-2">
+                                    We assess the existing board, circuit loads and earthing, and flag
+                                    anything that needs attention before quoting.
+                                </p>
+                                <span class="tl-time"><i class="fas fa-clock"></i> 45 Minutes</span>
+                            </div>
+                        </div>
+
+                        <div class="tl-item">
+                            <div class="tl-dot">02</div>
+                            <div class="tl-card">
+                                <h3 class="font-display font-bold text-[0.98rem] text-[var(--text-main)]">Fixed written quote</h3>
+                                <p class="text-sm text-[var(--text-muted)] leading-relaxed mt-2">
+                                    You receive a clear, itemised price and pick a date that works for
+                                    you. No surprise charges on the day.
+                                </p>
+                                <span class="tl-time"><i class="fas fa-file-lines"></i> Same Day</span>
+                            </div>
+                        </div>
+
+                        <div class="tl-item">
+                            <div class="tl-dot">03</div>
+                            <div class="tl-card">
+                                <h3 class="font-display font-bold text-[0.98rem] text-[var(--text-main)]">Careful board replacement</h3>
+                                <p class="text-sm text-[var(--text-muted)] leading-relaxed mt-2">
+                                    The old board is isolated and removed. Your new unit is fitted,
+                                    wired, RCD-protected and labelled circuit by circuit.
+                                </p>
+                                <span class="tl-time"><i class="fas fa-clock"></i> 4–6 Hours</span>
+                            </div>
+                        </div>
+
+                        <div class="tl-item">
+                            <div class="tl-dot">04</div>
+                            <div class="tl-card">
+                                <h3 class="font-display font-bold text-[0.98rem] text-[var(--text-main)]">Full testing &amp; certification</h3>
+                                <p class="text-sm text-[var(--text-muted)] leading-relaxed mt-2">
+                                    Every circuit is tested, RCDs tripped and reset, and a full safety
+                                    certificate is handed over before we leave.
+                                </p>
+                                <span class="tl-time"><i class="fas fa-certificate"></i> Before We Leave</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SECTION 6 · GUARANTEE STRIP + CTA PANEL    -->
+    <!-- ========================================== -->
+    <section class="sb-section !pt-0" id="board-guarantee">
+        <div class="max-w-[1380px] mx-auto px-5 sm:px-8 lg:px-12">
+
+            <!-- Guarantee strip -->
+            <div class="sb-guarantee">
+                <div class="sb-guarantee-cell">
+                    <div class="sb-guarantee-icon"><i class="fas fa-certificate"></i></div>
+                    <div class="min-w-0">
+                        <div class="font-display font-bold text-sm text-[var(--text-main)]">Licensed Electricians</div>
+                        <div class="text-xs text-[var(--text-muted)] mt-1 leading-relaxed">Fully qualified &amp; insured</div>
+                    </div>
+                </div>
+                <div class="sb-guarantee-cell">
+                    <div class="sb-guarantee-icon"><i class="fas fa-file-signature"></i></div>
+                    <div class="min-w-0">
+                        <div class="font-display font-bold text-sm text-[var(--text-main)]">Certified Work</div>
+                        <div class="text-xs text-[var(--text-muted)] mt-1 leading-relaxed">Full safety documentation</div>
+                    </div>
+                </div>
+                <div class="sb-guarantee-cell">
+                    <div class="sb-guarantee-icon"><i class="fas fa-award"></i></div>
+                    <div class="min-w-0">
+                        <div class="font-display font-bold text-sm text-[var(--text-main)]">12-Month Warranty</div>
+                        <div class="text-xs text-[var(--text-muted)] mt-1 leading-relaxed">On all workmanship</div>
+                    </div>
+                </div>
+                <div class="sb-guarantee-cell">
+                    <div class="sb-guarantee-icon"><i class="fas fa-clock"></i></div>
+                    <div class="min-w-0">
+                        <div class="font-display font-bold text-sm text-[var(--text-main)]">Same-Day Service</div>
+                        <div class="text-xs text-[var(--text-muted)] mt-1 leading-relaxed">Where availability allows</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA panel -->
+            <div class="sb-cta">
+                <div class="sb-cta-content">
+                    <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-[var(--menu-hover-bg)] border border-[var(--border-light)]">
+                        <span class="w-2 h-2 rounded-full bg-[var(--accent)] animate-pulse"></span>
+                        <span class="text-[10px] font-extrabold tracking-[0.18em] uppercase text-[var(--accent)]">Free Board Inspection</span>
+                    </div>
+
+                    <h2 class="mt-5">
+                        Not sure if your board<br class="hidden sm:block" /> is <em>safe?</em>
+                    </h2>
+
+                    <p class="text-[var(--text-muted)] leading-relaxed mt-4 max-w-md text-sm sm:text-base">
+                        Book a free on-site inspection. We'll assess your switchboard, explain
+                        exactly what we find in plain language, and quote a fixed price for any
+                        work needed.
+                    </p>
+
+                    <div class="sb-cta-actions">
+                        <a href="contact.html" class="btn btn-solid !py-3.5 !px-8"><span>Book Inspection</span> <i class="fas fa-arrow-right"></i></a>
+                        <a href="tel:+18005559473" class="btn btn-outline !py-3.5 !px-7"><i class="fas fa-phone-volume text-[var(--accent)]"></i> <span>Call Us</span></a>
+                    </div>
+
+                    <div class="flex flex-wrap gap-x-6 gap-y-2 mt-6 pt-5 border-t border-dashed border-[var(--border-light)]">
+                        <span class="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-wider text-[var(--text-muted)]">
+                            <i class="fas fa-check text-[var(--accent)] text-[9px]"></i> No obligation
+                        </span>
+                        <span class="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-wider text-[var(--text-muted)]">
+                            <i class="fas fa-check text-[var(--accent)] text-[9px]"></i> Written quote
+                        </span>
+                        <span class="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-wider text-[var(--text-muted)]">
+                            <i class="fas fa-check text-[var(--accent)] text-[9px]"></i> No call-out fee
+                        </span>
+                    </div>
+                </div>
+
+                <div class="sb-cta-image">
+                    <span class="sb-cta-badge">24/7 Emergency Line</span>
+                    <img src="img/oi8.webp"
+                         alt="VoltNest electrician inspecting a residential switchboard" />
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- FOOTER                                     -->
+    <!-- ========================================== -->
+    <footer>
+        <div class="max-w-[1440px] mx-auto px-6 lg:px-12">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+
+                <div>
+                    <a href="index.html" class="brand-link inline-flex">
+                        <div class="brand-icon-wrapper"><i class="fa-solid fa-bolt"></i></div>
+                        <div class="brand-logo text-white"><span class="text-[var(--accent)]">Volt</span>Nest</div>
+                    </a>
+                    <p class="text-[#94a3b8] text-sm leading-relaxed mt-4">Professional residential electrical and classic home wiring services. Dedicated to protecting your property and family with straightforward, safety-focused electrical installations and prompt repairs.</p>
+                    <div class="flex gap-3 mt-5">
+                        <a href="#" class="social-circle" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-circle" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-circle" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4>Navigation</h4>
+                    <ul class="space-y-2.5">
+                        <li><a href="home-2.html" class="hover:pl-2 inline-flex items-center gap-2"><i class="fas fa-chevron-right text-[8px] text-[var(--accent)]"></i> Home</a></li>
+                        <li><a href="about.html" class="hover:pl-2 inline-flex items-center gap-2"><i class="fas fa-chevron-right text-[8px] text-[var(--accent)]"></i> About Us</a></li>
+                        <li><a href="services.html" class="hover:pl-2 inline-flex items-center gap-2"><i class="fas fa-chevron-right text-[8px] text-[var(--accent)]"></i> Services</a></li>
+                        <li><a href="gallery.html" class="hover:pl-2 inline-flex items-center gap-2"><i class="fas fa-chevron-right text-[8px] text-[var(--accent)]"></i> Gallery</a></li>
+                        <li><a href="contact.html" class="hover:pl-2 inline-flex items-center gap-2"><i class="fas fa-chevron-right text-[8px] text-[var(--accent)]"></i> Contact &amp; Booking</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4>Core Services</h4>
+                    <ul class="space-y-2.5">
+                        <li><a href="services.html" class="hover:pl-2 inline-flex items-center gap-2"><i class="fas fa-chevron-right text-[8px] text-[var(--accent)]"></i> Home Wiring &amp; Rewiring</a></li>
+                        <li><a href="fittings.html" class="hover:pl-2 inline-flex items-center gap-2"><i class="fas fa-chevron-right text-[8px] text-[var(--accent)]"></i> Fan &amp; Light Fitting</a></li>
+                        <li><a href="switchboards.html" class="hover:pl-2 inline-flex items-center gap-2"><i class="fas fa-chevron-right text-[8px] text-[var(--accent)]"></i> Switchboard Repair</a></li>
+                        <li><a href="gallery.html" class="hover:pl-2 inline-flex items-center gap-2"><i class="fas fa-chevron-right text-[8px] text-[var(--accent)]"></i> Project Gallery</a></li>
+                        <li><a href="contact.html" class="hover:pl-2 inline-flex items-center gap-2"><i class="fas fa-chevron-right text-[8px] text-[var(--accent)]"></i> 24/7 Emergency Repairs</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4>Dispatch Headquarters</h4>
+                    <ul class="space-y-3 text-sm">
+                        <li class="flex items-start gap-3"><i class="fas fa-map-marker-alt text-[var(--accent)] mt-0.5"></i> <span class="text-[#94a3b8]">1200 Industrial Pkwy, Suite 400, Metro Area</span></li>
+                        <li class="flex items-start gap-3"><i class="fas fa-phone text-[var(--accent)] mt-0.5"></i> <span class="text-[#94a3b8]"><a href="tel:+18005559473">(800) 555-WIRE (9473)</a></span></li>
+                        <li class="flex items-start gap-3"><i class="fas fa-envelope text-[var(--accent)] mt-0.5"></i> <span class="text-[#94a3b8]"><a href="mailto:service@voltnest.com">service@voltnest.com</a></span></li>
+                        <li class="flex items-start gap-3"><i class="fas fa-clock text-[var(--accent)] mt-0.5"></i> <span class="text-[#94a3b8]">24/7 Emergency Dispatch Available</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-[rgba(180,83,9,0.15)] py-6 mt-10 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-sm text-[#64748b] text-center md:text-left">&copy; 2026 <span class="text-[var(--accent)] font-semibold">VoltNest</span> Electrical Services. All rights reserved.</p>
+                <div class="flex flex-wrap justify-center gap-4 sm:gap-6 text-sm">
+                    <a href="#" class="text-[#64748b] hover:text-[var(--accent)]">Workmanship Warranty</a>
+                    <a href="#" class="text-[#64748b] hover:text-[var(--accent)]">Privacy Policy</a>
+                    <a href="#" class="text-[#64748b] hover:text-[var(--accent)]">Safety Standards</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive Scripts -->
+    <script>
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('main-nav');
+            window.scrollY > 30 ? nav.classList.add('scrolled') : nav.classList.remove('scrolled');
+        });
+
+        const menu = document.getElementById('fullscreen-menu');
+        const overlay = document.getElementById('drawer-overlay');
+        function toggleMenu() {
+            menu.classList.toggle('active');
+            overlay.classList.toggle('active');
+            document.body.style.overflow = menu.classList.contains('active') ? 'hidden' : 'auto';
+        }
+
+        const themeBtnDesk = document.getElementById('theme-toggle');
+        const themeBtnMob = document.getElementById('theme-toggle-mobile');
+
+        function toggleTheme() {
+            document.body.classList.toggle('dark-mode');
+            const isDark = document.body.classList.contains('dark-mode');
+            const iconClass = isDark ? 'fas fa-sun' : 'fas fa-moon';
+
+            if (themeBtnDesk) themeBtnDesk.querySelector('i').className = iconClass;
+            if (themeBtnMob) themeBtnMob.querySelector('i').className = iconClass;
+        }
+
+        if (themeBtnDesk) themeBtnDesk.addEventListener('click', toggleTheme);
+        if (themeBtnMob) themeBtnMob.addEventListener('click', toggleTheme);
+
+        const rtlBtnDesk = document.getElementById('rtl-btn');
+        const rtlBtnMob = document.getElementById('rtl-btn-mobile');
+
+        function toggleRTL() {
+            const html = document.documentElement;
+            html.dir = html.dir === 'rtl' ? 'ltr' : 'rtl';
+            const dirText = html.dir.toUpperCase();
+
+            if (rtlBtnDesk) rtlBtnDesk.textContent = dirText;
+            if (rtlBtnMob) rtlBtnMob.textContent = dirText;
+        }
+
+        if (rtlBtnDesk) rtlBtnDesk.addEventListener('click', toggleRTL);
+        if (rtlBtnMob) rtlBtnMob.addEventListener('click', toggleRTL);
+    </script>
+</body>
+</html>

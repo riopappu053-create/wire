@@ -1,0 +1,1704 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact · VoltNest Classic Home Wiring Services</title>
+
+    <!-- Favicon (Thunder Icon) -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23b45309' rx='20'/%3E%3Ctext x='50' y='68' font-size='56' text-anchor='middle' fill='white' font-family='Arial'%3E⚡%3C/text%3E%3C/svg%3E" />
+
+    <!-- Fonts & Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Inter"', 'system-ui', 'sans-serif'],
+                        display: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Custom Professional Styles -->
+    <style>
+        :root {
+            --bg-color: #f8fafc;
+            --bg-secondary: #f0f7ff;
+            --bg-card: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --text-dim: #94a3b8;
+            --accent: #b45309;
+            --accent-dark: #78350f;
+            --accent-light: #fef3c7;
+            --border-light: rgba(180, 83, 9, 0.22);
+            --border-strong: rgba(180, 83, 9, 0.42);
+            --nav-bg: rgba(248, 250, 252, 0.94);
+            --drawer-bg: rgba(255, 255, 255, 0.98);
+            --menu-hover-bg: rgba(180, 83, 9, 0.10);
+            --shadow-color: rgba(180, 83, 9, 0.16);
+            --gradient-accent: linear-gradient(135deg, #b45309 0%, #78350f 100%);
+        }
+
+        body.dark-mode {
+            --bg-color: #0f172a;
+            --bg-secondary: #1e293b;
+            --bg-card: #0f172a;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --text-dim: #64748b;
+            --accent: #f59e0b;
+            --accent-dark: #b45309;
+            --border-light: rgba(245, 158, 11, 0.22);
+            --border-strong: rgba(245, 158, 11, 0.42);
+            --nav-bg: rgba(15, 23, 42, 0.94);
+            --drawer-bg: rgba(15, 23, 42, 0.98);
+            --menu-hover-bg: rgba(245, 158, 11, 0.12);
+            --gradient-accent: linear-gradient(135deg, #f59e0b 0%, #b45309 100%);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            padding-top: 84px;
+            transition: all 0.3s ease;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, .brand-logo, .font-display { font-family: 'Plus Jakarta Sans', sans-serif; letter-spacing: -0.02em; }
+
+        /* Navbar Styles */
+        .navbar {
+            position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
+            background: var(--nav-bg); height: 84px; display: flex; align-items: center;
+            backdrop-filter: blur(16px); transition: all 0.3s ease; border-bottom: 1px solid transparent;
+        }
+        .navbar.scrolled {
+            height: 70px; border-bottom: 1px solid var(--border-light);
+            box-shadow: 0 10px 40px var(--shadow-color);
+        }
+        .brand-link { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+        .brand-icon-wrapper { width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(180, 83, 9, 0.35); background: rgba(180, 83, 9, 0.10); color: var(--accent); font-size: 1.15rem; transition: transform 0.3s ease; }
+        .brand-link:hover .brand-icon-wrapper { transform: scale(1.05) rotate(5deg); }
+        .brand-logo { font-size: 1.6rem; font-weight: 800; color: var(--text-main); }
+        .brand-logo span { color: var(--accent); }
+
+        /* Nav Pills */
+        .nav-pills {
+            display: flex; align-items: center; gap: 4px;
+            background: var(--bg-card);
+            padding: 6px;
+            border-radius: 60px;
+            border: 1px solid var(--border-light);
+            box-shadow: 0 4px 20px var(--shadow-color);
+        }
+        .nav-pill {
+            padding: 10px 18px;
+            color: var(--text-main);
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-radius: 40px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none;
+            display: inline-flex; align-items: center; gap: 6px;
+            white-space: nowrap;
+        }
+        .nav-pill:hover {
+            color: var(--accent);
+            background: var(--menu-hover-bg);
+            transform: translateY(-2px);
+        }
+        .nav-pill.active {
+            background: var(--gradient-accent);
+            color: #ffffff !important;
+            box-shadow: 0 6px 16px rgba(180, 83, 9, 0.35);
+            transform: translateY(-1px);
+        }
+
+        /* Dropdown */
+        .dropdown-pill { position: relative; display: flex; align-items: center; }
+        .dropdown-pill .nav-pill { padding-right: 14px; }
+        .dropdown-pill .nav-pill .fa-chevron-down { font-size: 10px; margin-left: 2px; transition: transform 0.25s ease; opacity: 0.7; }
+        .dropdown-pill:hover .nav-pill .fa-chevron-down { transform: rotate(180deg); opacity: 1; }
+        .dropdown-pill-menu {
+            position: absolute; top: calc(100% + 12px); left: 0; min-width: 190px;
+            background: var(--bg-card); border: 1px solid var(--border-light); border-radius: 16px;
+            padding: 8px; box-shadow: 0 20px 48px rgba(0, 0, 0, 0.15);
+            opacity: 0; visibility: hidden; transform: translateY(10px) scale(0.96);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); z-index: 100;
+        }
+        .dropdown-pill:hover .dropdown-pill-menu { opacity: 1; visibility: visible; transform: translateY(0) scale(1); }
+        .dropdown-pill-item {
+            display: block; padding: 12px 18px; color: var(--text-main); text-decoration: none;
+            font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px;
+            border-radius: 12px; transition: all 0.2s ease;
+        }
+        .dropdown-pill-item:hover { background: var(--menu-hover-bg); color: var(--accent); padding-left: 24px; }
+        .dropdown-pill-item.active { color: var(--accent); background: rgba(180, 83, 9, 0.08); }
+
+        /* Action Buttons */
+        .btn { padding: 12px 26px; font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: 1.2px; border-radius: 40px; transition: all 0.3s ease; display: inline-flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none; }
+        .btn-solid { background: var(--gradient-accent); color: #ffffff !important; border: none; box-shadow: 0 4px 15px rgba(180, 83, 9, 0.25); }
+        .btn-solid:hover { transform: translateY(-3px); box-shadow: 0 8px 26px rgba(180, 83, 9, 0.4); }
+        .btn-outline { background: var(--bg-card); border: 2px solid var(--border-light); color: var(--text-main); box-shadow: 0 4px 15px var(--shadow-color); }
+        .btn-outline:hover { border-color: var(--accent); color: var(--accent) !important; background: var(--menu-hover-bg); transform: translateY(-2px); }
+
+        /* Interactive Controls */
+        .theme-btn, .rtl-toggle { height: 42px; border-radius: 40px; background: var(--bg-card); border: 1px solid var(--border-light); color: var(--text-main); cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px var(--shadow-color); }
+        .theme-btn { width: 42px; border-radius: 50%; font-size: 14px; }
+        .rtl-toggle { padding: 0 18px; font-size: 11px; font-weight: 800; gap: 6px; letter-spacing: 0.5px; }
+        .theme-btn:hover, .rtl-toggle:hover { background: var(--accent); border-color: var(--accent); color: #fff; transform: translateY(-2px); }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--bg-secondary); }
+        ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 3px; }
+
+        /* Mobile Drawer */
+        .drawer-overlay { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.75); z-index: 999; opacity: 0; visibility: hidden; transition: all 0.4s ease; backdrop-filter: blur(6px); }
+        .drawer-overlay.active { opacity: 1; visibility: visible; }
+        .fullscreen-menu { position: fixed; top: 0; right: 0; width: 100%; max-width: 380px; height: 100dvh; background: var(--drawer-bg); z-index: 1001; display: flex; flex-direction: column; transform: translateX(100%); transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); border-left: 1px solid var(--border-light); box-shadow: -10px 0 40px rgba(0,0,0,0.1); }
+        .fullscreen-menu.active { transform: translateX(0); }
+        .mobile-link { display: block; padding: 18px 28px; font-weight: 700; color: var(--text-main); font-size: 15px; border-bottom: 1px solid var(--border-light); transition: all 0.2s; text-decoration: none; }
+        .mobile-link:hover { color: var(--accent); padding-left: 36px; background: var(--menu-hover-bg); }
+        .mobile-link.active { color: var(--accent); background: var(--menu-hover-bg); border-left: 3px solid var(--accent); padding-left: 25px; }
+        .mobile-dropdown-items { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; background: var(--bg-secondary); }
+        .mobile-dropdown-items.open { max-height: 150px; padding: 6px 0 10px 16px; }
+
+        /* Full Viewport Hero */
+        .page-hero {
+            position: relative;
+            min-height: calc(100vh - 84px);
+            display: flex; align-items: center; justify-content: center;
+            overflow: hidden;
+            isolation: isolate;
+        }
+        .page-hero-bg {
+            position: absolute; inset: 0;
+            background-image: url('https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=2000');
+            background-size: cover; background-position: center; background-repeat: no-repeat;
+            z-index: -2;
+            transform: scale(1.04);
+            animation: heroZoom 18s ease-in-out infinite alternate;
+        }
+        @keyframes heroZoom { from { transform: scale(1.04); } to { transform: scale(1.14); } }
+        .page-hero-overlay {
+            position: absolute; inset: 0; z-index: -1;
+            background:
+                linear-gradient(180deg, rgba(15, 23, 42, 0.88) 0%, rgba(15, 23, 42, 0.70) 45%, rgba(15, 23, 42, 0.93) 100%),
+                radial-gradient(circle at 80% 24%, rgba(180, 83, 9, 0.44) 0%, transparent 58%),
+                radial-gradient(circle at 10% 84%, rgba(180, 83, 9, 0.26) 0%, transparent 52%);
+        }
+        .page-hero-inner {
+            position: relative; z-index: 2;
+            width: 100%; max-width: 1100px;
+            padding: 70px 24px;
+            text-align: center; color: #ffffff;
+        }
+        .hero-breadcrumb {
+            display: inline-flex; align-items: center; gap: 10px;
+            padding: 9px 20px; border-radius: 999px;
+            background: rgba(255, 255, 255, 0.10);
+            border: 1px solid rgba(255, 255, 255, 0.22);
+            backdrop-filter: blur(10px);
+            font-size: 11px; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 1.6px;
+            color: #fef3c7;
+        }
+        .hero-breadcrumb a { color: #fef3c7; text-decoration: none; transition: color 0.25s ease; }
+        .hero-breadcrumb a:hover { color: #ffffff; }
+        .hero-breadcrumb .sep { opacity: 0.55; font-size: 9px; }
+        .hero-breadcrumb .current { color: #ffffff; }
+
+        .page-hero h1 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 800; letter-spacing: -0.03em;
+            line-height: 1.04;
+            font-size: clamp(2.35rem, 6vw, 4.7rem);
+            margin-top: 26px;
+            text-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
+        }
+        .page-hero h1 em { font-style: italic; font-weight: 400; color: #fbbf24; }
+
+        .page-hero p.lead {
+            max-width: 680px; margin: 22px auto 0;
+            font-size: 1rem; line-height: 1.8;
+            color: rgba(241, 245, 249, 0.88);
+        }
+        @media (min-width: 640px) { .page-hero p.lead { font-size: 1.075rem; } }
+
+        .page-hero-cta { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; margin-top: 36px; }
+        .page-hero-cta .btn-solid { box-shadow: 0 12px 34px rgba(180, 83, 9, 0.45); }
+        .page-hero-cta .btn-ghost {
+            padding: 12px 26px; border-radius: 40px;
+            font-weight: 700; font-size: 11px;
+            text-transform: uppercase; letter-spacing: 1.2px;
+            display: inline-flex; align-items: center; gap: 8px;
+            text-decoration: none; color: #ffffff;
+            background: rgba(255, 255, 255, 0.09);
+            border: 1px solid rgba(255, 255, 255, 0.28);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+        .page-hero-cta .btn-ghost:hover {
+            background: rgba(255, 255, 255, 0.18);
+            border-color: rgba(255, 255, 255, 0.55);
+            transform: translateY(-2px);
+        }
+
+        .hero-stat-strip {
+            display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 12px; max-width: 660px;
+            margin: 54px auto 0; padding-top: 28px;
+            border-top: 1px solid rgba(255, 255, 255, 0.18);
+        }
+        .hero-stat-strip .num { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.55rem; font-weight: 800; color: #ffffff; }
+        .hero-stat-strip .lbl { font-size: 9.5px; font-weight: 700; letter-spacing: 1.4px; text-transform: uppercase; color: rgba(254, 243, 199, 0.78); margin-top: 4px; }
+
+        .scroll-cue {
+            position: absolute; bottom: 26px; left: 50%; transform: translateX(-50%);
+            z-index: 3; display: flex; flex-direction: column; align-items: center; gap: 8px;
+            color: rgba(255, 255, 255, 0.62);
+            font-size: 9px; font-weight: 700;
+            letter-spacing: 2px; text-transform: uppercase;
+            text-decoration: none;
+            animation: cueFloat 2.4s ease-in-out infinite;
+        }
+        .scroll-cue:hover { color: #fbbf24; }
+        @keyframes cueFloat { 0%, 100% { transform: translate(-50%, 0); } 50% { transform: translate(-50%, 8px); } }
+
+        @media (prefers-reduced-motion: reduce) {
+            .page-hero-bg { animation: none; }
+            .scroll-cue { animation: none; }
+        }
+
+        /* Footer */
+        footer { background: #0f172a; border-top: 1px solid rgba(180, 83, 9, 0.25); padding-top: 60px; color: #f1f5f9; }
+        footer h4 { color: #f8fafc; font-weight: 700; font-size: 1.1rem; margin-bottom: 18px; }
+        footer a, footer li { color: #94a3b8; text-decoration: none; transition: all 0.3s; font-size: 0.9rem; }
+        footer a:hover { color: var(--accent); }
+        footer .social-circle { width: 40px; height: 40px; border-radius: 50%; border: 1px solid rgba(180, 83, 9, 0.25); display: flex; align-items: center; justify-content: center; transition: all 0.3s; color: #94a3b8; }
+        footer .social-circle:hover { background: var(--gradient-accent); border-color: var(--accent); color: #fff; transform: translateY(-3px); }
+
+        /* ==========================================
+           SHARED LAYERED SECTION STYLES
+           ========================================== */
+        .fit-section { padding: 48px 0; }
+        @media (min-width: 768px) { .fit-section { padding: 64px 0; } }
+
+        .fit-frame {
+            position: relative;
+            background: var(--bg-card);
+            border: 1px solid var(--border-light);
+            border-radius: 30px;
+            padding: 30px 20px;
+            box-shadow: 0 24px 60px -30px var(--shadow-color);
+        }
+        .fit-frame::before {
+            content: '';
+            position: absolute;
+            inset: 9px;
+            border: 1px dashed var(--border-light);
+            border-radius: 22px;
+            pointer-events: none;
+        }
+        @media (min-width: 768px) {
+            .fit-frame { padding: 52px 46px; border-radius: 34px; }
+            .fit-frame::before { inset: 12px; border-radius: 26px; }
+        }
+
+        .fit-corner::before,
+        .fit-corner::after {
+            content: '';
+            position: absolute;
+            width: 22px; height: 22px;
+            border-style: solid;
+            border-color: var(--accent);
+            opacity: 0.55;
+            pointer-events: none;
+        }
+        .fit-corner::before { top: 20px; left: 20px; border-width: 2px 0 0 2px; border-radius: 8px 0 0 0; }
+        .fit-corner::after  { bottom: 20px; right: 20px; border-width: 0 2px 2px 0; border-radius: 0 0 8px 0; }
+
+        .fit-eyebrow {
+            display: inline-flex; align-items: center; gap: 8px;
+            font-size: 10.5px; font-weight: 800; letter-spacing: 2px;
+            text-transform: uppercase; color: var(--accent);
+        }
+        .fit-eyebrow::before { content: ''; width: 26px; height: 2px; background: var(--accent); border-radius: 2px; }
+
+        .fit-title {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 800; letter-spacing: -0.025em;
+            font-size: clamp(1.8rem, 3.4vw, 2.6rem);
+            line-height: 1.13; color: var(--text-main);
+        }
+        .fit-rule {
+            height: 1px; width: 80px;
+            background: linear-gradient(90deg, var(--accent), transparent);
+            margin-top: 18px; border-radius: 2px;
+        }
+
+        .fit-card {
+            position: relative;
+            background: var(--bg-card);
+            border: 1px solid var(--border-light);
+            border-radius: 22px;
+            padding: 30px 24px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
+            height: 100%;
+            display: flex; flex-direction: column;
+        }
+        .fit-card::before {
+            content: '';
+            position: absolute; top: 0; left: 0; right: 0;
+            height: 3px; background: var(--gradient-accent);
+            opacity: 0; transition: opacity 0.35s ease;
+        }
+        .fit-card:hover {
+            border-color: var(--border-light);
+            box-shadow: 0 26px 55px -24px rgba(180, 83, 9, 0.38);
+            transform: translateY(-6px);
+        }
+        .fit-card:hover::before { opacity: 1; }
+
+        .fit-icon {
+            width: 56px; height: 56px; border-radius: 16px;
+            display: flex; align-items: center; justify-content: center;
+            background: rgba(180, 83, 9, 0.10);
+            border: 1px solid var(--border-light);
+            color: var(--accent); font-size: 21px;
+            transition: all 0.4s ease;
+            flex-shrink: 0;
+        }
+        .fit-card:hover .fit-icon {
+            background: var(--gradient-accent);
+            color: #ffffff;
+            transform: rotate(-6deg) scale(1.05);
+        }
+        .fit-num {
+            position: absolute; top: 22px; right: 24px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 2rem; font-weight: 800; line-height: 1;
+            color: var(--accent); opacity: 0.14; letter-spacing: -0.04em;
+        }
+        .fit-list {
+            list-style: none; padding: 0; margin: 18px 0 0;
+            display: grid; gap: 9px; padding-top: 18px;
+            border-top: 1px dashed var(--border-light);
+        }
+        .fit-list li {
+            display: flex; align-items: flex-start; gap: 9px;
+            font-size: 0.8125rem; color: var(--text-muted); line-height: 1.55;
+        }
+        .fit-list i { color: var(--accent); font-size: 9px; margin-top: 5px; flex-shrink: 0; }
+
+        /* Contact links inside cards */
+        .contact-link {
+            display: inline-flex; align-items: center; gap: 8px;
+            margin-top: auto; padding-top: 20px;
+            font-size: 10.5px; font-weight: 800;
+            letter-spacing: 1.2px; text-transform: uppercase;
+            color: var(--accent); text-decoration: none;
+            transition: gap 0.3s ease;
+        }
+        .contact-link:hover { gap: 14px; }
+
+        /* Form fields */
+        .fit-field { display: flex; flex-direction: column; gap: 8px; }
+        .fit-label {
+            font-size: 10.5px; font-weight: 800; letter-spacing: 1.4px;
+            text-transform: uppercase; color: var(--text-muted);
+        }
+        .fit-input {
+            width: 100%;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-light);
+            border-radius: 14px;
+            padding: 13px 16px;
+            font-size: 0.875rem;
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+        .fit-input::placeholder { color: var(--text-dim); }
+        .fit-input:focus {
+            border-color: var(--accent);
+            background: var(--bg-card);
+            box-shadow: 0 0 0 4px rgba(180, 83, 9, 0.12);
+        }
+        textarea.fit-input { resize: vertical; min-height: 130px; }
+        select.fit-input { appearance: none; cursor: pointer; }
+
+        /* Promise rows */
+        .promise-row {
+            display: flex; align-items: flex-start; gap: 14px;
+            padding: 18px 0;
+            border-bottom: 1px dashed var(--border-light);
+        }
+        .promise-row:last-child { border-bottom: none; padding-bottom: 0; }
+        .promise-row:first-child { padding-top: 0; }
+        .promise-icon {
+            flex-shrink: 0;
+            width: 42px; height: 42px; border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            background: rgba(180, 83, 9, 0.10);
+            border: 1px solid var(--border-light);
+            color: var(--accent); font-size: 15px;
+        }
+
+        /* Process cards */
+        .step-card {
+            position: relative;
+            background: var(--bg-card);
+            border: 1px solid var(--border-light);
+            border-radius: 20px;
+            padding: 28px 22px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            height: 100%;
+        }
+        .step-card:hover {
+            border-color: var(--border-light);
+            box-shadow: 0 22px 46px -24px rgba(180, 83, 9, 0.34);
+            transform: translateY(-5px);
+        }
+        .step-num {
+            width: 46px; height: 46px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 800; font-size: 0.9rem;
+            color: var(--accent);
+            background: var(--bg-card);
+            border: 1px solid var(--border-light);
+            box-shadow: 0 6px 18px var(--shadow-color);
+        }
+
+        /* Area chips */
+        .area-card {
+            position: relative;
+            background: var(--bg-card);
+            border: 1px solid var(--border-light);
+            border-radius: 18px;
+            padding: 22px 20px;
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            height: 100%;
+            display: flex; align-items: center; gap: 14px;
+        }
+        .area-card:hover {
+            border-color: var(--accent);
+            background: var(--menu-hover-bg);
+            transform: translateY(-4px);
+            box-shadow: 0 18px 40px -22px rgba(180, 83, 9, 0.34);
+        }
+        .area-icon {
+            width: 42px; height: 42px; border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            background: rgba(180, 83, 9, 0.10);
+            border: 1px solid var(--border-light);
+            color: var(--accent); font-size: 15px;
+            flex-shrink: 0;
+        }
+
+        /* FAQ */
+        .faq-item {
+            border: 1px solid var(--border-light);
+            border-radius: 16px;
+            background: var(--bg-card);
+            margin-bottom: 12px;
+            overflow: hidden;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .faq-item[open] { border-color: var(--accent); box-shadow: 0 14px 34px -18px rgba(180, 83, 9, 0.35); }
+        .faq-item summary {
+            list-style: none;
+            cursor: pointer;
+            padding: 18px 22px;
+            display: flex; align-items: center; justify-content: space-between; gap: 14px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 700; font-size: 0.95rem;
+            color: var(--text-main);
+            transition: color 0.25s ease;
+        }
+        .faq-item summary::-webkit-details-marker { display: none; }
+        .faq-item summary:hover { color: var(--accent); }
+        .faq-item summary .faq-icon {
+            flex-shrink: 0;
+            width: 26px; height: 26px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            border: 1px solid var(--border-light);
+            background: var(--bg-secondary);
+            color: var(--accent); font-size: 10px;
+            transition: transform 0.3s ease;
+        }
+        .faq-item[open] summary .faq-icon { transform: rotate(45deg); background: var(--gradient-accent); color: #fff; border-color: var(--accent); }
+        .faq-body { padding: 0 22px 20px; font-size: 0.875rem; line-height: 1.7; color: var(--text-muted); }
+
+        /* ==========================================
+           NEW MAP SECTION
+           ========================================== */
+        .map-frame {
+            position: relative;
+            border-radius: 26px;
+            overflow: hidden;
+            border: 1px solid var(--border-light);
+            box-shadow: 0 26px 60px -30px var(--shadow-color);
+            height: 440px;
+            background: var(--bg-secondary);
+        }
+        @media (min-width: 768px) {
+            .map-frame { height: 520px; border-radius: 28px; }
+        }
+        .map-frame iframe {
+            width: 100%; height: 100%;
+            border: 0; display: block;
+            filter: grayscale(8%) contrast(1.02);
+        }
+        body.dark-mode .map-frame iframe {
+            filter: grayscale(35%) invert(0.92) hue-rotate(180deg) contrast(0.95);
+        }
+        .map-info-card {
+            position: absolute;
+            left: 20px; right: 20px; bottom: 20px;
+            padding: 22px 24px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.97);
+            backdrop-filter: blur(14px);
+            border: 1px solid var(--border-light);
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.18);
+            max-width: 380px;
+        }
+        body.dark-mode .map-info-card { background: rgba(15, 23, 42, 0.96); }
+        @media (min-width: 768px) {
+            .map-info-card {
+                top: 24px; bottom: auto;
+                right: auto; left: 24px;
+            }
+        }
+        .map-info-row {
+            display: flex; align-items: flex-start; gap: 12px;
+            padding: 10px 0;
+            font-size: 0.8125rem;
+            line-height: 1.55;
+            color: var(--text-muted);
+        }
+        .map-info-row i {
+            color: var(--accent);
+            font-size: 13px;
+            margin-top: 3px;
+            flex-shrink: 0;
+            width: 16px;
+            text-align: center;
+        }
+
+        /* ==========================================
+           NEW WARM SPLIT CTA
+           ========================================== */
+        .cta-warm {
+            position: relative;
+            border-radius: 32px;
+            overflow: hidden;
+            border: 1px solid var(--border-strong);
+            box-shadow: 0 34px 70px -32px rgba(180, 83, 9, 0.35), 0 12px 30px -18px rgba(15, 23, 42, 0.15);
+            display: grid;
+            grid-template-columns: 1fr;
+            background: #0f172a;
+        }
+        @media (min-width: 1024px) {
+            .cta-warm {
+                grid-template-columns: 1.1fr 1fr;
+                min-height: 440px;
+            }
+        }
+
+        .cta-warm-content {
+            position: relative;
+            padding: 48px 28px;
+            background:
+                radial-gradient(circle at 8% 8%, rgba(251, 191, 36, 0.55) 0%, transparent 55%),
+                radial-gradient(circle at 92% 92%, rgba(180, 83, 9, 0.28) 0%, transparent 55%),
+                linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            overflow: hidden;
+            isolation: isolate;
+        }
+        @media (min-width: 768px) {
+            .cta-warm-content { padding: 64px 52px; }
+        }
+        /* Decorative corner circle */
+        .cta-warm-content::before {
+            content: '';
+            position: absolute;
+            width: 220px; height: 220px;
+            border-radius: 50%;
+            border: 2px dashed rgba(120, 53, 15, 0.18);
+            top: -70px; right: -70px;
+            pointer-events: none;
+            z-index: -1;
+        }
+        /* Decorative small circle */
+        .cta-warm-content::after {
+            content: '';
+            position: absolute;
+            width: 90px; height: 90px;
+            border-radius: 50%;
+            border: 2px solid rgba(120, 53, 15, 0.14);
+            bottom: 24px; right: 32px;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .cta-warm-badge {
+            display: inline-flex; align-items: center; gap: 9px;
+            padding: 7px 16px;
+            border-radius: 999px;
+            background: rgba(15, 23, 42, 0.92);
+            border: 1px solid rgba(15, 23, 42, 0.4);
+            color: #fef3c7;
+            font-size: 10px; font-weight: 800;
+            letter-spacing: 1.8px; text-transform: uppercase;
+            align-self: flex-start;
+            box-shadow: 0 6px 16px rgba(15, 23, 42, 0.20);
+        }
+        .cta-warm-badge .dot {
+            width: 7px; height: 7px; border-radius: 50%;
+            background: #fbbf24;
+            box-shadow: 0 0 0 0 rgba(251, 191, 36, 0.6);
+            animation: pulseDot 2s ease-in-out infinite;
+        }
+        @keyframes pulseDot {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(251, 191, 36, 0.5); }
+            50%      { box-shadow: 0 0 0 8px rgba(251, 191, 36, 0); }
+        }
+
+        .cta-warm h2 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 800; letter-spacing: -0.03em;
+            font-size: clamp(1.9rem, 3.8vw, 2.9rem);
+            line-height: 1.08;
+            color: #1c1917;
+            margin-top: 22px;
+        }
+        .cta-warm h2 em {
+            font-style: italic; font-weight: 400;
+            color: #b45309;
+        }
+        .cta-warm p {
+            color: #44403c;
+            line-height: 1.75;
+            max-width: 460px;
+            margin-top: 18px;
+            font-size: 0.9375rem;
+        }
+        @media (min-width: 640px) {
+            .cta-warm p { font-size: 1rem; }
+        }
+
+        .cta-warm-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 30px;
+        }
+        .cta-btn-dark {
+            padding: 14px 26px;
+            font-weight: 700;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            border-radius: 40px;
+            background: #0f172a;
+            border: 2px solid #0f172a;
+            color: #fef3c7 !important;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 26px rgba(15, 23, 42, 0.28);
+        }
+        .cta-btn-dark:hover {
+            transform: translateY(-3px);
+            background: #b45309;
+            border-color: #b45309;
+            color: #ffffff !important;
+            box-shadow: 0 14px 32px rgba(180, 83, 9, 0.40);
+        }
+        .cta-btn-outline-dark {
+            padding: 14px 26px;
+            font-weight: 700;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            border-radius: 40px;
+            background: transparent;
+            border: 2px solid #78350f;
+            color: #78350f;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+        .cta-btn-outline-dark:hover {
+            background: #78350f;
+            border-color: #78350f;
+            color: #fef3c7 !important;
+            transform: translateY(-3px);
+            box-shadow: 0 12px 28px rgba(120, 53, 15, 0.35);
+        }
+
+        .cta-warm-trust {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px 22px;
+            margin-top: 28px;
+            padding-top: 22px;
+            border-top: 1px dashed rgba(120, 53, 15, 0.25);
+        }
+        .cta-warm-trust span {
+            display: inline-flex; align-items: center; gap: 7px;
+            font-size: 10.5px; font-weight: 700;
+            letter-spacing: 0.6px;
+            color: #57534e;
+            text-transform: uppercase;
+        }
+        .cta-warm-trust span i {
+            color: #b45309; font-size: 11px;
+        }
+
+        .cta-warm-image {
+            position: relative;
+            min-height: 280px;
+            overflow: hidden;
+            background: #0f172a;
+        }
+        .cta-warm-image img {
+            width: 100%; height: 100%;
+            object-fit: cover; display: block;
+            transition: transform 1s ease;
+        }
+        .cta-warm:hover .cta-warm-image img {
+            transform: scale(1.06);
+        }
+        .cta-warm-image::after {
+            content: '';
+            position: absolute; inset: 0;
+            background:
+                linear-gradient(180deg, rgba(180, 83, 9, 0.18) 0%, rgba(15, 23, 42, 0.55) 100%),
+                radial-gradient(circle at 30% 30%, rgba(251, 191, 36, 0.20) 0%, transparent 60%);
+            pointer-events: none;
+        }
+        @media (min-width: 1024px) {
+            .cta-warm-image { min-height: auto; }
+        }
+
+        /* Floating trust card on image */
+        .cta-float-card {
+            position: absolute;
+            z-index: 3;
+            bottom: 20px; right: 20px;
+            padding: 14px 18px;
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.96);
+            backdrop-filter: blur(14px);
+            border: 1px solid var(--border-light);
+            box-shadow: 0 18px 42px rgba(0, 0, 0, 0.25);
+            display: flex; align-items: center; gap: 12px;
+            max-width: calc(100% - 40px);
+        }
+        body.dark-mode .cta-float-card { background: rgba(15, 23, 42, 0.96); }
+        @media (min-width: 1024px) {
+            .cta-float-card { top: 24px; bottom: auto; right: 24px; }
+        }
+        .cta-float-icon {
+            width: 42px; height: 42px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            background: var(--gradient-accent);
+            color: #ffffff;
+            font-size: 16px;
+            flex-shrink: 0;
+            box-shadow: 0 8px 20px rgba(180, 83, 9, 0.35);
+        }
+        .cta-float-stars {
+            display: flex; gap: 2px;
+            color: #f59e0b;
+            font-size: 9px;
+            margin-top: 2px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ========================================== -->
+    <!-- NAVBAR COMPONENT (Contact active)          -->
+    <!-- ========================================== -->
+    <nav class="navbar" id="main-nav">
+        <div class="w-full flex items-center justify-between max-w-[1440px] mx-auto px-6">
+            <a href="index.html" class="brand-link">
+                <div class="brand-icon-wrapper"><i class="fa-solid fa-bolt"></i></div>
+                <div class="brand-logo"><span>Volt</span>Nest</div>
+            </a>
+
+            <div class="hidden xl:flex items-center justify-center flex-1 px-4">
+                <div class="nav-pills">
+                    <div class="dropdown-pill">
+                        <a href="#" class="nav-pill">
+                            Home <i class="fas fa-chevron-down"></i>
+                        </a>
+                        <div class="dropdown-pill-menu">
+                            <a href="index.html" class="dropdown-pill-item">Home 1</a>
+                            <a href="home-2.html" class="dropdown-pill-item">Home 2</a>
+                        </div>
+                    </div>
+                    <a href="about.html" class="nav-pill">About Us</a>
+                    <a href="services.html" class="nav-pill">Services</a>
+                    <a href="fittings.html" class="nav-pill">Fan &amp; Light</a>
+                    <a href="switchboards.html" class="nav-pill">Switchboards</a>
+                    <a href="price.html" class="nav-pill">Price</a>
+                    <a href="contact.html" class="nav-pill active">Contact</a>
+                </div>
+            </div>
+
+            <div class="hidden xl:flex items-center gap-4">
+                <a href="contact.html" class="btn btn-outline"><i class="fas fa-calendar-check text-[var(--accent)]"></i> Book</a>
+                <div class="w-px h-6 bg-[var(--border-light)] mx-1"></div>
+                <button id="theme-toggle" class="theme-btn" aria-label="Toggle theme"><i class="fas fa-moon"></i></button>
+                <button id="rtl-btn" class="rtl-toggle">LTR</button>
+            </div>
+
+            <button class="xl:hidden text-2xl text-[var(--text-main)] w-10 h-10 flex items-center justify-center rounded-full bg-[var(--bg-card)] border border-[var(--border-light)] shadow-md" onclick="toggleMenu()">
+                <i class="fas fa-bars text-[var(--accent)]"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Drawer -->
+    <div class="drawer-overlay" id="drawer-overlay" onclick="toggleMenu()"></div>
+    <div class="fullscreen-menu" id="fullscreen-menu">
+        <div class="p-6 flex justify-between items-center border-b border-[var(--border-light)]">
+            <a href="index.html" class="brand-link"><div class="brand-icon-wrapper"><i class="fa-solid fa-bolt"></i></div><div class="brand-logo"><span>Volt</span>Nest</div></a>
+            <button class="text-2xl text-[var(--text-main)] hover:text-[var(--accent)] transition-colors w-10 h-10 flex items-center justify-center rounded-full bg-[var(--bg-secondary)]" onclick="toggleMenu()"><i class="fas fa-times"></i></button>
+        </div>
+
+        <div class="flex-1 overflow-y-auto py-4">
+            <div class="px-8 py-4 font-bold text-[15px] text-[var(--text-main)] flex justify-between items-center cursor-pointer border-b border-[var(--border-light)]" onclick="document.getElementById('mobile-home-menu').classList.toggle('open')">
+                Home <i class="fas fa-chevron-down text-sm text-[var(--accent)]"></i>
+            </div>
+            <div id="mobile-home-menu" class="mobile-dropdown-items">
+                <a href="index.html" class="mobile-link !text-[13px] !py-3 !border-none text-[var(--text-muted)] hover:text-[var(--accent)]"><i class="fas fa-arrow-right text-[10px] mr-2"></i> Home 1</a>
+                <a href="home-2.html" class="mobile-link !text-[13px] !py-3 !border-none text-[var(--text-muted)] hover:text-[var(--accent)]"><i class="fas fa-arrow-right text-[10px] mr-2"></i> Home 2</a>
+            </div>
+            <a href="about.html" class="mobile-link">About Us</a>
+            <a href="services.html" class="mobile-link">Services</a>
+            <a href="fittings.html" class="mobile-link">Fan &amp; Light</a>
+            <a href="switchboards.html" class="mobile-link">Switchboards</a>
+            <a href="price.html" class="mobile-link">price</a>
+            <a href="contact.html" class="mobile-link active">Contact</a>
+        </div>
+
+        <div class="p-6 border-t border-[var(--border-light)] bg-[var(--bg-secondary)] space-y-5">
+            <div class="flex justify-between items-center w-full pb-2">
+                <div class="flex items-center gap-3">
+                    <span class="text-[var(--text-main)] font-bold text-[11px] uppercase tracking-widest">Theme Mode</span>
+                    <button id="theme-toggle-mobile" class="theme-btn" aria-label="Toggle theme">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </div>
+                <div class="flex items-center gap-3">
+                    <span class="text-[var(--text-main)] font-bold text-[11px] uppercase tracking-widest">Layout</span>
+                    <button id="rtl-btn-mobile" class="rtl-toggle">
+                        LTR
+                    </button>
+                </div>
+            </div>
+            <a href="contact.html" class="btn btn-outline w-full !py-3.5 justify-center"><i class="fas fa-calendar-check mr-2 text-[var(--accent)]"></i> Book Service</a>
+            <a href="tel:+18005559473" class="btn btn-solid w-full !py-3.5 justify-center"><i class="fas fa-phone-volume mr-2"></i> Emergency Call</a>
+        </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- HERO — FULL VIEWPORT BACKGROUND IMAGE      -->
+    <!-- ========================================== -->
+    <section class="page-hero" id="contact-hero">
+        <div class="page-hero-bg" aria-hidden="true"></div>
+        <div class="page-hero-overlay" aria-hidden="true"></div>
+
+        <div class="page-hero-inner">
+            <div class="hero-breadcrumb">
+                <a href="index.html">Home</a>
+                <i class="fas fa-chevron-right sep"></i>
+                <span class="current">Contact</span>
+            </div>
+
+            <h1>
+                Let's get your home<br />
+                <em>powered safely.</em>
+            </h1>
+
+            <p class="lead">
+                Book a visit, request a free quote, or call our 24/7 emergency line. A licensed
+                VoltNest master electrician is ready to help — with clear answers and no obligation.
+            </p>
+
+            <div class="page-hero-cta">
+                <a href="tel:+18005559473" class="btn btn-solid !py-3.5 !px-8">
+                    <i class="fas fa-phone-volume"></i> <span>Call (800) 555-9473</span>
+                </a>
+                <a href="mailto:service@voltnest.com" class="btn-ghost">
+                    <i class="fas fa-envelope"></i> <span>Email Us</span>
+                </a>
+            </div>
+
+            <div class="hero-stat-strip">
+                <div>
+                    <div class="num">24/7</div>
+                    <div class="lbl">Emergency Dispatch</div>
+                </div>
+                <div>
+                    <div class="num">&lt; 60 min</div>
+                    <div class="lbl">Response Time</div>
+                </div>
+                <div>
+                    <div class="num">Free</div>
+                    <div class="lbl">On-Site Quote</div>
+                </div>
+            </div>
+        </div>
+
+        <a href="#main-nav" class="scroll-cue" aria-label="Scroll">
+            <span>Scroll</span>
+            <i class="fas fa-chevron-down text-[11px]"></i>
+        </a>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SECTION 1 · HOW TO REACH US                -->
+    <!-- ========================================== -->
+    <section class="fit-section" id="reach-us">
+        <div class="max-w-[1380px] mx-auto px-5 sm:px-8 lg:px-12">
+            <div class="fit-frame fit-corner">
+
+                <div class="max-w-2xl mb-10">
+                    <span class="fit-eyebrow">How To Reach Us</span>
+                    <h2 class="fit-title mt-4">Pick the fastest way to get in touch.</h2>
+                    <div class="fit-rule"></div>
+                    <p class="text-[var(--text-muted)] leading-relaxed mt-5">
+                        Whether it's an emergency, a quote request or a simple question, there's a
+                        direct line to the right person on our team.
+                    </p>
+                </div>
+
+                <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+
+                    <article class="fit-card">
+                        <span class="fit-num">01</span>
+                        <div class="fit-icon"><i class="fas fa-phone-volume"></i></div>
+                        <h3 class="font-display font-bold text-lg mt-6 text-[var(--text-main)]">Call Us</h3>
+                        <p class="text-sm text-[var(--text-muted)] leading-relaxed mt-3">
+                            Speak directly to our dispatch team for bookings and urgent electrical
+                            faults.
+                        </p>
+                        <ul class="fit-list">
+                            <li><i class="fas fa-check"></i> (800) 555-WIRE (9473)</li>
+                            <li><i class="fas fa-check"></i> Mon–Sun, 24 hours</li>
+                        </ul>
+                        <a href="tel:+18005559473" class="contact-link">Call Now <i class="fas fa-arrow-right text-[9px]"></i></a>
+                    </article>
+
+                    <article class="fit-card">
+                        <span class="fit-num">02</span>
+                        <div class="fit-icon"><i class="fas fa-envelope"></i></div>
+                        <h3 class="font-display font-bold text-lg mt-6 text-[var(--text-main)]">Email Us</h3>
+                        <p class="text-sm text-[var(--text-muted)] leading-relaxed mt-3">
+                            Send photos of the job and we'll reply with a clear answer and fixed
+                            written quote.
+                        </p>
+                        <ul class="fit-list">
+                            <li><i class="fas fa-check"></i> service@voltnest.com</li>
+                            <li><i class="fas fa-check"></i> Replies within 1 business hour</li>
+                        </ul>
+                        <a href="mailto:service@voltnest.com" class="contact-link">Send Email <i class="fas fa-arrow-right text-[9px]"></i></a>
+                    </article>
+
+                    <article class="fit-card">
+                        <span class="fit-num">03</span>
+                        <div class="fit-icon"><i class="fas fa-calendar-check"></i></div>
+                        <h3 class="font-display font-bold text-lg mt-6 text-[var(--text-main)]">Book Online</h3>
+                        <p class="text-sm text-[var(--text-muted)] leading-relaxed mt-3">
+                            Choose a service and a time slot that suits you — we confirm straight
+                            away.
+                        </p>
+                        <ul class="fit-list">
+                            <li><i class="fas fa-check"></i> Same-day slots available</li>
+                            <li><i class="fas fa-check"></i> Free on-site assessment</li>
+                        </ul>
+                        <a href="contact.html" class="contact-link">Book Online <i class="fas fa-arrow-right text-[9px]"></i></a>
+                    </article>
+
+                    <article class="fit-card">
+                        <span class="fit-num">04</span>
+                        <div class="fit-icon"><i class="fas fa-bolt"></i></div>
+                        <h3 class="font-display font-bold text-lg mt-6 text-[var(--text-main)]">Emergency</h3>
+                        <p class="text-sm text-[var(--text-muted)] leading-relaxed mt-3">
+                            Burning smells, tripping breakers or dead sockets — call our 24/7 line
+                            immediately.
+                        </p>
+                        <ul class="fit-list">
+                            <li><i class="fas fa-check"></i> Rapid-response callout</li>
+                            <li><i class="fas fa-check"></i> Licenced on-call electrician</li>
+                        </ul>
+                        <a href="tel:+18005559473" class="contact-link">Call Emergency Line <i class="fas fa-arrow-right text-[9px]"></i></a>
+                    </article>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SECTION 2 · SEND US A MESSAGE              -->
+    <!-- ========================================== -->
+    <section class="fit-section !pt-0" id="message-us">
+        <div class="max-w-[1380px] mx-auto px-5 sm:px-8 lg:px-12">
+            <div class="fit-frame fit-corner">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14">
+
+                    <div class="lg:col-span-7">
+                        <span class="fit-eyebrow">Send Us A Message</span>
+                        <h2 class="fit-title mt-4">Tell us about the job.</h2>
+                        <div class="fit-rule"></div>
+                        <p class="text-[var(--text-muted)] leading-relaxed mt-5">
+                            Fill in the details below and we'll come back with a fixed written quote —
+                            usually within one business hour.
+                        </p>
+
+                        <form class="grid sm:grid-cols-2 gap-5 mt-8" onsubmit="event.preventDefault();">
+                            <div class="fit-field">
+                                <label class="fit-label" for="cf-name">Full Name</label>
+                                <input id="cf-name" type="text" class="fit-input" placeholder="e.g. Jamie Carter" required />
+                            </div>
+                            <div class="fit-field">
+                                <label class="fit-label" for="cf-phone">Phone Number</label>
+                                <input id="cf-phone" type="tel" class="fit-input" placeholder="(555) 123-4567" required />
+                            </div>
+                            <div class="fit-field sm:col-span-2">
+                                <label class="fit-label" for="cf-email">Email Address</label>
+                                <input id="cf-email" type="email" class="fit-input" placeholder="you@example.com" required />
+                            </div>
+                            <div class="fit-field sm:col-span-2">
+                                <label class="fit-label" for="cf-service">Service Needed</label>
+                                <select id="cf-service" class="fit-input">
+                                    <option>Home Wiring &amp; Rewiring</option>
+                                    <option>Fan &amp; Light Fitting</option>
+                                    <option>Switchboard Repair &amp; Upgrade</option>
+                                    <option>Safety Inspection &amp; Testing</option>
+                                    <option>Emergency Electrical Repair</option>
+                                    <option>Something Else</option>
+                                </select>
+                            </div>
+                            <div class="fit-field sm:col-span-2">
+                                <label class="fit-label" for="cf-message">Job Details</label>
+                                <textarea id="cf-message" class="fit-input" placeholder="Tell us what needs doing, and any preferred dates or times..."></textarea>
+                            </div>
+                            <div class="sm:col-span-2 pt-1">
+                                <button type="submit" class="btn btn-solid !py-3.5 !px-8 w-full sm:w-auto">
+                                    <span>Request a Quote</span> <i class="fas fa-arrow-right"></i>
+                                </button>
+                                <p class="text-xs text-[var(--text-dim)] mt-4">
+                                    No obligation. We never share your details with third parties.
+                                </p>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="lg:col-span-5 lg:pl-8 lg:border-l lg:border-dashed lg:border-[var(--border-light)]">
+                        <h3 class="font-display font-bold text-xl text-[var(--text-main)]">Dispatch Headquarters</h3>
+                        <p class="text-sm text-[var(--text-muted)] leading-relaxed mt-2">
+                            Our team is on hand around the clock for bookings and emergencies.
+                        </p>
+
+                        <div class="mt-7">
+                            <div class="promise-row">
+                                <div class="promise-icon"><i class="fas fa-map-marker-alt"></i></div>
+                                <div>
+                                    <h4 class="font-display font-bold text-sm text-[var(--text-main)]">Visit the office</h4>
+                                    <p class="text-sm text-[var(--text-muted)] leading-relaxed mt-1">
+                                        1200 Industrial Pkwy, Suite 400, Metro Area
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="promise-row">
+                                <div class="promise-icon"><i class="fas fa-phone"></i></div>
+                                <div>
+                                    <h4 class="font-display font-bold text-sm text-[var(--text-main)]">Call dispatch</h4>
+                                    <p class="text-sm text-[var(--text-muted)] leading-relaxed mt-1">
+                                        <a href="tel:+18005559473" class="text-[var(--accent)] font-semibold hover:underline">(800) 555-WIRE (9473)</a>
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="promise-row">
+                                <div class="promise-icon"><i class="fas fa-envelope"></i></div>
+                                <div>
+                                    <h4 class="font-display font-bold text-sm text-[var(--text-main)]">Email the team</h4>
+                                    <p class="text-sm text-[var(--text-muted)] leading-relaxed mt-1">
+                                        <a href="mailto:service@voltnest.com" class="text-[var(--accent)] font-semibold hover:underline">service@voltnest.com</a>
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="promise-row">
+                                <div class="promise-icon"><i class="fas fa-clock"></i></div>
+                                <div>
+                                    <h4 class="font-display font-bold text-sm text-[var(--text-main)]">Opening hours</h4>
+                                    <p class="text-sm text-[var(--text-muted)] leading-relaxed mt-1">
+                                        Office Mon–Fri, 8am–6pm · Emergency line 24/7
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SECTION 3 · WHAT HAPPENS NEXT              -->
+    <!-- ========================================== -->
+    <section class="fit-section !pt-0" id="what-next">
+        <div class="max-w-[1380px] mx-auto px-5 sm:px-8 lg:px-12">
+            <div class="fit-frame fit-corner">
+
+                <div class="max-w-2xl mb-10">
+                    <span class="fit-eyebrow">What Happens Next</span>
+                    <h2 class="fit-title mt-4">From your message to a finished job.</h2>
+                    <div class="fit-rule"></div>
+                    <p class="text-[var(--text-muted)] leading-relaxed mt-5">
+                        No call centres and no runaround — a real electrician reviews every enquiry
+                        and follows it through to completion.
+                    </p>
+                </div>
+
+                <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+
+                    <div class="step-card">
+                        <div class="step-num">01</div>
+                        <h3 class="font-display font-bold text-base text-[var(--text-main)] mt-5">We receive your request</h3>
+                        <p class="text-sm text-[var(--text-muted)] leading-relaxed mt-2">
+                            Your enquiry goes straight to our dispatch team — not a queue.
+                        </p>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="step-num">02</div>
+                        <h3 class="font-display font-bold text-base text-[var(--text-main)] mt-5">Quick call-back</h3>
+                        <p class="text-sm text-[var(--text-muted)] leading-relaxed mt-2">
+                            We call within 60 minutes to confirm details and answer questions.
+                        </p>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="step-num">03</div>
+                        <h3 class="font-display font-bold text-base text-[var(--text-main)] mt-5">Fixed written quote</h3>
+                        <p class="text-sm text-[var(--text-muted)] leading-relaxed mt-2">
+                            You receive a clear price and a confirmed visit time to approve.
+                        </p>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="step-num">04</div>
+                        <h3 class="font-display font-bold text-base text-[var(--text-main)] mt-5">Job booked in</h3>
+                        <p class="text-sm text-[var(--text-muted)] leading-relaxed mt-2">
+                            Your electrician arrives on time, completes the work and certifies it.
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SECTION 4 · SERVICE AREAS                  -->
+    <!-- ========================================== -->
+    <section class="fit-section !pt-0" id="service-areas">
+        <div class="max-w-[1380px] mx-auto px-5 sm:px-8 lg:px-12">
+            <div class="fit-frame fit-corner">
+
+                <div class="max-w-2xl mb-10">
+                    <span class="fit-eyebrow">Service Areas</span>
+                    <h2 class="fit-title mt-4">Where our electricians work.</h2>
+                    <div class="fit-rule"></div>
+                    <p class="text-[var(--text-muted)] leading-relaxed mt-5">
+                        We cover the metro area and surrounding suburbs. Not sure if you're in range?
+                        Give us a quick call and we'll confirm.
+                    </p>
+                </div>
+
+                <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+
+                    <div class="area-card">
+                        <div class="area-icon"><i class="fas fa-city"></i></div>
+                        <div>
+                            <div class="font-display font-bold text-sm text-[var(--text-main)]">Metro Central</div>
+                            <div class="text-xs text-[var(--text-muted)] mt-0.5">Same-day availability</div>
+                        </div>
+                    </div>
+
+                    <div class="area-card">
+                        <div class="area-icon"><i class="fas fa-house"></i></div>
+                        <div>
+                            <div class="font-display font-bold text-sm text-[var(--text-main)]">North Suburbs</div>
+                            <div class="text-xs text-[var(--text-muted)] mt-0.5">Same-day availability</div>
+                        </div>
+                    </div>
+
+                    <div class="area-card">
+                        <div class="area-icon"><i class="fas fa-tree"></i></div>
+                        <div>
+                            <div class="font-display font-bold text-sm text-[var(--text-main)]">Greenfield &amp; Parks</div>
+                            <div class="text-xs text-[var(--text-muted)] mt-0.5">Next-day bookings</div>
+                        </div>
+                    </div>
+
+                    <div class="area-card">
+                        <div class="area-icon"><i class="fas fa-water"></i></div>
+                        <div>
+                            <div class="font-display font-bold text-sm text-[var(--text-main)]">Riverside District</div>
+                            <div class="text-xs text-[var(--text-muted)] mt-0.5">Same-day availability</div>
+                        </div>
+                    </div>
+
+                    <div class="area-card">
+                        <div class="area-icon"><i class="fas fa-industry"></i></div>
+                        <div>
+                            <div class="font-display font-bold text-sm text-[var(--text-main)]">Industrial Pkwy</div>
+                            <div class="text-xs text-[var(--text-muted)] mt-0.5">Office &amp; HQ location</div>
+                        </div>
+                    </div>
+
+                    <div class="area-card">
+                        <div class="area-icon"><i class="fas fa-mountain"></i></div>
+                        <div>
+                            <div class="font-display font-bold text-sm text-[var(--text-main)]">Hillcrest Heights</div>
+                            <div class="text-xs text-[var(--text-muted)] mt-0.5">Next-day bookings</div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="mt-8 pt-8 border-t border-dashed border-[var(--border-light)] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                    <p class="text-sm text-[var(--text-muted)]">
+                        Outside these areas? Emergency callouts may still be available.
+                    </p>
+                    <a href="tel:+18005559473" class="btn btn-outline !py-3 !px-6">
+                        <i class="fas fa-phone-volume text-[var(--accent)]"></i> <span>Check My Area</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+   <!-- ========================================== -->
+    <!-- SECTION 5 · FIND US (MAP) — CARD ON RIGHT -->
+    <!-- ========================================== -->
+    <section class="py-24 bg-[var(--bg-color)] transition-colors" id="find-us">
+        <div class="max-w-[1380px] mx-auto px-5 sm:px-8 lg:px-12">
+            <div class="max-w-2xl mb-12">
+                <span class="text-xs font-bold uppercase tracking-widest text-[var(--accent)]">Find Us</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-[var(--text-main)] font-display mt-3">Visit our dispatch headquarters.</h2>
+                <div class="w-16 h-1 bg-[var(--accent)] my-4"></div>
+                <p class="text-[var(--text-muted)] leading-relaxed mt-3">
+                    Drop by the office during opening hours, or use the map to see how close we are. Parking is available on site.
+                </p>
+            </div>
+
+            <div class="map-frame">
+                <iframe
+                    src="https://maps.google.com/maps?q=New+York&t=&z=13&ie=UTF8&iwloc=&output=embed"
+                    title="VoltNest Dispatch Headquarters map"
+                    loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"
+                    allowfullscreen></iframe>
+
+                <div class="map-info-card right-card">
+                    <div class="flex items-center gap-3 pb-3 mb-4 border-b border-dashed border-[var(--border-light)]">
+                        <div class="w-10 h-10 rounded-full bg-[var(--bg-secondary)] border border-[var(--border-light)] flex items-center justify-center shrink-0">
+                            <i class="fas fa-bolt text-[var(--accent)] text-sm"></i>
+                        </div>
+                        <div>
+                            <div class="font-display font-bold text-sm text-[var(--text-main)]">VoltNest HQ</div>
+                            <div class="text-[10px] font-bold uppercase tracking-widest text-[var(--accent)]">Dispatch Headquarters</div>
+                        </div>
+                    </div>
+
+                    <div class="map-info-row">
+                        <i class="fas fa-map-marker-alt text-[var(--accent)]"></i>
+                        <span>1200 Industrial Pkwy, Suite 400, Metro Area</span>
+                    </div>
+                    <div class="map-info-row">
+                        <i class="fas fa-clock text-[var(--accent)]"></i>
+                        <span>Mon–Fri 8am–6pm · Emergencies 24/7</span>
+                    </div>
+                    <div class="map-info-row">
+                        <i class="fas fa-phone text-[var(--accent)]"></i>
+                        <span><a href="tel:+18005559473" class="text-[var(--accent)] font-semibold hover:underline">(800) 555-WIRE (9473)</a></span>
+                    </div>
+
+                    <a href="https://maps.google.com/?q=New+York" target="_blank" rel="noopener"
+                        class="btn btn-solid w-full !py-3.5 justify-center mt-5 text-xs shadow-lg">
+                        <i class="fas fa-diamond-turn-right mr-2"></i> <span>Get Directions</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Style additions to position the card on the right side -->
+    <style>
+        .map-frame {
+            position: relative;
+            width: 100%;
+            height: 480px;
+            border-radius: 28px;
+            overflow: hidden;
+            border: 1px solid var(--border-light);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+        }
+        .map-frame iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+        .map-info-card.right-card {
+            position: absolute;
+            top: 24px;
+            right: 24px;
+            left: auto;
+            z-index: 10;
+            background: var(--bg-card);
+            border: 1px solid var(--border-light);
+            border-radius: 20px;
+            padding: 24px;
+            width: 100%;
+            max-width: 340px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+        .map-info-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+            line-height: 1.5;
+        }
+        .map-info-row i {
+            margin-top: 3px;
+            width: 16px;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .map-frame {
+                height: auto;
+                display: flex;
+                flex-direction: column;
+            }
+            .map-frame iframe {
+                height: 300px;
+            }
+            .map-info-card.right-card {
+                position: relative;
+                top: 0;
+                right: 0;
+                max-width: 100%;
+                border-radius: 0 0 28px 28px;
+                box-shadow: none;
+                border-top: none;
+            }
+        }
+    </style>
+    <!-- ========================================== -->
+    <!-- SECTION 6 · CONTACT FAQ                    -->
+    <!-- ========================================== -->
+    <section class="fit-section !pt-0" id="contact-faq">
+        <div class="max-w-[1380px] mx-auto px-5 sm:px-8 lg:px-12">
+            <div class="fit-frame fit-corner">
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14">
+
+                    <div class="lg:col-span-4">
+                        <span class="fit-eyebrow">FAQs</span>
+                        <h2 class="fit-title mt-4">Before you get in touch.</h2>
+                        <div class="fit-rule"></div>
+                        <p class="text-[var(--text-muted)] leading-relaxed mt-5">
+                            A few quick answers to the questions we hear most. Anything else, just
+                            ask — we're happy to help.
+                        </p>
+                        <div class="flex flex-wrap gap-4 pt-7">
+                            <a href="tel:+18005559473" class="btn btn-solid !py-3.5 !px-7"><i class="fas fa-phone-volume"></i> <span>Call Us</span></a>
+                            <a href="mailto:service@voltnest.com" class="btn btn-outline !py-3.5 !px-7"><span>Email Us</span></a>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-8">
+                        <details class="faq-item" open>
+                            <summary>
+                                How quickly will I hear back?
+                                <span class="faq-icon"><i class="fas fa-plus"></i></span>
+                            </summary>
+                            <div class="faq-body">
+                                Most enquiries get a call-back within 60 minutes during office hours.
+                                Emergency calls are answered straight away, 24 hours a day.
+                            </div>
+                        </details>
+
+                        <details class="faq-item">
+                            <summary>
+                                Is the on-site quote really free?
+                                <span class="faq-icon"><i class="fas fa-plus"></i></span>
+                            </summary>
+                            <div class="faq-body">
+                                Yes. We attend, assess the job and provide a fixed written quote at no
+                                charge and with no obligation to proceed.
+                            </div>
+                        </details>
+
+                        <details class="faq-item">
+                            <summary>
+                                Do you charge a call-out fee?
+                                <span class="faq-icon"><i class="fas fa-plus"></i></span>
+                            </summary>
+                            <div class="faq-body">
+                                There's no separate call-out fee for standard bookings within our
+                                service areas. Any travel charges are agreed in writing first.
+                            </div>
+                        </details>
+
+                        <details class="faq-item">
+                            <summary>
+                                Can you come out the same day?
+                                <span class="faq-icon"><i class="fas fa-plus"></i></span>
+                            </summary>
+                            <div class="faq-body">
+                                Same-day slots are usually available for metro and north-suburb
+                                addresses. Book early in the day for the best chance of a same-day visit.
+                            </div>
+                        </details>
+
+                        <details class="faq-item">
+                            <summary>
+                                What payment methods do you accept?
+                                <span class="faq-icon"><i class="fas fa-plus"></i></span>
+                            </summary>
+                            <div class="faq-body">
+                                Card, bank transfer and cash are all accepted. For larger projects a
+                                deposit secures the booking, with the balance due on completion.
+                            </div>
+                        </details>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SECTION 7 · REDESIGNED WARM CTA            -->
+    <!-- ========================================== -->
+    <section class="fit-section !pt-0" id="contact-cta">
+        <div class="max-w-[1380px] mx-auto px-5 sm:px-8 lg:px-12">
+            <div class="cta-warm">
+
+                <!-- Content (warm cream) -->
+                <div class="cta-warm-content">
+                    <span class="cta-warm-badge">
+                        <span class="dot"></span>
+                        <span>Lines Open 24/7</span>
+                    </span>
+
+                    <h2>
+                        Need an electrician<br />
+                        <em>today?</em>
+                    </h2>
+
+                    <p>
+                        Call our dispatch line or book online — a licensed VoltNest master
+                        electrician is ready to help with clear answers, upfront pricing and
+                        zero obligation.
+                    </p>
+
+                    <div class="cta-warm-actions">
+                        <a href="tel:+18005559473" class="cta-btn-dark">
+                            <i class="fas fa-phone-volume"></i> <span>Call (800) 555-9473</span>
+                        </a>
+                        <a href="contact.html" class="cta-btn-outline-dark">
+                            <span>Book Online</span> <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+
+                    <div class="cta-warm-trust">
+                        <span><i class="fas fa-shield-halved"></i> Licensed &amp; Insured</span>
+                        <span><i class="fas fa-clock"></i> Same-Day Service</span>
+                        <span><i class="fas fa-award"></i> 12-Month Warranty</span>
+                    </div>
+                </div>
+
+                <!-- Image (bronze tinted) -->
+                <div class="cta-warm-image">
+                    <img src="img/ll1.jpg"
+                         alt="VoltNest master electrician at work" />
+
+                    <div class="cta-float-card">
+                        <div class="cta-float-icon"><i class="fas fa-phone-volume"></i></div>
+                        <div>
+                            <div class="text-[10px] font-bold uppercase tracking-widest text-[var(--accent)]">Talk to an Electrician</div>
+                            <div class="font-display font-bold text-sm text-[var(--text-main)] mt-0.5">(800) 555-9473</div>
+                            <div class="cta-float-stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <span class="text-[var(--text-muted)] ml-1.5 font-bold">4.9 / 5</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- FOOTER COMPONENT (exact)                   -->
+    <!-- ========================================== -->
+    <footer>
+        <div class="max-w-[1440px] mx-auto px-6 lg:px-12">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+
+                <div>
+                    <a href="index.html" class="brand-link inline-flex">
+                        <div class="brand-icon-wrapper"><i class="fa-solid fa-bolt"></i></div>
+                        <div class="brand-logo text-white"><span class="text-[var(--accent)]">Volt</span>Nest</div>
+                    </a>
+                    <p class="text-[#94a3b8] text-sm leading-relaxed mt-4">Professional residential electrical and classic home wiring services. Dedicated to protecting your property and family with straightforward, safety-focused electrical installations and prompt repairs.</p>
+                    <div class="flex gap-3 mt-5">
+                        <a href="#" class="social-circle"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-circle"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-circle"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4>Navigation</h4>
+                    <ul class="space-y-2.5">
+                        <li><a href="home-2.html" class="hover:pl-2 inline-flex items-center gap-2"><i class="fas fa-chevron-right text-[8px] text-[var(--accent)]"></i> Home</a></li>
+                        <li><a href="about.html" class="hover:pl-2 inline-flex items-center gap-2"><i class="fas fa-chevron-right text-[8px] text-[var(--accent)]"></i> About Us</a></li>
+                        <li><a href="services.html" class="hover:pl-2 inline-flex items-center gap-2"><i class="fas fa-chevron-right text-[8px] text-[var(--accent)]"></i> Services</a></li>
+                        <li><a href="gallery.html" class="hover:pl-2 inline-flex items-center gap-2"><i class="fas fa-chevron-right text-[8px] text-[var(--accent)]"></i> Gallery</a></li>
+                        <li><a href="contact.html" class="hover:pl-2 inline-flex items-center gap-2"><i class="fas fa-chevron-right text-[8px] text-[var(--accent)]"></i> Contact & Booking</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4>Core Services</h4>
+                    <ul class="space-y-2.5">
+                        <li><a href="services.html" class="hover:pl-2 inline-flex items-center gap-2"><i class="fas fa-chevron-right text-[8px] text-[var(--accent)]"></i> Home Wiring & Rewiring</a></li>
+                        <li><a href="fittings.html" class="hover:pl-2 inline-flex items-center gap-2"><i class="fas fa-chevron-right text-[8px] text-[var(--accent)]"></i> Fan & Light Fitting</a></li>
+                        <li><a href="switchboards.html" class="hover:pl-2 inline-flex items-center gap-2"><i class="fas fa-chevron-right text-[8px] text-[var(--accent)]"></i> Switchboard Repair</a></li>
+                        <li><a href="gallery.html" class="hover:pl-2 inline-flex items-center gap-2"><i class="fas fa-chevron-right text-[8px] text-[var(--accent)]"></i> Project Gallery</a></li>
+                        <li><a href="contact.html" class="hover:pl-2 inline-flex items-center gap-2"><i class="fas fa-chevron-right text-[8px] text-[var(--accent)]"></i> 24/7 Emergency Repairs</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4>Dispatch Headquarters</h4>
+                    <ul class="space-y-3 text-sm">
+                        <li class="flex items-start gap-3"><i class="fas fa-map-marker-alt text-[var(--accent)] mt-0.5"></i> <span class="text-[#94a3b8]">1200 Industrial Pkwy, Suite 400, Metro Area</span></li>
+                        <li class="flex items-start gap-3"><i class="fas fa-phone text-[var(--accent)] mt-0.5"></i> <span class="text-[#94a3b8]"><a href="tel:+18005559473">(800) 555-WIRE (9473)</a></span></li>
+                        <li class="flex items-start gap-3"><i class="fas fa-envelope text-[var(--accent)] mt-0.5"></i> <span class="text-[#94a3b8]"><a href="mailto:service@voltnest.com">service@voltnest.com</a></span></li>
+                        <li class="flex items-start gap-3"><i class="fas fa-clock text-[var(--accent)] mt-0.5"></i> <span class="text-[#94a3b8]">24/7 Emergency Dispatch Available</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-[rgba(180,83,9,0.15)] py-6 mt-10 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-sm text-[#64748b]">&copy; 2026 <span class="text-[var(--accent)] font-semibold">VoltNest</span> Electrical Services. All rights reserved.</p>
+                <div class="flex gap-6 text-sm">
+                    <a href="" class="text-[#64748b] hover:text-[var(--accent)]">Workmanship Warranty</a>
+                    <a href="#" class="text-[#64748b] hover:text-[var(--accent)]">Privacy Policy</a>
+                    <a href="#" class="text-[#64748b] hover:text-[var(--accent)]">Safety Standards</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive Scripts -->
+    <script>
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('main-nav');
+            window.scrollY > 30 ? nav.classList.add('scrolled') : nav.classList.remove('scrolled');
+        });
+
+        const menu = document.getElementById('fullscreen-menu');
+        const overlay = document.getElementById('drawer-overlay');
+        function toggleMenu() {
+            menu.classList.toggle('active');
+            overlay.classList.toggle('active');
+            document.body.style.overflow = menu.classList.contains('active') ? 'hidden' : 'auto';
+        }
+
+        const themeBtnDesk = document.getElementById('theme-toggle');
+        const themeBtnMob = document.getElementById('theme-toggle-mobile');
+
+        function toggleTheme() {
+            document.body.classList.toggle('dark-mode');
+            const isDark = document.body.classList.contains('dark-mode');
+            const iconClass = isDark ? 'fas fa-sun' : 'fas fa-moon';
+
+            if(themeBtnDesk) themeBtnDesk.querySelector('i').className = iconClass;
+            if(themeBtnMob) themeBtnMob.querySelector('i').className = iconClass;
+        }
+
+        if(themeBtnDesk) themeBtnDesk.addEventListener('click', toggleTheme);
+        if(themeBtnMob) themeBtnMob.addEventListener('click', toggleTheme);
+
+        const rtlBtnDesk = document.getElementById('rtl-btn');
+        const rtlBtnMob = document.getElementById('rtl-btn-mobile');
+
+        function toggleRTL() {
+            const html = document.documentElement;
+            html.dir = html.dir === 'rtl' ? 'ltr' : 'rtl';
+            const dirText = html.dir.toUpperCase();
+
+            if(rtlBtnDesk) rtlBtnDesk.textContent = dirText;
+            if(rtlBtnMob) rtlBtnMob.textContent = dirText;
+        }
+
+        if(rtlBtnDesk) rtlBtnDesk.addEventListener('click', toggleRTL);
+        if(rtlBtnMob) rtlBtnMob.addEventListener('click', toggleRTL);
+    </script>
+</body>
+</html>

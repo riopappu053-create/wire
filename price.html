@@ -1,0 +1,1581 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Price · VoltNest Classic Home Wiring Services</title>
+
+    <!-- Favicon (Thunder Icon) -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23b45309' rx='20'/%3E%3Ctext x='50' y='68' font-size='56' text-anchor='middle' fill='white' font-family='Arial'%3E⚡%3C/text%3E%3C/svg%3E" />
+
+    <!-- Fonts & Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Inter"', 'system-ui', 'sans-serif'],
+                        display: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Custom Professional Styles -->
+    <style>
+        :root {
+            --bg-color: #f8fafc;
+            --bg-secondary: #f0f7ff;
+            --bg-card: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --text-dim: #94a3b8;
+            --accent: #b45309;
+            --accent-dark: #78350f;
+            --accent-light: #fef3c7;
+            --border-light: rgba(180, 83, 9, 0.22);
+            --border-strong: rgba(180, 83, 9, 0.42);
+            --nav-bg: rgba(248, 250, 252, 0.94);
+            --drawer-bg: rgba(255, 255, 255, 0.98);
+            --menu-hover-bg: rgba(180, 83, 9, 0.10);
+            --shadow-color: rgba(180, 83, 9, 0.16);
+            --gradient-accent: linear-gradient(135deg, #b45309 0%, #78350f 100%);
+        }
+
+        body.dark-mode {
+            --bg-color: #0f172a;
+            --bg-secondary: #1e293b;
+            --bg-card: #0f172a;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --text-dim: #64748b;
+            --accent: #f59e0b;
+            --accent-dark: #b45309;
+            --border-light: rgba(245, 158, 11, 0.22);
+            --border-strong: rgba(245, 158, 11, 0.42);
+            --nav-bg: rgba(15, 23, 42, 0.94);
+            --drawer-bg: rgba(15, 23, 42, 0.98);
+            --menu-hover-bg: rgba(245, 158, 11, 0.12);
+            --gradient-accent: linear-gradient(135deg, #f59e0b 0%, #b45309 100%);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            padding-top: 84px;
+            transition: all 0.3s ease;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, .brand-logo, .font-display { font-family: 'Plus Jakarta Sans', sans-serif; letter-spacing: -0.02em; }
+
+        /* Navbar Styles */
+        .navbar {
+            position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
+            background: var(--nav-bg); height: 84px; display: flex; align-items: center;
+            backdrop-filter: blur(16px); transition: all 0.3s ease; border-bottom: 1px solid transparent;
+        }
+        .navbar.scrolled {
+            height: 70px; border-bottom: 1px solid var(--border-light);
+            box-shadow: 0 10px 40px var(--shadow-color);
+        }
+        .brand-link { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+        .brand-icon-wrapper { width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(180, 83, 9, 0.35); background: rgba(180, 83, 9, 0.10); color: var(--accent); font-size: 1.15rem; transition: transform 0.3s ease; }
+        .brand-link:hover .brand-icon-wrapper { transform: scale(1.05) rotate(5deg); }
+        .brand-logo { font-size: 1.6rem; font-weight: 800; color: var(--text-main); }
+        .brand-logo span { color: var(--accent); }
+
+        /* Nav Pills */
+        .nav-pills {
+            display: flex; align-items: center; gap: 4px;
+            background: var(--bg-card);
+            padding: 6px;
+            border-radius: 60px;
+            border: 1px solid var(--border-light);
+            box-shadow: 0 4px 20px var(--shadow-color);
+        }
+        .nav-pill {
+            padding: 10px 18px;
+            color: var(--text-main);
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-radius: 40px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none;
+            display: inline-flex; align-items: center; gap: 6px;
+            white-space: nowrap;
+        }
+        .nav-pill:hover {
+            color: var(--accent);
+            background: var(--menu-hover-bg);
+            transform: translateY(-2px);
+        }
+        .nav-pill.active {
+            background: var(--gradient-accent);
+            color: #ffffff !important;
+            box-shadow: 0 6px 16px rgba(180, 83, 9, 0.35);
+            transform: translateY(-1px);
+        }
+
+        /* Dropdown */
+        .dropdown-pill { position: relative; display: flex; align-items: center; }
+        .dropdown-pill .nav-pill { padding-right: 14px; }
+        .dropdown-pill .nav-pill .fa-chevron-down { font-size: 10px; margin-left: 2px; transition: transform 0.25s ease; opacity: 0.7; }
+        .dropdown-pill:hover .nav-pill .fa-chevron-down { transform: rotate(180deg); opacity: 1; }
+        .dropdown-pill-menu {
+            position: absolute; top: calc(100% + 12px); left: 0; min-width: 190px;
+            background: var(--bg-card); border: 1px solid var(--border-light); border-radius: 16px;
+            padding: 8px; box-shadow: 0 20px 48px rgba(0, 0, 0, 0.15);
+            opacity: 0; visibility: hidden; transform: translateY(10px) scale(0.96);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); z-index: 100;
+        }
+        .dropdown-pill:hover .dropdown-pill-menu { opacity: 1; visibility: visible; transform: translateY(0) scale(1); }
+        .dropdown-pill-item {
+            display: block; padding: 12px 18px; color: var(--text-main); text-decoration: none;
+            font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px;
+            border-radius: 12px; transition: all 0.2s ease;
+        }
+        .dropdown-pill-item:hover { background: var(--menu-hover-bg); color: var(--accent); padding-left: 24px; }
+        .dropdown-pill-item.active { color: var(--accent); background: rgba(180, 83, 9, 0.08); }
+
+        /* Action Buttons */
+        .btn { padding: 12px 26px; font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: 1.2px; border-radius: 40px; transition: all 0.3s ease; display: inline-flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none; }
+        .btn-solid { background: var(--gradient-accent); color: #ffffff !important; border: none; box-shadow: 0 4px 15px rgba(180, 83, 9, 0.25); }
+        .btn-solid:hover { transform: translateY(-3px); box-shadow: 0 8px 26px rgba(180, 83, 9, 0.4); }
+        .btn-outline { background: var(--bg-card); border: 2px solid var(--border-light); color: var(--text-main); box-shadow: 0 4px 15px var(--shadow-color); }
+        .btn-outline:hover { border-color: var(--accent); color: var(--accent) !important; background: var(--menu-hover-bg); transform: translateY(-2px); }
+
+        /* Interactive Controls */
+        .theme-btn, .rtl-toggle { height: 42px; border-radius: 40px; background: var(--bg-card); border: 1px solid var(--border-light); color: var(--text-main); cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px var(--shadow-color); }
+        .theme-btn { width: 42px; border-radius: 50%; font-size: 14px; }
+        .rtl-toggle { padding: 0 18px; font-size: 11px; font-weight: 800; gap: 6px; letter-spacing: 0.5px; }
+        .theme-btn:hover, .rtl-toggle:hover { background: var(--accent); border-color: var(--accent); color: #fff; transform: translateY(-2px); }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--bg-secondary); }
+        ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 3px; }
+
+        /* Mobile Drawer */
+        .drawer-overlay { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.75); z-index: 999; opacity: 0; visibility: hidden; transition: all 0.4s ease; backdrop-filter: blur(6px); }
+        .drawer-overlay.active { opacity: 1; visibility: visible; }
+        .fullscreen-menu { position: fixed; top: 0; right: 0; width: 100%; max-width: 380px; height: 100dvh; background: var(--drawer-bg); z-index: 1001; display: flex; flex-direction: column; transform: translateX(100%); transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); border-left: 1px solid var(--border-light); box-shadow: -10px 0 40px rgba(0,0,0,0.1); }
+        .fullscreen-menu.active { transform: translateX(0); }
+        .mobile-link { display: block; padding: 18px 28px; font-weight: 700; color: var(--text-main); font-size: 15px; border-bottom: 1px solid var(--border-light); transition: all 0.2s; text-decoration: none; }
+        .mobile-link:hover { color: var(--accent); padding-left: 36px; background: var(--menu-hover-bg); }
+        .mobile-link.active { color: var(--accent); background: var(--menu-hover-bg); border-left: 3px solid var(--accent); padding-left: 25px; }
+        .mobile-dropdown-items { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; background: var(--bg-secondary); }
+        .mobile-dropdown-items.open { max-height: 150px; padding: 6px 0 10px 16px; }
+
+        /* Full Viewport Hero */
+        .page-hero {
+            position: relative;
+            min-height: calc(100vh - 84px);
+            display: flex; align-items: center; justify-content: center;
+            overflow: hidden;
+            isolation: isolate;
+        }
+        .page-hero-bg {
+            position: absolute; inset: 0;
+            background-image: url('https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&q=80&w=2000');
+            background-size: cover; background-position: center; background-repeat: no-repeat;
+            z-index: -2;
+            transform: scale(1.04);
+            animation: heroZoom 18s ease-in-out infinite alternate;
+        }
+        @keyframes heroZoom { from { transform: scale(1.04); } to { transform: scale(1.14); } }
+        .page-hero-overlay {
+            position: absolute; inset: 0; z-index: -1;
+            background:
+                linear-gradient(180deg, rgba(15, 23, 42, 0.88) 0%, rgba(15, 23, 42, 0.70) 45%, rgba(15, 23, 42, 0.93) 100%),
+                radial-gradient(circle at 80% 24%, rgba(180, 83, 9, 0.44) 0%, transparent 58%),
+                radial-gradient(circle at 10% 84%, rgba(180, 83, 9, 0.26) 0%, transparent 52%);
+        }
+        .page-hero-inner {
+            position: relative; z-index: 2;
+            width: 100%; max-width: 1100px;
+            padding: 70px 24px;
+            text-align: center; color: #ffffff;
+        }
+        .hero-breadcrumb {
+            display: inline-flex; align-items: center; gap: 10px;
+            padding: 9px 20px; border-radius: 999px;
+            background: rgba(255, 255, 255, 0.10);
+            border: 1px solid rgba(255, 255, 255, 0.22);
+            backdrop-filter: blur(10px);
+            font-size: 11px; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 1.6px;
+            color: #fef3c7;
+        }
+        .hero-breadcrumb a { color: #fef3c7; text-decoration: none; transition: color 0.25s ease; }
+        .hero-breadcrumb a:hover { color: #ffffff; }
+        .hero-breadcrumb .sep { opacity: 0.55; font-size: 9px; }
+        .hero-breadcrumb .current { color: #ffffff; }
+
+        .page-hero h1 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 800; letter-spacing: -0.03em;
+            line-height: 1.04;
+            font-size: clamp(2.35rem, 6vw, 4.7rem);
+            margin-top: 26px;
+            text-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
+        }
+        .page-hero h1 em { font-style: italic; font-weight: 400; color: #fbbf24; }
+
+        .page-hero p.lead {
+            max-width: 680px; margin: 22px auto 0;
+            font-size: 1rem; line-height: 1.8;
+            color: rgba(241, 245, 249, 0.88);
+        }
+        @media (min-width: 640px) { .page-hero p.lead { font-size: 1.075rem; } }
+
+        .page-hero-cta { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; margin-top: 36px; }
+        .page-hero-cta .btn-solid { box-shadow: 0 12px 34px rgba(180, 83, 9, 0.45); }
+        .page-hero-cta .btn-ghost {
+            padding: 12px 26px; border-radius: 40px;
+            font-weight: 700; font-size: 11px;
+            text-transform: uppercase; letter-spacing: 1.2px;
+            display: inline-flex; align-items: center; gap: 8px;
+            text-decoration: none; color: #ffffff;
+            background: rgba(255, 255, 255, 0.09);
+            border: 1px solid rgba(255, 255, 255, 0.28);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+        .page-hero-cta .btn-ghost:hover {
+            background: rgba(255, 255, 255, 0.18);
+            border-color: rgba(255, 255, 255, 0.55);
+            transform: translateY(-2px);
+        }
+
+        .hero-stat-strip {
+            display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 12px; max-width: 660px;
+            margin: 54px auto 0; padding-top: 28px;
+            border-top: 1px solid rgba(255, 255, 255, 0.18);
+        }
+        .hero-stat-strip .num { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.55rem; font-weight: 800; color: #ffffff; }
+        .hero-stat-strip .lbl { font-size: 9.5px; font-weight: 700; letter-spacing: 1.4px; text-transform: uppercase; color: rgba(254, 243, 199, 0.78); margin-top: 4px; }
+
+        .scroll-cue {
+            position: absolute; bottom: 26px; left: 50%; transform: translateX(-50%);
+            z-index: 3; display: flex; flex-direction: column; align-items: center; gap: 8px;
+            color: rgba(255, 255, 255, 0.62);
+            font-size: 9px; font-weight: 700;
+            letter-spacing: 2px; text-transform: uppercase;
+            text-decoration: none;
+            animation: cueFloat 2.4s ease-in-out infinite;
+        }
+        .scroll-cue:hover { color: #fbbf24; }
+        @keyframes cueFloat { 0%, 100% { transform: translate(-50%, 0); } 50% { transform: translate(-50%, 8px); } }
+
+        @media (prefers-reduced-motion: reduce) {
+            .page-hero-bg { animation: none; }
+            .scroll-cue { animation: none; }
+        }
+
+        /* Footer */
+        footer { background: #0f172a; border-top: 1px solid rgba(180, 83, 9, 0.25); padding-top: 60px; color: #f1f5f9; }
+        footer h4 { color: #f8fafc; font-weight: 700; font-size: 1.1rem; margin-bottom: 18px; }
+        footer a, footer li { color: #94a3b8; text-decoration: none; transition: all 0.3s; font-size: 0.9rem; }
+        footer a:hover { color: var(--accent); }
+        footer .social-circle { width: 40px; height: 40px; border-radius: 50%; border: 1px solid rgba(180, 83, 9, 0.25); display: flex; align-items: center; justify-content: center; transition: all 0.3s; color: #94a3b8; }
+        footer .social-circle:hover { background: var(--gradient-accent); border-color: var(--accent); color: #fff; transform: translateY(-3px); }
+
+        /* ==========================================
+           PRICING SECTIONS — SHARED
+           ========================================== */
+        .pr-section { padding: 52px 0; }
+        @media (min-width: 768px) { .pr-section { padding: 72px 0; } }
+
+        .pr-eyebrow {
+            display: inline-flex; align-items: center; gap: 9px;
+            font-size: 10.5px; font-weight: 800; letter-spacing: 2px;
+            text-transform: uppercase; color: var(--accent);
+        }
+        .pr-eyebrow::before { content: ''; width: 24px; height: 2px; background: var(--accent); border-radius: 2px; }
+
+        .pr-title {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 800; letter-spacing: -0.03em;
+            font-size: clamp(1.85rem, 3.6vw, 2.7rem);
+            line-height: 1.12; color: var(--text-main);
+        }
+
+        /* ==========================================
+           SECTION 1 · PRICING PROMISE (SPLIT)
+           ========================================== */
+        .pr-promise-tile {
+            position: relative;
+            background: var(--bg-card);
+            border: 1px solid var(--border-light);
+            border-radius: 20px;
+            padding: 24px 22px;
+            transition: all 0.35s cubic-bezier(0.4,0,0.2,1);
+            height: 100%;
+        }
+        .pr-promise-tile:hover {
+            border-color: var(--border-strong);
+            background: var(--menu-hover-bg);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 44px -22px rgba(180,83,9,0.34);
+        }
+        .pr-promise-icon {
+            width: 48px; height: 48px; border-radius: 14px;
+            display: flex; align-items: center; justify-content: center;
+            background: rgba(180,83,9,0.10);
+            border: 1px solid var(--border-light);
+            color: var(--accent); font-size: 18px;
+            transition: all 0.35s ease;
+        }
+        .pr-promise-tile:hover .pr-promise-icon {
+            background: var(--gradient-accent);
+            color: #ffffff;
+            transform: rotate(-6deg) scale(1.06);
+        }
+        .pr-promise-big {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.35rem; font-weight: 800;
+            color: var(--text-main); line-height: 1.1;
+        }
+        .pr-promise-tile:hover .pr-promise-big {
+            background: var(--gradient-accent);
+            -webkit-background-clip: text; background-clip: text;
+            color: transparent;
+        }
+
+        /* ==========================================
+           SECTION 2 · 3 TIER PRICING CARDS
+           ========================================== */
+        .pr-tier {
+            position: relative;
+            background: var(--bg-card);
+            border: 1px solid var(--border-light);
+            border-radius: 26px;
+            padding: 34px 28px 32px;
+            transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
+            height: 100%;
+            display: flex; flex-direction: column;
+        }
+        .pr-tier:hover {
+            border-color: var(--border-strong);
+            box-shadow: 0 26px 56px -24px rgba(180,83,9,0.36);
+            transform: translateY(-6px);
+        }
+        .pr-tier.featured {
+            background: #0f172a;
+            border-color: rgba(180,83,9,0.55);
+            box-shadow: 0 30px 66px -28px rgba(15,23,42,0.70);
+        }
+        .pr-tier.featured:hover { transform: translateY(-8px); }
+        .pr-tier.featured .pr-tier-name,
+        .pr-tier.featured .pr-tier-amount,
+        .pr-tier.featured .pr-tier-amount-label { color: #ffffff; }
+        .pr-tier.featured .pr-tier-desc,
+        .pr-tier.featured .pr-tier-feat { color: #94a3b8; }
+
+        .pr-tier-badge {
+            position: absolute;
+            top: -13px; left: 50%; transform: translateX(-50%);
+            padding: 7px 18px; border-radius: 999px;
+            background: var(--gradient-accent);
+            color: #ffffff;
+            font-size: 9px; font-weight: 800;
+            letter-spacing: 1.8px; text-transform: uppercase;
+            white-space: nowrap;
+            box-shadow: 0 8px 22px rgba(180,83,9,0.40);
+        }
+        .pr-tier-icon {
+            width: 52px; height: 52px; border-radius: 15px;
+            display: flex; align-items: center; justify-content: center;
+            background: rgba(180,83,9,0.10);
+            border: 1px solid var(--border-light);
+            color: var(--accent); font-size: 20px;
+            transition: all 0.35s ease;
+        }
+        .pr-tier.featured .pr-tier-icon {
+            background: rgba(245,158,11,0.14);
+            border-color: rgba(245,158,11,0.32);
+            color: #f59e0b;
+        }
+        .pr-tier-name {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 700; font-size: 1.15rem;
+            color: var(--text-main); margin-top: 18px;
+        }
+        .pr-tier-desc {
+            font-size: 0.8125rem; line-height: 1.65;
+            color: var(--text-muted); margin-top: 8px;
+            min-height: 42px;
+        }
+        .pr-tier-amount {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 800; font-size: 2.4rem;
+            color: var(--text-main); line-height: 1;
+            margin-top: 20px; letter-spacing: -0.02em;
+        }
+        .pr-tier-amount-label {
+            font-size: 11px; font-weight: 700;
+            color: var(--text-muted);
+            letter-spacing: 0.6px;
+            margin-top: 6px;
+        }
+        .pr-tier-feats {
+            margin-top: 22px; padding-top: 20px;
+            border-top: 1px dashed var(--border-light);
+            display: grid; gap: 10px;
+        }
+        .pr-tier.featured .pr-tier-feats {
+            border-top-color: rgba(255,255,255,0.14);
+        }
+        .pr-tier-feat {
+            display: flex; align-items: flex-start; gap: 10px;
+            font-size: 0.8125rem; line-height: 1.55;
+            color: var(--text-muted);
+        }
+        .pr-tier-feat i {
+            color: var(--accent); font-size: 9px;
+            margin-top: 5px; flex-shrink: 0;
+        }
+        .pr-tier.featured .pr-tier-feat i { color: #f59e0b; }
+        .pr-tier .btn { margin-top: auto; }
+        .pr-tier-cta { padding-top: 24px; }
+
+        /* ==========================================
+           SECTION 3 · RATE CARD (GROUPED ROWS)
+           ========================================== */
+        .pr-rate-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-light);
+            border-radius: 24px;
+            overflow: hidden;
+            transition: all 0.35s ease;
+        }
+        .pr-rate-card:hover {
+            border-color: var(--border-strong);
+            box-shadow: 0 24px 52px -26px rgba(180,83,9,0.32);
+        }
+        .pr-rate-head {
+            display: flex; align-items: center; justify-content: space-between;
+            gap: 16px;
+            padding: 22px 26px;
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border-light);
+        }
+        @media (min-width: 768px) { .pr-rate-head { padding: 24px 32px; } }
+        .pr-rate-head-left { display: flex; align-items: center; gap: 14px; }
+        .pr-rate-head-icon {
+            width: 44px; height: 44px; border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            background: var(--gradient-accent);
+            color: #ffffff; font-size: 16px;
+            flex-shrink: 0;
+            box-shadow: 0 8px 20px rgba(180,83,9,0.30);
+        }
+        .pr-rate-head-title {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 700; font-size: 1rem;
+            color: var(--text-main);
+        }
+        .pr-rate-head-sub {
+            font-size: 9.5px; font-weight: 700;
+            letter-spacing: 1.2px; text-transform: uppercase;
+            color: var(--text-muted); margin-top: 3px;
+        }
+        .pr-rate-badge {
+            padding: 6px 14px; border-radius: 999px;
+            background: rgba(180,83,9,0.10);
+            border: 1px solid var(--border-light);
+            color: var(--accent);
+            font-size: 9px; font-weight: 800;
+            letter-spacing: 1.2px; text-transform: uppercase;
+            white-space: nowrap;
+        }
+
+        .pr-rate-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            padding: 18px 26px;
+            border-bottom: 1px dashed var(--border-light);
+            transition: background 0.25s ease;
+        }
+        @media (min-width: 768px) { .pr-rate-row { padding: 18px 32px; } }
+        .pr-rate-row:last-child { border-bottom: none; }
+        .pr-rate-row:hover { background: var(--menu-hover-bg); }
+        .pr-rate-info { min-width: 0; flex: 1; }
+        .pr-rate-name {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 700; font-size: 0.9rem;
+            color: var(--text-main);
+        }
+        .pr-rate-desc {
+            font-size: 0.78rem; line-height: 1.55;
+            color: var(--text-muted); margin-top: 3px;
+        }
+        .pr-rate-price {
+            flex-shrink: 0;
+            text-align: right;
+        }
+        .pr-rate-price .from {
+            font-size: 9px; font-weight: 700;
+            letter-spacing: 1.2px; text-transform: uppercase;
+            color: var(--text-muted); display: block;
+        }
+        .pr-rate-price .val {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 800; font-size: 1.1rem;
+            color: var(--accent); line-height: 1.2;
+            margin-top: 2px;
+        }
+        @media (max-width: 479px) {
+            .pr-rate-row { padding: 16px 20px; gap: 10px; }
+            .pr-rate-desc { display: none; }
+            .pr-rate-price .val { font-size: 1rem; }
+        }
+
+        /* ==========================================
+           SECTION 4 · PRICE FACTORS
+           ========================================== */
+        .pr-factor {
+            position: relative;
+            background: var(--bg-card);
+            border: 1px solid var(--border-light);
+            border-radius: 22px;
+            padding: 30px 26px;
+            height: 100%;
+            transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
+            overflow: hidden;
+        }
+        .pr-factor::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: var(--gradient-accent);
+            opacity: 0;
+            transition: opacity 0.35s ease;
+        }
+        .pr-factor:hover {
+            border-color: var(--border-strong);
+            transform: translateY(-6px);
+            box-shadow: 0 24px 50px -22px rgba(180,83,9,0.36);
+        }
+        .pr-factor:hover::before { opacity: 1; }
+        .pr-factor-num {
+            position: absolute;
+            top: 20px; right: 22px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 2rem; font-weight: 800;
+            line-height: 1;
+            color: var(--accent); opacity: 0.14;
+            letter-spacing: -0.04em;
+        }
+        .pr-factor-icon {
+            width: 54px; height: 54px; border-radius: 16px;
+            display: flex; align-items: center; justify-content: center;
+            background: rgba(180,83,9,0.10);
+            border: 1px solid var(--border-light);
+            color: var(--accent); font-size: 20px;
+            transition: all 0.35s ease;
+        }
+        .pr-factor:hover .pr-factor-icon {
+            background: var(--gradient-accent);
+            color: #ffffff;
+            transform: rotate(-6deg) scale(1.05);
+        }
+
+        /* ==========================================
+           SECTION 5 · FAQ + GUARANTEE SIDEBAR
+           ========================================== */
+        .pr-faq-item {
+            border: 1px solid var(--border-light);
+            border-radius: 16px;
+            background: var(--bg-card);
+            margin-bottom: 12px;
+            overflow: hidden;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .pr-faq-item[open] {
+            border-color: var(--accent);
+            box-shadow: 0 14px 34px -18px rgba(180,83,9,0.35);
+        }
+        .pr-faq-item summary {
+            list-style: none;
+            cursor: pointer;
+            padding: 18px 22px;
+            display: flex; align-items: center; justify-content: space-between; gap: 14px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 700; font-size: 0.95rem;
+            color: var(--text-main);
+            transition: color 0.25s ease;
+        }
+        .pr-faq-item summary::-webkit-details-marker { display: none; }
+        .pr-faq-item summary:hover { color: var(--accent); }
+        .pr-faq-item summary .faq-icon {
+            flex-shrink: 0;
+            width: 26px; height: 26px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            border: 1px solid var(--border-light);
+            background: var(--bg-secondary);
+            color: var(--accent); font-size: 10px;
+            transition: transform 0.3s ease;
+        }
+        .pr-faq-item[open] summary .faq-icon {
+            transform: rotate(45deg);
+            background: var(--gradient-accent);
+            color: #fff;
+            border-color: var(--accent);
+        }
+        .pr-faq-body {
+            padding: 0 22px 20px;
+            font-size: 0.875rem; line-height: 1.7;
+            color: var(--text-muted);
+        }
+
+        .pr-side-card {
+            background: #0f172a;
+            border: 1px solid rgba(180,83,9,0.42);
+            border-radius: 24px;
+            padding: 32px 28px;
+            color: #f8fafc;
+            box-shadow: 0 26px 56px -26px rgba(15,23,42,0.70);
+        }
+        .pr-side-badge {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 6px 14px; border-radius: 999px;
+            background: rgba(245,158,11,0.14);
+            border: 1px solid rgba(245,158,11,0.32);
+            color: #fbbf24;
+            font-size: 9px; font-weight: 800;
+            letter-spacing: 1.6px; text-transform: uppercase;
+        }
+        .pr-side-item {
+            display: flex; align-items: flex-start; gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+        .pr-side-item:last-of-type { border-bottom: none; }
+        .pr-side-icon {
+            flex-shrink: 0;
+            width: 34px; height: 34px; border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            background: rgba(245,158,11,0.14);
+            border: 1px solid rgba(245,158,11,0.28);
+            color: #fbbf24; font-size: 13px;
+        }
+
+        /* ==========================================
+           SECTION 6 · IMAGE CTA
+           ========================================== */
+        .pr-cta {
+            position: relative;
+            border-radius: 30px;
+            overflow: hidden;
+            isolation: isolate;
+            border: 1px solid var(--border-strong);
+            box-shadow: 0 36px 80px -34px rgba(15,23,42,0.65);
+        }
+        .pr-cta-bg {
+            position: absolute; inset: 0; z-index: -2;
+            background-image: url('img/ll4.webp');
+            background-size: cover; background-position: center;
+            transform: scale(1.04);
+            transition: transform 1.2s ease;
+        }
+        .pr-cta:hover .pr-cta-bg { transform: scale(1.1); }
+        .pr-cta-overlay {
+            position: absolute; inset: 0; z-index: -1;
+            background:
+                linear-gradient(135deg, rgba(15,23,42,0.94) 0%, rgba(120,53,15,0.82) 100%),
+                radial-gradient(circle at 82% 22%, rgba(245,158,11,0.30) 0%, transparent 55%);
+        }
+        .pr-cta-inner {
+            padding: 60px 30px;
+            text-align: center;
+            color: #ffffff;
+        }
+        @media (min-width: 768px) { .pr-cta-inner { padding: 82px 60px; } }
+        .pr-cta-inner h2 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 800; letter-spacing: -0.03em;
+            font-size: clamp(1.85rem, 4vw, 2.9rem);
+            line-height: 1.1;
+            text-shadow: 0 12px 36px rgba(0,0,0,0.40);
+        }
+        .pr-cta-inner h2 em { font-style: italic; font-weight: 400; color: #fbbf24; }
+
+        .pr-cta-perks {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px 22px;
+            margin-top: 26px;
+        }
+        .pr-cta-perks span {
+            display: inline-flex; align-items: center; gap: 8px;
+            font-size: 10px; font-weight: 700;
+            letter-spacing: 1.2px; text-transform: uppercase;
+            color: #e2e8f0;
+        }
+        .pr-cta-perks i { color: #fbbf24; font-size: 10px; }
+    </style>
+</head>
+<body>
+
+    <!-- ========================================== -->
+    <!-- NAVBAR COMPONENT (Price active)            -->
+    <!-- ========================================== -->
+    <nav class="navbar" id="main-nav">
+        <div class="w-full flex items-center justify-between max-w-[1440px] mx-auto px-6">
+            <a href="index.html" class="brand-link">
+                <div class="brand-icon-wrapper"><i class="fa-solid fa-bolt"></i></div>
+                <div class="brand-logo"><span>Volt</span>Nest</div>
+            </a>
+
+            <div class="hidden xl:flex items-center justify-center flex-1 px-4">
+                <div class="nav-pills">
+                    <div class="dropdown-pill">
+                        <a href="#" class="nav-pill">
+                            Home <i class="fas fa-chevron-down"></i>
+                        </a>
+                        <div class="dropdown-pill-menu">
+                            <a href="index.html" class="dropdown-pill-item">Home 1</a>
+                            <a href="home-2.html" class="dropdown-pill-item">Home 2</a>
+                        </div>
+                    </div>
+                    <a href="about.html" class="nav-pill">About Us</a>
+                    <a href="services.html" class="nav-pill">Services</a>
+                    <a href="fittings.html" class="nav-pill">Fan &amp; Light</a>
+                    <a href="switchboards.html" class="nav-pill">Switchboards</a>
+                    <a href="price.html" class="nav-pill active">Price</a>
+                    <a href="contact.html" class="nav-pill">Contact</a>
+                </div>
+            </div>
+
+            <div class="hidden xl:flex items-center gap-4">
+                <a href="contact.html" class="btn btn-outline"><i class="fas fa-calendar-check text-[var(--accent)]"></i> Book</a>
+                <div class="w-px h-6 bg-[var(--border-light)] mx-1"></div>
+                <button id="theme-toggle" class="theme-btn" aria-label="Toggle theme"><i class="fas fa-moon"></i></button>
+                <button id="rtl-btn" class="rtl-toggle">LTR</button>
+            </div>
+
+            <button class="xl:hidden text-2xl text-[var(--text-main)] w-10 h-10 flex items-center justify-center rounded-full bg-[var(--bg-card)] border border-[var(--border-light)] shadow-md" onclick="toggleMenu()">
+                <i class="fas fa-bars text-[var(--accent)]"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Drawer -->
+    <div class="drawer-overlay" id="drawer-overlay" onclick="toggleMenu()"></div>
+    <div class="fullscreen-menu" id="fullscreen-menu">
+        <div class="p-6 flex justify-between items-center border-b border-[var(--border-light)]">
+            <a href="index.html" class="brand-link"><div class="brand-icon-wrapper"><i class="fa-solid fa-bolt"></i></div><div class="brand-logo"><span>Volt</span>Nest</div></a>
+            <button class="text-2xl text-[var(--text-main)] hover:text-[var(--accent)] transition-colors w-10 h-10 flex items-center justify-center rounded-full bg-[var(--bg-secondary)]" onclick="toggleMenu()"><i class="fas fa-times"></i></button>
+        </div>
+
+        <div class="flex-1 overflow-y-auto py-4">
+            <div class="px-8 py-4 font-bold text-[15px] text-[var(--text-main)] flex justify-between items-center cursor-pointer border-b border-[var(--border-light)]" onclick="document.getElementById('mobile-home-menu').classList.toggle('open')">
+                Home <i class="fas fa-chevron-down text-sm text-[var(--accent)]"></i>
+            </div>
+            <div id="mobile-home-menu" class="mobile-dropdown-items">
+                <a href="index.html" class="mobile-link !text-[13px] !py-3 !border-none text-[var(--text-muted)] hover:text-[var(--accent)]"><i class="fas fa-arrow-right text-[10px] mr-2"></i> Home 1</a>
+                <a href="home-2.html" class="mobile-link !text-[13px] !py-3 !border-none text-[var(--text-muted)] hover:text-[var(--accent)]"><i class="fas fa-arrow-right text-[10px] mr-2"></i> Home 2</a>
+            </div>
+            <a href="about.html" class="mobile-link">About Us</a>
+            <a href="services.html" class="mobile-link">Services</a>
+            <a href="fittings.html" class="mobile-link">Fan &amp; Light</a>
+            <a href="switchboards.html" class="mobile-link">Switchboards</a>
+            <a href="price.html" class="mobile-link active">price</a>
+            <a href="contact.html" class="mobile-link">Contact</a>
+        </div>
+
+        <div class="p-6 border-t border-[var(--border-light)] bg-[var(--bg-secondary)] space-y-5">
+            <div class="flex justify-between items-center w-full pb-2">
+                <div class="flex items-center gap-3">
+                    <span class="text-[var(--text-main)] font-bold text-[11px] uppercase tracking-widest">Theme Mode</span>
+                    <button id="theme-toggle-mobile" class="theme-btn" aria-label="Toggle theme">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </div>
+                <div class="flex items-center gap-3">
+                    <span class="text-[var(--text-main)] font-bold text-[11px] uppercase tracking-widest">Layout</span>
+                    <button id="rtl-btn-mobile" class="rtl-toggle">
+                        LTR
+                    </button>
+                </div>
+            </div>
+            <a href="contact.html" class="btn btn-outline w-full !py-3.5 justify-center"><i class="fas fa-calendar-check mr-2 text-[var(--accent)]"></i> Book Service</a>
+            <a href="tel:+18005559473" class="btn btn-solid w-full !py-3.5 justify-center"><i class="fas fa-phone-volume mr-2"></i> Emergency Call</a>
+        </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- HERO — FULL VIEWPORT BACKGROUND IMAGE      -->
+    <!-- ========================================== -->
+    <section class="page-hero" id="price-hero">
+        <div class="page-hero-bg" aria-hidden="true"></div>
+        <div class="page-hero-overlay" aria-hidden="true"></div>
+
+        <div class="page-hero-inner">
+            <div class="hero-breadcrumb">
+                <a href="index.html">Home</a>
+                <i class="fas fa-chevron-right sep"></i>
+                <span class="current">Price</span>
+            </div>
+
+            <h1>
+                Honest pricing,<br />
+                <em>no hidden surprises.</em>
+            </h1>
+
+            <p class="lead">
+                Transparent, fixed rates for every residential electrical job — from a single socket
+                to a complete switchboard upgrade. You get a written quote before any work starts,
+                and the price you approve is the price you pay.
+            </p>
+
+            <div class="page-hero-cta">
+                <a href="contact.html" class="btn btn-solid !py-3.5 !px-8">
+                    <span>Get a Free Quote</span> <i class="fas fa-arrow-right"></i>
+                </a>
+                <a href="services.html" class="btn-ghost">
+                    <i class="fas fa-plug"></i> <span>Our Services</span>
+                </a>
+            </div>
+
+            <div class="hero-stat-strip">
+                <div>
+                    <div class="num">Fixed</div>
+                    <div class="lbl">Written Quotes</div>
+                </div>
+                <div>
+                    <div class="num">$0</div>
+                    <div class="lbl">Call-Out Fee</div>
+                </div>
+                <div>
+                    <div class="num">12 mo</div>
+                    <div class="lbl">Workmanship Warranty</div>
+                </div>
+            </div>
+        </div>
+
+        <a href="#main-nav" class="scroll-cue" aria-label="Scroll">
+            <span>Scroll</span>
+            <i class="fas fa-chevron-down text-[11px]"></i>
+        </a>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SECTION 1 · PRICING PROMISE (SPLIT)        -->
+    <!-- ========================================== -->
+    <section class="pr-section" id="pricing-promise">
+        <div class="max-w-[1380px] mx-auto px-5 sm:px-8 lg:px-12">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
+
+                <!-- Copy -->
+                <div class="lg:col-span-6">
+                    <span class="pr-eyebrow">Our Pricing Promise</span>
+                    <h2 class="pr-title mt-4">
+                        What you see,<br /> is what you pay.
+                    </h2>
+                    <p class="text-[var(--text-muted)] leading-relaxed mt-6">
+                        No hourly bill shock. No "while we're here" upsells. Just clear, itemised
+                        pricing confirmed in writing before a single tool leaves the van.
+                    </p>
+                    <p class="text-[var(--text-muted)] leading-relaxed mt-4">
+                        If we find something unexpected on site, we stop, explain it, and re-quote
+                        — you always have the final say before we continue.
+                    </p>
+
+                    <div class="flex flex-wrap gap-4 pt-8">
+                        <a href="contact.html" class="btn btn-solid !py-3.5 !px-8"><span>Request a Quote</span> <i class="fas fa-arrow-right"></i></a>
+                        <a href="tel:+18005559473" class="btn btn-outline !py-3.5 !px-7"><i class="fas fa-phone-volume text-[var(--accent)]"></i> <span>Call Us</span></a>
+                    </div>
+                </div>
+
+                <!-- Promise tiles -->
+                <div class="lg:col-span-6">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+                        <div class="pr-promise-tile">
+                            <div class="pr-promise-icon"><i class="fas fa-file-invoice-dollar"></i></div>
+                            <div class="pr-promise-big mt-5">$0 Call-Out</div>
+                            <p class="text-sm text-[var(--text-muted)] leading-relaxed mt-2">
+                                No charge for travel or on-site assessment within our service areas.
+                            </p>
+                        </div>
+
+                        <div class="pr-promise-tile">
+                            <div class="pr-promise-icon"><i class="fas fa-handshake"></i></div>
+                            <div class="pr-promise-big mt-5">Fixed Quotes</div>
+                            <p class="text-sm text-[var(--text-muted)] leading-relaxed mt-2">
+                                Approve the price up front — we won't ask for more unless you add work.
+                            </p>
+                        </div>
+
+                        <div class="pr-promise-tile">
+                            <div class="pr-promise-icon"><i class="fas fa-receipt"></i></div>
+                            <div class="pr-promise-big mt-5">Itemised</div>
+                            <p class="text-sm text-[var(--text-muted)] leading-relaxed mt-2">
+                                Every line itemised: labour, parts and any materials we supply.
+                            </p>
+                        </div>
+
+                        <div class="pr-promise-tile">
+                            <div class="pr-promise-icon"><i class="fas fa-award"></i></div>
+                            <div class="pr-promise-big mt-5">12-Month</div>
+                            <p class="text-sm text-[var(--text-muted)] leading-relaxed mt-2">
+                                Workmanship warranty on every job — big or small.
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SECTION 2 · 3 TIER PRICING CARDS           -->
+    <!-- ========================================== -->
+    <section class="pr-section !pt-0" id="popular-pricing">
+        <div class="max-w-[1380px] mx-auto px-5 sm:px-8 lg:px-12">
+
+            <div class="max-w-2xl mb-10">
+                <span class="pr-eyebrow">Popular Packages</span>
+                <h2 class="pr-title mt-4">Three simple ways to book.</h2>
+                <p class="text-[var(--text-muted)] leading-relaxed mt-5">
+                    Most residential jobs fall into one of these packages. If yours doesn't,
+                    we'll quote it individually — always fixed, always written.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6 md:gap-5 lg:gap-6 items-stretch">
+
+                <!-- Essential -->
+                <div class="pr-tier">
+                    <div class="pr-tier-icon"><i class="fas fa-screwdriver-wrench"></i></div>
+                    <div class="pr-tier-name">Essential Call-Out</div>
+                    <div class="pr-tier-desc">Perfect for quick fixes and single-fault diagnosis.</div>
+                    <div class="pr-tier-amount">$89</div>
+                    <div class="pr-tier-amount-label">per visit · no call-out fee</div>
+                    <div class="pr-tier-feats">
+                        <div class="pr-tier-feat"><i class="fas fa-check"></i> Single fault diagnosis</div>
+                        <div class="pr-tier-feat"><i class="fas fa-check"></i> 30-minute inspection</div>
+                        <div class="pr-tier-feat"><i class="fas fa-check"></i> Written safety report</div>
+                        <div class="pr-tier-feat"><i class="fas fa-check"></i> Same-visit fix where possible</div>
+                    </div>
+                    <div class="pr-tier-cta">
+                        <a href="contact.html" class="btn btn-outline w-full !py-3.5 justify-center">
+                            Book Essential <i class="fas fa-arrow-right text-[9px]"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Standard (featured) -->
+                <div class="pr-tier featured">
+                    <span class="pr-tier-badge">Most Popular</span>
+                    <div class="pr-tier-icon"><i class="fas fa-bolt"></i></div>
+                    <div class="pr-tier-name">Standard Service</div>
+                    <div class="pr-tier-desc">Our go-to package for most repairs and small installs.</div>
+                    <div class="pr-tier-amount">$249</div>
+                    <div class="pr-tier-amount-label">per service · parts included*</div>
+                    <div class="pr-tier-feats">
+                        <div class="pr-tier-feat"><i class="fas fa-check"></i> Up to 2 hours of labour</div>
+                        <div class="pr-tier-feat"><i class="fas fa-check"></i> Parts included up to $40</div>
+                        <div class="pr-tier-feat"><i class="fas fa-check"></i> Full safety certificate</div>
+                        <div class="pr-tier-feat"><i class="fas fa-check"></i> 12-month workmanship warranty</div>
+                    </div>
+                    <div class="pr-tier-cta">
+                        <a href="contact.html" class="btn btn-solid w-full !py-3.5 justify-center">
+                            Book Standard <i class="fas fa-arrow-right text-[9px]"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Complete -->
+                <div class="pr-tier">
+                    <div class="pr-tier-icon"><i class="fas fa-house-chimney"></i></div>
+                    <div class="pr-tier-name">Complete Package</div>
+                    <div class="pr-tier-desc">For multi-circuit work, board upgrades and full-day jobs.</div>
+                    <div class="pr-tier-amount">$849</div>
+                    <div class="pr-tier-amount-label">starting from · fixed quote</div>
+                    <div class="pr-tier-feats">
+                        <div class="pr-tier-feat"><i class="fas fa-check"></i> Full-day coverage</div>
+                        <div class="pr-tier-feat"><i class="fas fa-check"></i> Multiple circuits or rooms</div>
+                        <div class="pr-tier-feat"><i class="fas fa-check"></i> Board &amp; safety upgrades</div>
+                        <div class="pr-tier-feat"><i class="fas fa-check"></i> Priority scheduling</div>
+                    </div>
+                    <div class="pr-tier-cta">
+                        <a href="contact.html" class="btn btn-outline w-full !py-3.5 justify-center">
+                            Request Quote <i class="fas fa-arrow-right text-[9px]"></i>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+            <p class="text-center text-xs text-[var(--text-dim)] mt-8">
+                *Parts beyond $40 charged at cost. All prices include GST and are confirmed in writing before work begins.
+            </p>
+        </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SECTION 3 · FULL RATE CARD                 -->
+    <!-- ========================================== -->
+    <section class="pr-section !pt-0" id="rate-card">
+        <div class="max-w-[1380px] mx-auto px-5 sm:px-8 lg:px-12">
+
+            <div class="max-w-2xl mb-10">
+                <span class="pr-eyebrow">Full Rate Card</span>
+                <h2 class="pr-title mt-4">Guide prices, by service.</h2>
+                <p class="text-[var(--text-muted)] leading-relaxed mt-5">
+                    Common jobs with starting prices. Final price depends on site conditions —
+                    always confirmed in a written quote first.
+                </p>
+            </div>
+
+            <div class="grid gap-5">
+
+                <!-- Group 1: Lighting & Fixtures -->
+                <div class="pr-rate-card">
+                    <div class="pr-rate-head">
+                        <div class="pr-rate-head-left">
+                            <div class="pr-rate-head-icon"><i class="fas fa-lightbulb"></i></div>
+                            <div>
+                                <div class="pr-rate-head-title">Lighting &amp; Fixtures</div>
+                                <div class="pr-rate-head-sub">Installs &amp; replacements</div>
+                            </div>
+                        </div>
+                        <span class="pr-rate-badge">4 Services</span>
+                    </div>
+
+                    <div class="pr-rate-row">
+                        <div class="pr-rate-info">
+                            <div class="pr-rate-name">Light fitting installation</div>
+                            <div class="pr-rate-desc">Standard pendant, wall or ceiling light fitted to existing wiring</div>
+                        </div>
+                        <div class="pr-rate-price">
+                            <span class="from">from</span>
+                            <span class="val">$65</span>
+                        </div>
+                    </div>
+
+                    <div class="pr-rate-row">
+                        <div class="pr-rate-info">
+                            <div class="pr-rate-name">Ceiling fan installation</div>
+                            <div class="pr-rate-desc">Includes mounting, balancing and speed-switch wiring</div>
+                        </div>
+                        <div class="pr-rate-price">
+                            <span class="from">from</span>
+                            <span class="val">$95</span>
+                        </div>
+                    </div>
+
+                    <div class="pr-rate-row">
+                        <div class="pr-rate-info">
+                            <div class="pr-rate-name">Heavy chandelier hanging</div>
+                            <div class="pr-rate-desc">Includes ceiling bracing, chain support and levelling</div>
+                        </div>
+                        <div class="pr-rate-price">
+                            <span class="from">from</span>
+                            <span class="val">$180</span>
+                        </div>
+                    </div>
+
+                    <div class="pr-rate-row">
+                        <div class="pr-rate-info">
+                            <div class="pr-rate-name">Recessed LED downlight</div>
+                            <div class="pr-rate-desc">Per light — ceiling cut-out and cable routing included</div>
+                        </div>
+                        <div class="pr-rate-price">
+                            <span class="from">from</span>
+                            <span class="val">$55</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Group 2: Sockets & Switchboards -->
+                <div class="pr-rate-card">
+                    <div class="pr-rate-head">
+                        <div class="pr-rate-head-left">
+                            <div class="pr-rate-head-icon"><i class="fas fa-plug"></i></div>
+                            <div>
+                                <div class="pr-rate-head-title">Sockets &amp; Switchboards</div>
+                                <div class="pr-rate-head-sub">Repairs &amp; upgrades</div>
+                            </div>
+                        </div>
+                        <span class="pr-rate-badge">4 Services</span>
+                    </div>
+
+                    <div class="pr-rate-row">
+                        <div class="pr-rate-info">
+                            <div class="pr-rate-name">Socket replacement</div>
+                            <div class="pr-rate-desc">Like-for-like swap on existing wiring</div>
+                        </div>
+                        <div class="pr-rate-price">
+                            <span class="from">from</span>
+                            <span class="val">$45</span>
+                        </div>
+                    </div>
+
+                    <div class="pr-rate-row">
+                        <div class="pr-rate-info">
+                            <div class="pr-rate-name">USB socket installation</div>
+                            <div class="pr-rate-desc">Includes USB-A/C outlet and compatibility check</div>
+                        </div>
+                        <div class="pr-rate-price">
+                            <span class="from">from</span>
+                            <span class="val">$65</span>
+                        </div>
+                    </div>
+
+                    <div class="pr-rate-row">
+                        <div class="pr-rate-info">
+                            <div class="pr-rate-name">Consumer unit upgrade</div>
+                            <div class="pr-rate-desc">Fuse box to modern board, RCD protection included</div>
+                        </div>
+                        <div class="pr-rate-price">
+                            <span class="from">from</span>
+                            <span class="val">$549</span>
+                        </div>
+                    </div>
+
+                    <div class="pr-rate-row">
+                        <div class="pr-rate-info">
+                            <div class="pr-rate-name">RCD protection install</div>
+                            <div class="pr-rate-desc">Additional RCD/RCBO protection on a dedicated circuit</div>
+                        </div>
+                        <div class="pr-rate-price">
+                            <span class="from">from</span>
+                            <span class="val">$180</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Group 3: Wiring & Extras -->
+                <div class="pr-rate-card">
+                    <div class="pr-rate-head">
+                        <div class="pr-rate-head-left">
+                            <div class="pr-rate-head-icon"><i class="fas fa-bolt"></i></div>
+                            <div>
+                                <div class="pr-rate-head-title">Wiring &amp; Extras</div>
+                                <div class="pr-rate-head-sub">Larger &amp; specialist work</div>
+                            </div>
+                        </div>
+                        <span class="pr-rate-badge">4 Services</span>
+                    </div>
+
+                    <div class="pr-rate-row">
+                        <div class="pr-rate-info">
+                            <div class="pr-rate-name">Single-room rewire</div>
+                            <div class="pr-rate-desc">New cabling, sockets and lighting to one room</div>
+                        </div>
+                        <div class="pr-rate-price">
+                            <span class="from">from</span>
+                            <span class="val">$680</span>
+                        </div>
+                    </div>
+
+                    <div class="pr-rate-row">
+                        <div class="pr-rate-info">
+                            <div class="pr-rate-name">Full home rewire</div>
+                            <div class="pr-rate-desc">Whole-property rewiring with new board and certification</div>
+                        </div>
+                        <div class="pr-rate-price">
+                            <span class="from">from</span>
+                            <span class="val">$2,499</span>
+                        </div>
+                    </div>
+
+                    <div class="pr-rate-row">
+                        <div class="pr-rate-info">
+                            <div class="pr-rate-name">EV charger installation</div>
+                            <div class="pr-rate-desc">Wall-mounted charger with dedicated circuit protection</div>
+                        </div>
+                        <div class="pr-rate-price">
+                            <span class="from">from</span>
+                            <span class="val">$499</span>
+                        </div>
+                    </div>
+
+                    <div class="pr-rate-row">
+                        <div class="pr-rate-info">
+                            <div class="pr-rate-name">Outdoor power point</div>
+                            <div class="pr-rate-desc">Weatherproof socket with armoured cable run</div>
+                        </div>
+                        <div class="pr-rate-price">
+                            <span class="from">from</span>
+                            <span class="val">$180</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <p class="text-center text-xs text-[var(--text-dim)] mt-8">
+                Prices are guides only — your written quote after inspection is the final price.
+            </p>
+        </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SECTION 4 · WHAT AFFECTS YOUR PRICE        -->
+    <!-- ========================================== -->
+    <section class="pr-section !pt-0" id="price-factors">
+        <div class="max-w-[1380px] mx-auto px-5 sm:px-8 lg:px-12">
+
+            <div class="max-w-2xl mb-10">
+                <span class="pr-eyebrow">What Affects Your Price</span>
+                <h2 class="pr-title mt-4">Four factors, fully explained.</h2>
+                <p class="text-[var(--text-muted)] leading-relaxed mt-5">
+                    We're not hiding anything — these are the only things that can move a
+                    quote up or down. Every job is assessed against them.
+                </p>
+            </div>
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+
+                <div class="pr-factor">
+                    <span class="pr-factor-num">01</span>
+                    <div class="pr-factor-icon"><i class="fas fa-diagram-project"></i></div>
+                    <h3 class="font-display font-bold text-base mt-6 text-[var(--text-main)]">Job Complexity</h3>
+                    <p class="text-sm text-[var(--text-muted)] leading-relaxed mt-3">
+                        A straightforward swap costs less than a diagnostic-heavy fault. We
+                        quote based on the work required, not the time we're there.
+                    </p>
+                </div>
+
+                <div class="pr-factor">
+                    <span class="pr-factor-num">02</span>
+                    <div class="pr-factor-icon"><i class="fas fa-boxes-stacked"></i></div>
+                    <h3 class="font-display font-bold text-base mt-6 text-[var(--text-main)]">Parts &amp; Materials</h3>
+                    <p class="text-sm text-[var(--text-muted)] leading-relaxed mt-3">
+                        Quality fittings are included at cost in every written quote. Nothing
+                        is marked up, and you see exactly what you're paying for.
+                    </p>
+                </div>
+
+                <div class="pr-factor">
+                    <span class="pr-factor-num">03</span>
+                    <div class="pr-factor-icon"><i class="fas fa-house-chimney-window"></i></div>
+                    <h3 class="font-display font-bold text-base mt-6 text-[var(--text-main)]">Access &amp; Location</h3>
+                    <p class="text-sm text-[var(--text-muted)] leading-relaxed mt-3">
+                        Easy-access jobs keep labour low. Awkward ceilings, tight roof spaces
+                        or long cable runs add time — but we always explain why first.
+                    </p>
+                </div>
+
+                <div class="pr-factor">
+                    <span class="pr-factor-num">04</span>
+                    <div class="pr-factor-icon"><i class="fas fa-clock"></i></div>
+                    <h3 class="font-display font-bold text-base mt-6 text-[var(--text-main)]">Urgency &amp; Timing</h3>
+                    <p class="text-sm text-[var(--text-muted)] leading-relaxed mt-3">
+                        Standard bookings have no extra charge. Same-day, after-hours or
+                        weekend callouts may carry a small premium — always agreed first.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SECTION 5 · PRICING FAQ + GUARANTEE        -->
+    <!-- ========================================== -->
+    <section class="pr-section !pt-0" id="pricing-faq">
+        <div class="max-w-[1380px] mx-auto px-5 sm:px-8 lg:px-12">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14">
+
+                <!-- FAQ -->
+                <div class="lg:col-span-7">
+                    <span class="pr-eyebrow">Pricing FAQs</span>
+                    <h2 class="pr-title mt-4">Your pricing questions, answered.</h2>
+                    <p class="text-[var(--text-muted)] leading-relaxed mt-5">
+                        Straight answers to the things customers ask us most about cost.
+                    </p>
+
+                    <div class="mt-7">
+                        <details class="pr-faq-item" open>
+                            <summary>
+                                Do you charge for a quote?
+                                <span class="faq-icon"><i class="fas fa-plus"></i></span>
+                            </summary>
+                            <div class="pr-faq-body">
+                                Never. On-site inspections and written quotes are completely free
+                                within our service areas — no obligation to proceed.
+                            </div>
+                        </details>
+
+                        <details class="pr-faq-item">
+                            <summary>
+                                Are parts included in the price?
+                                <span class="faq-icon"><i class="fas fa-plus"></i></span>
+                            </summary>
+                            <div class="pr-faq-body">
+                                Yes — standard fittings are included at cost in the written quote.
+                                If you'd like premium fixtures, we can supply them or use ones you've
+                                already bought.
+                            </div>
+                        </details>
+
+                        <details class="pr-faq-item">
+                            <summary>
+                                What if the job takes longer than quoted?
+                                <span class="faq-icon"><i class="fas fa-plus"></i></span>
+                            </summary>
+                            <div class="pr-faq-body">
+                                Our quotes are fixed. If we discover something unexpected on site,
+                                we stop, explain it clearly and provide a revised quote — nothing is
+                                added without your approval.
+                            </div>
+                        </details>
+
+                        <details class="pr-faq-item">
+                            <summary>
+                                Do you offer a warranty?
+                                <span class="faq-icon"><i class="fas fa-plus"></i></span>
+                            </summary>
+                            <div class="pr-faq-body">
+                                Every job comes with a 12-month workmanship warranty. Parts carry
+                                their own manufacturer warranties, which we'll document for you.
+                            </div>
+                        </details>
+
+                        <details class="pr-faq-item">
+                            <summary>
+                                Can I get a discount for multiple jobs?
+                                <span class="faq-icon"><i class="fas fa-plus"></i></span>
+                            </summary>
+                            <div class="pr-faq-body">
+                                Yes. Bundling multiple jobs into one visit often reduces the overall
+                                cost. Mention this when you book and we'll factor it into the quote.
+                            </div>
+                        </details>
+                    </div>
+                </div>
+
+                <!-- Guarantee sidebar -->
+                <div class="lg:col-span-5">
+                    <div class="pr-side-card">
+                        <span class="pr-side-badge"><i class="fas fa-shield-halved"></i> Our Guarantee</span>
+                        <h3 class="font-display font-bold text-xl text-white mt-4">
+                            Everything we quote<br /> comes with these.
+                        </h3>
+                        <p class="text-sm text-[#94a3b8] leading-relaxed mt-3">
+                            Every VoltNest quote is backed by the same four commitments.
+                        </p>
+
+                        <div class="mt-4">
+                            <div class="pr-side-item">
+                                <div class="pr-side-icon"><i class="fas fa-lock"></i></div>
+                                <div>
+                                    <div class="font-display font-bold text-sm text-white">Fixed price</div>
+                                    <div class="text-xs text-[#94a3b8] mt-1 leading-relaxed">The number you approve is the number you pay.</div>
+                                </div>
+                            </div>
+
+                            <div class="pr-side-item">
+                                <div class="pr-side-icon"><i class="fas fa-file-signature"></i></div>
+                                <div>
+                                    <div class="font-display font-bold text-sm text-white">Written quote</div>
+                                    <div class="text-xs text-[#94a3b8] mt-1 leading-relaxed">Emailed or handed over before we start.</div>
+                                </div>
+                            </div>
+
+                            <div class="pr-side-item">
+                                <div class="pr-side-icon"><i class="fas fa-award"></i></div>
+                                <div>
+                                    <div class="font-display font-bold text-sm text-white">12-month warranty</div>
+                                    <div class="text-xs text-[#94a3b8] mt-1 leading-relaxed">On all workmanship, with a simple claims process.</div>
+                                </div>
+                            </div>
+
+                            <div class="pr-side-item">
+                                <div class="pr-side-icon"><i class="fas fa-rotate-left"></i></div>
+                                <div>
+                                    <div class="font-display font-bold text-sm text-white">Satisfaction promise</div>
+                                    <div class="text-xs text-[#94a3b8] mt-1 leading-relaxed">Not happy? We'll come back and make it right — free.</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="pt-7 border-t border-white/10 mt-5">
+                            <a href="contact.html" class="btn btn-solid w-full !py-3.5 justify-center">
+                                <span>Request a Quote</span> <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SECTION 6 · IMAGE CTA                      -->
+    <!-- ========================================== -->
+    <section class="pr-section !pt-0" id="pricing-cta">
+        <div class="max-w-[1380px] mx-auto px-5 sm:px-8 lg:px-12">
+            <div class="pr-cta">
+                <div class="pr-cta-bg" aria-hidden="true"></div>
+                <div class="pr-cta-overlay" aria-hidden="true"></div>
+
+                <div class="pr-cta-inner">
+                    <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white/10 border border-white/25 backdrop-blur">
+                        <span class="w-2 h-2 rounded-full bg-[#fbbf24] animate-pulse"></span>
+                        <span class="text-[10.5px] font-bold tracking-[0.18em] uppercase text-[#fef3c7]">Free On-Site Quote</span>
+                    </div>
+
+                    <h2 class="mt-6">
+                        Ready for a clear,<br /> <em>honest quote?</em>
+                    </h2>
+
+                    <p class="text-[#cbd5e1] max-w-xl mx-auto leading-relaxed mt-5 text-sm sm:text-base">
+                        Book a VoltNest electrician today. We'll assess the job, explain the
+                        options, and hand you a fixed written quote — with no obligation.
+                    </p>
+
+                    <div class="flex flex-wrap gap-4 justify-center mt-9">
+                        <a href="contact.html" class="btn btn-solid !py-3.5 !px-8">
+                            <span>Book Your Free Quote</span> <i class="fas fa-arrow-right"></i>
+                        </a>
+                        <a href="tel:+18005559473" class="inline-flex items-center gap-2 px-7 py-3.5 rounded-full font-bold text-[11px] uppercase tracking-[1.2px] text-white bg-white/10 border border-white/25 hover:bg-white/20 transition-all">
+                            <i class="fas fa-phone-volume"></i> <span>(800) 555-9473</span>
+                        </a>
+                    </div>
+
+                    <div class="pr-cta-perks">
+                        <span><i class="fas fa-check"></i> No Call-Out Fee</span>
+                        <span><i class="fas fa-check"></i> Fixed Written Quote</span>
+                        <span><i class="fas fa-check"></i> 12-Month Warranty</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- FOOTER COMPONENT (exact)                   -->
+    <!-- ========================================== -->
+    <footer>
+        <div class="max-w-[1440px] mx-auto px-6 lg:px-12">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+
+                <div>
+                    <a href="index.html" class="brand-link inline-flex">
+                        <div class="brand-icon-wrapper"><i class="fa-solid fa-bolt"></i></div>
+                        <div class="brand-logo text-white"><span class="text-[var(--accent)]">Volt</span>Nest</div>
+                    </a>
+                    <p class="text-[#94a3b8] text-sm leading-relaxed mt-4">Professional residential electrical and classic home wiring services. Dedicated to protecting your property and family with straightforward, safety-focused electrical installations and prompt repairs.</p>
+                    <div class="flex gap-3 mt-5">
+                        <a href="#" class="social-circle"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-circle"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-circle"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4>Navigation</h4>
+                    <ul class="space-y-2.5">
+                        <li><a href="home-2.html" class="hover:pl-2 inline-flex items-center gap-2"><i class="fas fa-chevron-right text-[8px] text-[var(--accent)]"></i> Home</a></li>
+                        <li><a href="about.html" class="hover:pl-2 inline-flex items-center gap-2"><i class="fas fa-chevron-right text-[8px] text-[var(--accent)]"></i> About Us</a></li>
+                        <li><a href="services.html" class="hover:pl-2 inline-flex items-center gap-2"><i class="fas fa-chevron-right text-[8px] text-[var(--accent)]"></i> Services</a></li>
+                        <li><a href="gallery.html" class="hover:pl-2 inline-flex items-center gap-2"><i class="fas fa-chevron-right text-[8px] text-[var(--accent)]"></i> Gallery</a></li>
+                        <li><a href="contact.html" class="hover:pl-2 inline-flex items-center gap-2"><i class="fas fa-chevron-right text-[8px] text-[var(--accent)]"></i> Contact & Booking</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4>Core Services</h4>
+                    <ul class="space-y-2.5">
+                        <li><a href="services.html" class="hover:pl-2 inline-flex items-center gap-2"><i class="fas fa-chevron-right text-[8px] text-[var(--accent)]"></i> Home Wiring & Rewiring</a></li>
+                        <li><a href="fittings.html" class="hover:pl-2 inline-flex items-center gap-2"><i class="fas fa-chevron-right text-[8px] text-[var(--accent)]"></i> Fan & Light Fitting</a></li>
+                        <li><a href="switchboards.html" class="hover:pl-2 inline-flex items-center gap-2"><i class="fas fa-chevron-right text-[8px] text-[var(--accent)]"></i> Switchboard Repair</a></li>
+                        <li><a href="gallery.html" class="hover:pl-2 inline-flex items-center gap-2"><i class="fas fa-chevron-right text-[8px] text-[var(--accent)]"></i> Project Gallery</a></li>
+                        <li><a href="contact.html" class="hover:pl-2 inline-flex items-center gap-2"><i class="fas fa-chevron-right text-[8px] text-[var(--accent)]"></i> 24/7 Emergency Repairs</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4>Dispatch Headquarters</h4>
+                    <ul class="space-y-3 text-sm">
+                        <li class="flex items-start gap-3"><i class="fas fa-map-marker-alt text-[var(--accent)] mt-0.5"></i> <span class="text-[#94a3b8]">1200 Industrial Pkwy, Suite 400, Metro Area</span></li>
+                        <li class="flex items-start gap-3"><i class="fas fa-phone text-[var(--accent)] mt-0.5"></i> <span class="text-[#94a3b8]"><a href="tel:+18005559473">(800) 555-WIRE (9473)</a></span></li>
+                        <li class="flex items-start gap-3"><i class="fas fa-envelope text-[var(--accent)] mt-0.5"></i> <span class="text-[#94a3b8]"><a href="mailto:service@voltnest.com">service@voltnest.com</a></span></li>
+                        <li class="flex items-start gap-3"><i class="fas fa-clock text-[var(--accent)] mt-0.5"></i> <span class="text-[#94a3b8]">24/7 Emergency Dispatch Available</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-[rgba(180,83,9,0.15)] py-6 mt-10 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-sm text-[#64748b]">&copy; 2026 <span class="text-[var(--accent)] font-semibold">VoltNest</span> Electrical Services. All rights reserved.</p>
+                <div class="flex gap-6 text-sm">
+                    <a href="" class="text-[#64748b] hover:text-[var(--accent)]">Workmanship Warranty</a>
+                    <a href="#" class="text-[#64748b] hover:text-[var(--accent)]">Privacy Policy</a>
+                    <a href="#" class="text-[#64748b] hover:text-[var(--accent)]">Safety Standards</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive Scripts -->
+    <script>
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('main-nav');
+            window.scrollY > 30 ? nav.classList.add('scrolled') : nav.classList.remove('scrolled');
+        });
+
+        const menu = document.getElementById('fullscreen-menu');
+        const overlay = document.getElementById('drawer-overlay');
+        function toggleMenu() {
+            menu.classList.toggle('active');
+            overlay.classList.toggle('active');
+            document.body.style.overflow = menu.classList.contains('active') ? 'hidden' : 'auto';
+        }
+
+        const themeBtnDesk = document.getElementById('theme-toggle');
+        const themeBtnMob = document.getElementById('theme-toggle-mobile');
+
+        function toggleTheme() {
+            document.body.classList.toggle('dark-mode');
+            const isDark = document.body.classList.contains('dark-mode');
+            const iconClass = isDark ? 'fas fa-sun' : 'fas fa-moon';
+
+            if(themeBtnDesk) themeBtnDesk.querySelector('i').className = iconClass;
+            if(themeBtnMob) themeBtnMob.querySelector('i').className = iconClass;
+        }
+
+        if(themeBtnDesk) themeBtnDesk.addEventListener('click', toggleTheme);
+        if(themeBtnMob) themeBtnMob.addEventListener('click', toggleTheme);
+
+        const rtlBtnDesk = document.getElementById('rtl-btn');
+        const rtlBtnMob = document.getElementById('rtl-btn-mobile');
+
+        function toggleRTL() {
+            const html = document.documentElement;
+            html.dir = html.dir === 'rtl' ? 'ltr' : 'rtl';
+            const dirText = html.dir.toUpperCase();
+
+            if(rtlBtnDesk) rtlBtnDesk.textContent = dirText;
+            if(rtlBtnMob) rtlBtnMob.textContent = dirText;
+        }
+
+        if(rtlBtnDesk) rtlBtnDesk.addEventListener('click', toggleRTL);
+        if(rtlBtnMob) rtlBtnMob.addEventListener('click', toggleRTL);
+    </script>
+</body>
+</html>

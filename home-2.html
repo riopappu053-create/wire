@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>VoltNest · Classic Home Wiring Services (Home 2)</title>
+    
+    <!-- Favicon (Thunder Icon) -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23b45309' rx='20'/%3E%3Ctext x='50' y='68' font-size='56' text-anchor='middle' fill='white' font-family='Arial'%3E⚡%3C/text%3E%3C/svg%3E" />
+
+    <!-- Fonts & Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Inter"', 'system-ui', 'sans-serif'],
+                        display: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Custom Professional Styles -->
+    <style>
+        :root {
+            --bg-color: #f8fafc;
+            --bg-secondary: #f0f7ff;
+            --bg-card: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --text-dim: #94a3b8;
+            --accent: #b45309; /* Warm Classic Bronze/Amber */
+            --accent-dark: #78350f;
+            --accent-light: #fef3c7;
+            --border-light: rgba(180, 83, 9, 0.22);
+            --nav-bg: rgba(248, 250, 252, 0.94);
+            --drawer-bg: rgba(255, 255, 255, 0.98);
+            --menu-hover-bg: rgba(180, 83, 9, 0.10);
+            --shadow-color: rgba(180, 83, 9, 0.16);
+            --gradient-accent: linear-gradient(135deg, #b45309 0%, #78350f 100%);
+        }
+
+        body.dark-mode {
+            --bg-color: #0f172a;
+            --bg-secondary: #1e293b;
+            --bg-card: #0f172a;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --text-dim: #64748b;
+            --accent: #f59e0b;
+            --accent-dark: #b45309;
+            --border-light: rgba(245, 158, 11, 0.22);
+            --nav-bg: rgba(15, 23, 42, 0.94);
+            --drawer-bg: rgba(15, 23, 42, 0.98);
+            --menu-hover-bg: rgba(245, 158, 11, 0.12);
+            --gradient-accent: linear-gradient(135deg, #f59e0b 0%, #b45309 100%);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            padding-top: 84px;
+            transition: all 0.3s ease;
+            overflow-x: hidden;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4, .brand-logo, .font-display { font-family: 'Plus Jakarta Sans', sans-serif; letter-spacing: -0.02em; }
+
+        /* Navbar Styles */
+        .navbar {
+            position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
+            background: var(--nav-bg); height: 84px; display: flex; align-items: center;
+            backdrop-filter: blur(16px); transition: all 0.3s ease; border-bottom: 1px solid transparent;
+        }
+        .navbar.scrolled {
+            height: 70px; border-bottom: 1px solid var(--border-light);
+            box-shadow: 0 10px 40px var(--shadow-color);
+        }
+        .brand-link { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+        .brand-icon-wrapper { width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(180, 83, 9, 0.35); background: rgba(180, 83, 9, 0.10); color: var(--accent); font-size: 1.15rem; transition: transform 0.3s ease; }
+        .brand-link:hover .brand-icon-wrapper { transform: scale(1.05) rotate(5deg); }
+        .brand-logo { font-size: 1.6rem; font-weight: 800; color: var(--text-main); }
+        .brand-logo span { color: var(--accent); }
+        
+        /* Nav Pills */
+        .nav-pills { 
+            display: flex; align-items: center; gap: 4px; 
+            background: var(--bg-card); 
+            padding: 6px; 
+            border-radius: 60px; 
+            border: 1px solid var(--border-light); 
+            box-shadow: 0 4px 20px var(--shadow-color);
+        }
+        .nav-pill { 
+            padding: 10px 18px; 
+            color: var(--text-main); 
+            font-size: 12px; 
+            font-weight: 700; 
+            text-transform: uppercase; 
+            letter-spacing: 0.5px; 
+            border-radius: 40px; 
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
+            text-decoration: none; 
+            display: inline-flex; align-items: center; gap: 6px; 
+            white-space: nowrap; 
+        }
+        .nav-pill:hover { 
+            color: var(--accent); 
+            background: var(--menu-hover-bg); 
+            transform: translateY(-2px);
+        }
+        .nav-pill.active { 
+            background: var(--gradient-accent); 
+            color: #ffffff !important; 
+            box-shadow: 0 6px 16px rgba(180, 83, 9, 0.35); 
+            transform: translateY(-1px);
+        }
+
+        /* Dropdown */
+        .dropdown-pill { position: relative; display: flex; align-items: center; }
+        .dropdown-pill .nav-pill { padding-right: 14px; }
+        .dropdown-pill .nav-pill .fa-chevron-down { font-size: 10px; margin-left: 2px; transition: transform 0.25s ease; opacity: 0.7; }
+        .dropdown-pill:hover .nav-pill .fa-chevron-down { transform: rotate(180deg); opacity: 1; }
+        .dropdown-pill-menu {
+            position: absolute; top: calc(100% + 12px); left: 0; min-width: 190px;
+            background: var(--bg-card); border: 1px solid var(--border-light); border-radius: 16px;
+            padding: 8px; box-shadow: 0 20px 48px rgba(0, 0, 0, 0.15);
+            opacity: 0; visibility: hidden; transform: translateY(10px) scale(0.96);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); z-index: 100;
+        }
+        .dropdown-pill:hover .dropdown-pill-menu { opacity: 1; visibility: visible; transform: translateY(0) scale(1); }
+        .dropdown-pill-item {
+            display: block; padding: 12px 18px; color: var(--text-main); text-decoration: none;
+            font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px;
+            border-radius: 12px; transition: all 0.2s ease;
+        }
+        .dropdown-pill-item:hover { background: var(--menu-hover-bg); color: var(--accent); padding-left: 24px; }
+        .dropdown-pill-item.active { color: var(--accent); background: rgba(180, 83, 9, 0.08); }
+        
+        /* Action Buttons */
+        .btn { padding: 12px 26px; font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: 1.2px; border-radius: 40px; transition: all 0.3s ease; display: inline-flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none; cursor: pointer; }
+        .btn-solid { background: var(--gradient-accent); color: #ffffff !important; border: none; box-shadow: 0 4px 15px rgba(180, 83, 9, 0.25); }
+        .btn-solid:hover { transform: translateY(-3px); box-shadow: 0 8px 26px rgba(180, 83, 9, 0.4); }
+        .btn-outline { background: var(--bg-card); border: 2px solid var(--border-light); color: var(--text-main); box-shadow: 0 4px 15px var(--shadow-color); }
+        .btn-outline:hover { border-color: var(--accent); color: var(--accent) !important; background: var(--menu-hover-bg); transform: translateY(-2px); }
+        
+        /* Interactive Controls */
+        .theme-btn, .rtl-toggle { height: 42px; border-radius: 40px; background: var(--bg-card); border: 1px solid var(--border-light); color: var(--text-main); cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px var(--shadow-color); }
+        .theme-btn { width: 42px; border-radius: 50%; font-size: 14px; }
+        .rtl-toggle { padding: 0 18px; font-size: 11px; font-weight: 800; gap: 6px; letter-spacing: 0.5px; }
+        .theme-btn:hover, .rtl-toggle:hover { background: var(--accent); border-color: var(--accent); color: #fff; transform: translateY(-2px); }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--bg-secondary); }
+        ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 3px; }
+
+        /* Hero Split (Variant for Home 2) */
+        .hero-split { min-height: calc(100vh - 84px); display: flex; align-items: center; position: relative; padding: 60px 0; background: radial-gradient(circle at 15% 20%, rgba(180, 83, 9, 0.12) 0%, transparent 50%), radial-gradient(circle at 90% 80%, rgba(180, 83, 9, 0.08) 0%, transparent 40%); }
+        .hero-img-card { position: relative; border-radius: 28px; overflow: hidden; box-shadow: 0 30px 60px -15px rgba(180, 83, 9, 0.25); border: 1px solid var(--border-light); }
+        .floating-glass-badge { position: absolute; bottom: -20px; right: -20px; background: rgba(255, 255, 255, 0.88); backdrop-filter: blur(14px); border: 1px solid var(--border-light); border-radius: 20px; padding: 14px 20px; box-shadow: 0 16px 36px rgba(0, 0, 0, 0.12); }
+        body.dark-mode .floating-glass-badge { background: rgba(15, 23, 42, 0.90); }
+        
+        /* Mobile Drawer */
+        .drawer-overlay { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.75); z-index: 999; opacity: 0; visibility: hidden; transition: all 0.4s ease; backdrop-filter: blur(6px); }
+        .drawer-overlay.active { opacity: 1; visibility: visible; }
+        .fullscreen-menu { position: fixed; top: 0; right: 0; width: 100%; max-width: 380px; height: 100dvh; background: var(--drawer-bg); z-index: 1001; display: flex; flex-direction: column; transform: translateX(100%); transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); border-left: 1px solid var(--border-light); box-shadow: -10px 0 40px rgba(0,0,0,0.1); }
+        .fullscreen-menu.active { transform: translateX(0); }
+        .mobile-link { display: block; padding: 18px 28px; font-weight: 700; color: var(--text-main); font-size: 15px; border-bottom: 1px solid var(--border-light); transition: all 0.2s; }
+        .mobile-link:hover { color: var(--accent); padding-left: 36px; background: var(--menu-hover-bg); }
+        .mobile-dropdown-items { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; background: var(--bg-secondary); }
+        .mobile-dropdown-items.open { max-height: 150px; padding: 6px 0 10px 16px; }
+
+        /* Footer */
+        footer { background: #0f172a; border-top: 1px solid rgba(180, 83, 9, 0.25); padding-top: 60px; color: #f1f5f9; }
+        footer h4 { color: #f8fafc; font-weight: 700; font-size: 1.1rem; margin-bottom: 18px; }
+        footer a, footer li { color: #94a3b8; text-decoration: none; transition: all 0.3s; font-size: 0.9rem; }
+        footer a:hover { color: var(--accent); }
+        footer .social-circle { width: 40px; height: 40px; border-radius: 50%; border: 1px solid rgba(180, 83, 9, 0.25); display: flex; align-items: center; justify-content: center; transition: all 0.3s; color: #94a3b8; }
+        footer .social-circle:hover { background: var(--gradient-accent); border-color: var(--accent); color: #fff; transform: translateY(-3px); }
+    </style>
+</head>
+<body>
+
+    <!-- ========================================== -->
+    <!-- NAVBAR COMPONENT[cite: 6, 8]             -->
+    <!-- ========================================== -->
+    <nav class="navbar" id="main-nav">
+        <div class="w-full flex items-center justify-between max-w-[1440px] mx-auto px-6">
+            <!-- Brand -->
+            <a href="index.html" class="brand-link">
+                <div class="brand-icon-wrapper"><i class="fa-solid fa-bolt"></i></div>
+                <div class="brand-logo"><span>Volt</span>Nest</div>
+            </a>
+
+            <!-- Desktop Links -->
+            <div class="hidden xl:flex items-center justify-center flex-1 px-4">
+                <div class="nav-pills">
+                    <div class="dropdown-pill">
+                        <a href="#" class="nav-pill active">
+                            Home <i class="fas fa-chevron-down"></i>
+                        </a>
+                        <div class="dropdown-pill-menu">
+                            <a href="index.html" class="dropdown-pill-item">Home 1</a>
+                            <a href="home-2.html" class="dropdown-pill-item active">Home 2</a>
+                        </div>
+                    </div>
+                    <a href="about.html" class="nav-pill">About Us</a>
+                    <a href="services.html" class="nav-pill">Services</a>
+                    <a href="fittings.html" class="nav-pill">Fan & Light</a>
+                    <a href="switchboards.html" class="nav-pill">Switchboards</a>
+                    <a href="price.html" class="nav-pill">Price</a>
+                    <a href="contact.html" class="nav-pill">Contact</a>
+                </div>
+            </div>
+
+            <!-- Desktop Actions -->
+            <div class="hidden xl:flex items-center gap-4">
+                <a href="contact.html" class="btn btn-outline"><i class="fas fa-calendar-check text-[var(--accent)]"></i> Book</a>
+                <div class="w-px h-6 bg-[var(--border-light)] mx-1"></div>
+                <!-- Desktop Toggles -->
+                <button id="theme-toggle" class="theme-btn" aria-label="Toggle theme"><i class="fas fa-moon"></i></button>
+                <button id="rtl-btn" class="rtl-toggle">LTR</button>
+            </div>
+
+            <!-- Mobile Trigger -->
+            <button class="xl:hidden text-2xl text-[var(--text-main)] w-10 h-10 flex items-center justify-center rounded-full bg-[var(--bg-card)] border border-[var(--border-light)] shadow-md" onclick="toggleMenu()">
+                <i class="fas fa-bars text-[var(--accent)]"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Drawer -->
+    <div class="drawer-overlay" id="drawer-overlay" onclick="toggleMenu()"></div>
+    <div class="fullscreen-menu" id="fullscreen-menu">
+        <div class="p-6 flex justify-between items-center border-b border-[var(--border-light)]">
+            <a href="index.html" class="brand-link"><div class="brand-icon-wrapper"><i class="fa-solid fa-bolt"></i></div><div class="brand-logo"><span>Volt</span>Nest</div></a>
+            <button class="text-2xl text-[var(--text-main)] hover:text-[var(--accent)] transition-colors w-10 h-10 flex items-center justify-center rounded-full bg-[var(--bg-secondary)]" onclick="toggleMenu()"><i class="fas fa-times"></i></button>
+        </div>
+        
+        <div class="flex-1 overflow-y-auto py-4">
+            <div class="px-8 py-4 font-bold text-[15px] text-[var(--text-main)] flex justify-between items-center cursor-pointer border-b border-[var(--border-light)]" onclick="document.getElementById('mobile-home-menu').classList.toggle('open')">
+                Home <i class="fas fa-chevron-down text-sm text-[var(--accent)]"></i>
+            </div>
+            <div id="mobile-home-menu" class="mobile-dropdown-items open">
+                <a href="index.html" class="mobile-link !text-[13px] !py-3 !border-none text-[var(--text-muted)] hover:text-[var(--accent)]"><i class="fas fa-arrow-right text-[10px] mr-2"></i> Home 1</a>
+                <a href="home-2.html" class="mobile-link !text-[13px] !py-3 !border-none text-[var(--accent)] font-bold"><i class="fas fa-arrow-right text-[10px] mr-2"></i> Home 2</a>
+            </div>
+            <a href="about.html" class="mobile-link">About Us</a>
+            <a href="services.html" class="mobile-link">Services</a>
+            <a href="fittings.html" class="mobile-link">Fan & Light</a>
+            <a href="switchboards.html" class="mobile-link">Switchboards</a>
+            <a href="price.html" class="mobile-link">price</a>
+            <a href="contact.html" class="mobile-link">Contact</a>
+        </div>
+        
+        <div class="p-6 border-t border-[var(--border-light)] bg-[var(--bg-secondary)] space-y-5">
+            <div class="flex justify-between items-center w-full pb-2">
+                <div class="flex items-center gap-3">
+                    <span class="text-[var(--text-main)] font-bold text-[11px] uppercase tracking-widest">Theme Mode</span>
+                    <button id="theme-toggle-mobile" class="theme-btn" aria-label="Toggle theme">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </div>
+                <div class="flex items-center gap-3">
+                    <span class="text-[var(--text-main)] font-bold text-[11px] uppercase tracking-widest">Layout</span>
+                    <button id="rtl-btn-mobile" class="rtl-toggle">
+                        LTR
+                    </button>
+                </div>
+            </div>
+            <a href="contact.html" class="btn btn-outline w-full !py-3.5 justify-center"><i class="fas fa-calendar-check mr-2 text-[var(--accent)]"></i> Book Service</a>
+            <a href="tel:+18005559473" class="btn btn-solid w-full !py-3.5 justify-center"><i class="fas fa-phone-volume mr-2"></i> Emergency Call</a>
+        </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- HERO BANNER COMPONENT (Variant Home 2)[cite: 8]-->
+    <!-- ========================================== -->
+    <section id="home" class="hero-split">
+        <div class="max-w-[1380px] mx-auto px-6 sm:px-8 lg:px-12 w-full">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-10 items-center">
+                
+                <!-- Left Visuals (Swapped for Home 2)[cite: 8] -->
+                <div class="lg:col-span-5 relative mt-4 lg:mt-0 order-2 lg:order-1">
+                    <div class="absolute -inset-4 bg-gradient-to-tr from-[var(--accent)]/20 to-transparent rounded-[36px] blur-2xl -z-10 opacity-70"></div>
+                    <div class="hero-img-card group">
+                        <img src="img/oi1.webp" alt="Advanced electrical panel installation" class="w-full h-[450px] sm:h-[520px] object-cover transition-transform duration-700 group-hover:scale-105" />
+                        <div class="absolute inset-0 bg-gradient-to-t from-[var(--text-main)]/40 to-transparent"></div>
+                    </div>
+                    <div class="floating-glass-badge hidden sm:flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-full bg-[var(--bg-secondary)] border border-[var(--border-light)] flex items-center justify-center shrink-0">
+                            <i class="fas fa-bolt-lightning text-[var(--accent)] text-lg"></i>
+                        </div>
+                        <div>
+                            <div class="text-xs font-bold text-[var(--text-main)] tracking-wide">Rapid Fault Resolution</div>
+                            <div class="text-[10px] font-medium text-[var(--text-muted)] mt-0.5">Licensed Master Electricians</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Content (Swapped for Home 2)[cite: 8] -->
+                <div class="lg:col-span-7 flex flex-col items-start space-y-7 order-1 lg:order-2">
+                    <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-[var(--bg-card)] border border-[var(--border-light)] text-[var(--accent-dark)] dark:text-[var(--accent)] shadow-sm">
+                        <span class="w-2 h-2 rounded-full bg-[var(--accent)] animate-pulse"></span>
+                        <span class="text-[11px] font-bold tracking-widest uppercase">Next-Gen Home Power Solutions</span>
+                    </div>
+
+                    <h1 class="text-4xl sm:text-5xl lg:text-7xl font-bold leading-[1.08] text-[var(--text-main)] font-display">
+                        Advanced Protection <br /> & modern wiring for <br />
+                        <span class="italic font-normal text-[var(--accent)]">ultimate peace of mind.</span>
+                    </h1>
+
+                    <p class="text-base sm:text-lg text-[var(--text-muted)] max-w-xl leading-relaxed">
+                        Experience superior electrical architecture. We specialize in heavy-duty panel overhauls, smart home automation integration, and code-compliant whole-house rewiring.
+                    </p>
+
+                    <div class="flex flex-wrap gap-4 pt-2">
+                        <a href="contact.html" class="btn btn-solid !py-3.5 !px-8 shadow-lg"><span>Get Free Consultation</span> <i class="fas fa-arrow-right"></i></a>
+                        <a href="services.html" class="btn btn-outline !py-3.5 !px-8"><i class="fas fa-sliders text-[var(--accent)]"></i> <span>View All Services</span></a>
+                    </div>
+
+                    <div class="grid grid-cols-3 gap-6 pt-6 border-t border-[var(--border-light)] w-full max-w-lg">
+                        <div><div class="text-2xl font-bold font-display">24/7</div><div class="text-[11px] font-bold uppercase text-[var(--text-muted)] mt-0.5 tracking-wide">Emergency Support</div></div>
+                        <div><div class="text-2xl font-bold font-display">12 Mo</div><div class="text-[11px] uppercase text-[var(--text-muted)] mt-0.5 tracking-wide">Workmanship Bond</div></div>
+                        <div><div class="text-2xl font-bold font-display">5k+</div><div class="text-[11px] uppercase text-[var(--text-muted)] mt-0.5 tracking-wide">Projects Completed</div></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- NEW SECTION 1: ENTERPRISE POWER METRICS & COUNTERS           -->
+    <!-- ============================================================ -->
+    <section class="py-20 bg-[var(--bg-secondary)] border-y border-[var(--border-light)] transition-colors">
+        <div class="max-w-[1380px] mx-auto px-6 sm:px-8 lg:px-12">
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+                <div class="p-8 rounded-3xl bg-[var(--bg-card)] border border-[var(--border-light)] shadow-sm">
+                    <div class="text-3xl sm:text-4xl font-extrabold text-[var(--accent)] font-display mb-2">99.8%</div>
+                    <div class="text-xs font-bold uppercase tracking-wider text-[var(--text-main)] mb-1">Safety Rating</div>
+                    <p class="text-[11px] text-[var(--text-muted)]">Zero safety failures across 5,000+ homes.</p>
+                </div>
+                <div class="p-8 rounded-3xl bg-[var(--bg-card)] border border-[var(--border-light)] shadow-sm">
+                    <div class="text-3xl sm:text-4xl font-extrabold text-[var(--accent)] font-display mb-2">45 Mins</div>
+                    <div class="text-xs font-bold uppercase tracking-wider text-[var(--text-main)] mb-1">Avg Dispatch Time</div>
+                    <p class="text-[11px] text-[var(--text-muted)]">Rapid local deployment for urgent repairs.</p>
+                </div>
+                <div class="p-8 rounded-3xl bg-[var(--bg-card)] border border-[var(--border-light)] shadow-sm">
+                    <div class="text-3xl sm:text-4xl font-extrabold text-[var(--accent)] font-display mb-2">100%</div>
+                    <div class="text-xs font-bold uppercase tracking-wider text-[var(--text-main)] mb-1">Code Compliance</div>
+                    <p class="text-[11px] text-[var(--text-muted)]">Strict adherence to National Electrical Codes.</p>
+                </div>
+                <div class="p-8 rounded-3xl bg-[var(--bg-card)] border border-[var(--border-light)] shadow-sm">
+                    <div class="text-3xl sm:text-4xl font-extrabold text-[var(--accent)] font-display mb-2">15 Yrs</div>
+                    <div class="text-xs font-bold uppercase tracking-wider text-[var(--text-main)] mb-1">Master Experience</div>
+                    <p class="text-[11px] text-[var(--text-muted)]">Senior licensed professionals on every job.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- NEW SECTION 2: INTERACTIVE POWER SOLUTIONS SHOWCASE          -->
+    <!-- ============================================================ -->
+    <section class="py-24 bg-[var(--bg-color)] transition-colors">
+        <div class="max-w-[1380px] mx-auto px-6 sm:px-8 lg:px-12">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-xs font-bold uppercase tracking-widest text-[var(--accent)]">Tailored Architecture</span>
+                <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[var(--text-main)] font-display mt-3">
+                    Engineered For Modern High-Draw Living
+                </h2>
+                <p class="text-[var(--text-muted)] text-sm sm:text-base mt-4 leading-relaxed">
+                    Choose specialized electrical configurations built to power modern green energy upgrades and heavy household appliances safely.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Solution 1 -->
+                <div class="rounded-[28px] bg-[var(--bg-card)] border border-[var(--border-light)] shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group overflow-hidden">
+                    <div>
+                        <div class="h-48 overflow-hidden relative">
+                            <img src="img/oi3.webp" alt="Panel Upgrades" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <div class="absolute top-4 left-4 px-3 py-1 rounded-full bg-[var(--bg-card)] border border-[var(--border-light)] text-[10px] font-bold uppercase tracking-wider text-[var(--accent)] shadow-md">
+                                Heavy Duty
+                            </div>
+                        </div>
+                        <div class="p-8 pb-4">
+                            <h3 class="text-xl font-bold text-[var(--text-main)] font-display mb-3">200A-400A Switchboard Overhaul</h3>
+                            <p class="text-sm text-[var(--text-muted)] leading-relaxed">
+                                Complete replacement of outdated fuse boxes with high-capacity breaker centers, offering abundant expansion for future home additions.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="p-8 pt-0">
+                        <a href="switchboards.html" class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[var(--accent)] group-hover:gap-3 transition-all">
+                            Explore Panels <i class="fas fa-arrow-right text-[10px]"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Solution 2 -->
+                <div class="rounded-[28px] bg-[var(--bg-card)] border border-[var(--border-light)] shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group overflow-hidden">
+                    <div>
+                        <div class="h-48 overflow-hidden relative">
+                            <img src="https://images.unsplash.com/photo-1558002038-1055907df827?auto=format&fit=crop&q=80&w=800" alt="Smart Home Automation" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <div class="absolute top-4 left-4 px-3 py-1 rounded-full bg-[var(--bg-card)] border border-[var(--border-light)] text-[10px] font-bold uppercase tracking-wider text-[var(--accent)] shadow-md">
+                                Smart Grid
+                            </div>
+                        </div>
+                        <div class="p-8 pb-4">
+                            <h3 class="text-xl font-bold text-[var(--text-main)] font-display mb-3">Whole-Home Smart Automation</h3>
+                            <p class="text-sm text-[var(--text-muted)] leading-relaxed">
+                                Hardwired smart lighting switches, motorized shade cabling, and robust Cat6a structured data networking drops across every room.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="p-8 pt-0">
+                        <a href="services.html" class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[var(--accent)] group-hover:gap-3 transition-all">
+                            View Solutions <i class="fas fa-arrow-right text-[10px]"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Solution 3 -->
+                <div class="rounded-[28px] bg-[var(--bg-card)] border border-[var(--border-light)] shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group overflow-hidden">
+                    <div>
+                        <div class="h-48 overflow-hidden relative">
+                            <img src="img/oi4.webp" alt="EV Charging Station" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <div class="absolute top-4 left-4 px-3 py-1 rounded-full bg-[var(--bg-card)] border border-[var(--border-light)] text-[10px] font-bold uppercase tracking-wider text-[var(--accent)] shadow-md">
+                                Green Power
+                            </div>
+                        </div>
+                        <div class="p-8 pb-4">
+                            <h3 class="text-xl font-bold text-[var(--text-main)] font-display mb-3">EV Charging Hub & Solar Tie-In</h3>
+                            <p class="text-sm text-[var(--text-muted)] leading-relaxed">
+                                Dedicated high-amperage 240V circuits configured for fast residential vehicle charging and seamless solar inverter integration.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="p-8 pt-0">
+                        <a href="contact.html" class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[var(--accent)] group-hover:gap-3 transition-all">
+                            Book Setup <i class="fas fa-arrow-right text-[10px]"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- NEW SECTION 3: SMART HOME & GREEN ENERGY INTEGRATION GRID    -->
+    <!-- ============================================================ -->
+    <section class="py-24 bg-[var(--bg-secondary)] border-y border-[var(--border-light)] transition-colors">
+        <div class="max-w-[1380px] mx-auto px-6 sm:px-8 lg:px-12">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <div class="lg:col-span-6 space-y-6">
+                    <span class="text-xs uppercase tracking-widest text-[var(--accent)] font-bold">Future-Proof Living</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-[var(--text-main)] font-display leading-tight">
+                        Powering The Next Generation of Connected Homes.
+                    </h2>
+                    <p class="text-[var(--text-muted)] text-sm sm:text-base leading-relaxed">
+                        Today’s homes require significantly higher electrical bandwidth. From heat pump retrofits to level-2 vehicle chargers, VoltNest prepares your electrical foundation for sustainable living.
+                    </p>
+                    <div class="space-y-4 pt-2">
+                        <div class="flex items-start gap-4 p-4 rounded-2xl bg-[var(--bg-card)] border border-[var(--border-light)]">
+                            <div class="w-10 h-10 rounded-xl bg-[var(--accent-light)] text-[var(--accent)] flex items-center justify-center shrink-0 font-bold">
+                                <i class="fas fa-solar-panel"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-bold text-[var(--text-main)] mb-1">Solar Inverter Sub-Panel Wiring</h4>
+                                <p class="text-xs text-[var(--text-muted)]">Clean interconnection lines designed for optimal photovoltaic energy capture and battery storage.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4 p-4 rounded-2xl bg-[var(--bg-card)] border border-[var(--border-light)]">
+                            <div class="w-10 h-10 rounded-xl bg-[var(--accent-light)] text-[var(--accent)] flex items-center justify-center shrink-0 font-bold">
+                                <i class="fas fa-temperature-arrow-up"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-bold text-[var(--text-main)] mb-1">HVAC & Heat Pump Circuit Upgrades</h4>
+                                <p class="text-xs text-[var(--text-muted)]">High-amperage dedicated lines configured for modern energy-efficient climate control systems.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="lg:col-span-6 relative">
+                    <div class="p-8 rounded-[28px] bg-[var(--bg-card)] border border-[var(--border-light)] shadow-2xl relative overflow-hidden">
+                        <div class="absolute top-0 right-0 w-32 h-32 bg-[var(--accent)]/10 rounded-full blur-2xl -z-0"></div>
+                        <h3 class="text-xl font-bold text-[var(--text-main)] font-display mb-4 relative z-10">Why Home 2 Clients Choose VoltNest</h3>
+                        <ul class="space-y-4 relative z-10 text-xs sm:text-sm text-[var(--text-muted)]">
+                            <li class="flex items-center gap-3">
+                                <i class="fas fa-check-circle text-emerald-500 text-base"></i>
+                                <span>Advanced load calculation ensuring zero breaker fatigue</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i class="fas fa-check-circle text-emerald-500 text-base"></i>
+                                <span>Complete permitting and municipal inspection coordination</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i class="fas fa-check-circle text-emerald-500 text-base"></i>
+                                <span>Clean, non-invasive cable routing protecting drywall</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i class="fas fa-check-circle text-emerald-500 text-base"></i>
+                                <span>Comprehensive 10-year workmanship warranty certificate</span>
+                            </li>
+                        </ul>
+                        <div class="mt-8 pt-6 border-t border-[var(--border-light)] flex items-center justify-between relative z-10">
+                            <div>
+                                <div class="text-xs text-[var(--text-muted)] uppercase tracking-wider font-bold">Ready to Upgrade?</div>
+                                <div class="text-sm font-bold text-[var(--text-main)]">Speak with our lead engineer</div>
+                            </div>
+                            <a href="contact.html" class="btn btn-solid text-xs !py-3">Book Audit</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- NEW SECTION 4: TRUST BADGES & SAFETY PROMISE -->
+    <!-- ========================================== -->
+    <section class="py-24 bg-[var(--bg-color)] transition-colors">
+        <div class="max-w-[1380px] mx-auto px-6 sm:px-8 lg:px-12 text-center">
+            <span class="text-xs uppercase tracking-widest text-[var(--accent)] font-bold">Uncompromising Quality</span>
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-[var(--text-main)] font-display mt-2 mb-14">
+                Certified Standards & Industry Accreditations
+            </h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div class="p-6 rounded-2xl bg-[var(--bg-card)] border border-[var(--border-light)] flex flex-col items-center justify-center space-y-3 shadow-sm">
+                    <i class="fas fa-award text-3xl text-[var(--accent)]"></i>
+                    <h3 class="text-sm font-bold text-[var(--text-main)] font-display">Master Electrician Licensed</h3>
+                    <p class="text-[11px] text-[var(--text-muted)] text-center">Fully certified state electrical contractors.</p>
+                </div>
+                <div class="p-6 rounded-2xl bg-[var(--bg-card)] border border-[var(--border-light)] flex flex-col items-center justify-center space-y-3 shadow-sm">
+                    <i class="fas fa-shield-halved text-3xl text-[var(--accent)]"></i>
+                    <h3 class="text-sm font-bold text-[var(--text-main)] font-display">$5M Bonded & Insured</h3>
+                    <p class="text-[11px] text-[var(--text-muted)] text-center">Comprehensive liability protection for your home.</p>
+                </div>
+                <div class="p-6 rounded-2xl bg-[var(--bg-card)] border border-[var(--border-light)] flex flex-col items-center justify-center space-y-3 shadow-sm">
+                    <i class="fas fa-circle-check text-3xl text-[var(--accent)]"></i>
+                    <h3 class="text-sm font-bold text-[var(--text-main)] font-display">NEC Code Compliant</h3>
+                    <p class="text-[11px] text-[var(--text-muted)] text-center">Adhering strictly to national safety codes.</p>
+                </div>
+                <div class="p-6 rounded-2xl bg-[var(--bg-card)] border border-[var(--border-light)] flex flex-col items-center justify-center space-y-3 shadow-sm">
+                    <i class="fas fa-star text-3xl text-[var(--accent)]"></i>
+                    <h3 class="text-sm font-bold text-[var(--text-main)] font-display">5-Star Local Rating</h3>
+                    <p class="text-[11px] text-[var(--text-muted)] text-center">Over 1,200 verified residential reviews.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- MEET THE TEAM SECTION                      -->
+    <!-- ========================================== -->
+    <section class="py-24 bg-[var(--bg-color)] transition-colors">
+        <div class="max-w-[1380px] mx-auto px-6 sm:px-8 lg:px-12">
+            
+            <!-- Section Header -->
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-xs font-bold uppercase tracking-widest text-[var(--accent)]">Our Experts</span>
+                <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[var(--text-main)] font-display mt-3">
+                    Meet Our Master Electricians
+                </h2>
+                <p class="text-[var(--text-muted)] text-sm sm:text-base mt-4 leading-relaxed">
+                    Licensed, bonded, and rigorously trained professionals dedicated to delivering top-tier electrical safety and classic craftsmanship to your home.
+                </p>
+            </div>
+
+            <!-- Team Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Team Member 1 -->
+                <div class="rounded-[28px] bg-[var(--bg-card)] border border-[var(--border-light)] shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 overflow-hidden flex flex-col group">
+                    <div class="h-72 overflow-hidden relative">
+                        <img src="img/me1.webp" alt="Marcus Vance" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity"></div>
+                        <span class="absolute top-4 right-4 px-3 py-1 rounded-full bg-[var(--accent)] text-white text-[10px] font-bold uppercase tracking-wider">Master Electrician</span>
+                    </div>
+                    <div class="p-8 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-xl font-bold text-[var(--text-main)] font-display mb-1">Marcus Vance</h3>
+                            <p class="text-xs font-semibold text-[var(--accent)] mb-3 uppercase tracking-wider">Lead Project Director</p>
+                            <p class="text-sm text-[var(--text-muted)] leading-relaxed mb-6">
+                                Over 18 years of experience overseeing complex residential rewiring, custom panel upgrades, and code compliance.
+                            </p>
+                        </div>
+                        <div class="flex items-center gap-3 pt-4 border-t border-[var(--border-light)]">
+                            <a href="#" class="w-9 h-9 rounded-full bg-[var(--bg-secondary)] border border-[var(--border-light)] flex items-center justify-center text-[var(--text-muted)] hover:bg-[var(--accent)] hover:text-white hover:border-[var(--accent)] transition-colors"><i class="fab fa-linkedin-in text-xs"></i></a>
+                            <a href="#" class="w-9 h-9 rounded-full bg-[var(--bg-secondary)] border border-[var(--border-light)] flex items-center justify-center text-[var(--text-muted)] hover:bg-[var(--accent)] hover:text-white hover:border-[var(--accent)] transition-colors"><i class="far fa-envelope text-xs"></i></a>
+                            <span class="ml-auto text-[11px] font-bold text-[var(--text-dim)]">18 Yrs Exp</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Team Member 2 -->
+                <div class="rounded-[28px] bg-[var(--bg-card)] border border-[var(--border-light)] shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 overflow-hidden flex flex-col group">
+                    <div class="h-72 overflow-hidden relative">
+                        <img src="img/me2.webp" alt="Elena Rostova" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity"></div>
+                        <span class="absolute top-4 right-4 px-3 py-1 rounded-full bg-[var(--accent)] text-white text-[10px] font-bold uppercase tracking-wider">Senior Specialist</span>
+                    </div>
+                    <div class="p-8 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-xl font-bold text-[var(--text-main)] font-display mb-1">Elena Rostova</h3>
+                            <p class="text-xs font-semibold text-[var(--accent)] mb-3 uppercase tracking-wider">Smart Home & Automation</p>
+                            <p class="text-sm text-[var(--text-muted)] leading-relaxed mb-6">
+                                Expert in modern home automation setups, architectural lighting ecosystems, and EV charger system integration.
+                            </p>
+                        </div>
+                        <div class="flex items-center gap-3 pt-4 border-t border-[var(--border-light)]">
+                            <a href="#" class="w-9 h-9 rounded-full bg-[var(--bg-secondary)] border border-[var(--border-light)] flex items-center justify-center text-[var(--text-muted)] hover:bg-[var(--accent)] hover:text-white hover:border-[var(--accent)] transition-colors"><i class="fab fa-linkedin-in text-xs"></i></a>
+                            <a href="#" class="w-9 h-9 rounded-full bg-[var(--bg-secondary)] border border-[var(--border-light)] flex items-center justify-center text-[var(--text-muted)] hover:bg-[var(--accent)] hover:text-white hover:border-[var(--accent)] transition-colors"><i class="far fa-envelope text-xs"></i></a>
+                            <span class="ml-auto text-[11px] font-bold text-[var(--text-dim)]">12 Yrs Exp</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Team Member 3 -->
+                <div class="rounded-[28px] bg-[var(--bg-card)] border border-[var(--border-light)] shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 overflow-hidden flex flex-col group">
+                    <div class="h-72 overflow-hidden relative">
+                        <img src="img/me3.webp" alt="Damon Brooks" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity"></div>
+                        <span class="absolute top-4 right-4 px-3 py-1 rounded-full bg-[var(--accent)] text-white text-[10px] font-bold uppercase tracking-wider">Safety Auditor</span>
+                    </div>
+                    <div class="p-8 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-xl font-bold text-[var(--text-main)] font-display mb-1">Damon Brooks</h3>
+                            <p class="text-xs font-semibold text-[var(--accent)] mb-3 uppercase tracking-wider">Emergency Diagnostics</p>
+                            <p class="text-sm text-[var(--text-muted)] leading-relaxed mb-6">
+                                Specializes in thermal imaging diagnostics, rapid fault finding, and ensuring total structural fire safety compliance.
+                            </p>
+                        </div>
+                        <div class="flex items-center gap-3 pt-4 border-t border-[var(--border-light)]">
+                            <a href="#" class="w-9 h-9 rounded-full bg-[var(--bg-secondary)] border border-[var(--border-light)] flex items-center justify-center text-[var(--text-muted)] hover:bg-[var(--accent)] hover:text-white hover:border-[var(--accent)] transition-colors"><i class="fab fa-linkedin-in text-xs"></i></a>
+                            <a href="#" class="w-9 h-9 rounded-full bg-[var(--bg-secondary)] border border-[var(--border-light)] flex items-center justify-center text-[var(--text-muted)] hover:bg-[var(--accent)] hover:text-white hover:border-[var(--accent)] transition-colors"><i class="far fa-envelope text-xs"></i></a>
+                            <span class="ml-auto text-[11px] font-bold text-[var(--text-dim)]">14 Yrs Exp</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+   
+
+    <!-- ========================================== -->
+    <!-- NEW SECTION 6: CONSULTATION BOOKING FORM   -->
+    <!-- ========================================== -->
+    <section id="contact" class="py-24 bg-[var(--bg-color)] transition-colors">
+        <div class="max-w-[1380px] mx-auto px-6 sm:px-8 lg:px-12">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                <div class="lg:col-span-5 space-y-6">
+                    <span class="text-xs uppercase tracking-widest text-[var(--accent)] font-bold">Priority Scheduling</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-[var(--text-main)] font-display leading-tight">
+                        Book Your Home 2 Electrical Consultation Today.
+                    </h2>
+                    <p class="text-sm text-[var(--text-muted)] leading-relaxed">
+                        Ready to upgrade your home’s electrical infrastructure? Fill out the form and our senior master electrician will coordinate a comprehensive on-site assessment.
+                    </p>
+                    <div class="space-y-4 pt-4 border-t border-[var(--border-light)]">
+                        <div class="flex items-center gap-3 text-sm text-[var(--text-main)]">
+                            <i class="fas fa-check-circle text-emerald-500"></i> Fixed upfront pricing with zero surprises
+                        </div>
+                        <div class="flex items-center gap-3 text-sm text-[var(--text-main)]">
+                            <i class="fas fa-check-circle text-emerald-500"></i> Detailed load and safety analysis included
+                        </div>
+                        <div class="flex items-center gap-3 text-sm text-[var(--text-main)]">
+                            <i class="fas fa-check-circle text-emerald-500"></i> Same-week installation availability
+                        </div>
+                    </div>
+                    <div class="p-4 rounded-xl bg-[var(--bg-secondary)] border border-[var(--border-light)] flex items-center gap-4">
+                        <i class="fas fa-phone-volume text-2xl text-[var(--accent)]"></i>
+                        <div>
+                            <div class="text-xs text-[var(--text-muted)] uppercase tracking-wider font-semibold">Direct Dispatch Line</div>
+                            <a href="tel:+18005559473" class="text-sm font-bold text-[var(--text-main)] hover:text-[var(--accent)]">(800) 555-WIRE (9473)</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="lg:col-span-7">
+                    <form class="p-8 sm:p-10 rounded-3xl bg-[var(--bg-card)] border border-[var(--border-light)] shadow-xl space-y-4" onsubmit="event.preventDefault(); alert('Booking request submitted successfully! Our dispatcher will call you within 15 minutes.');">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-semibold text-[var(--text-main)] mb-1.5">First & Last Name</label>
+                                <input type="text" required placeholder="John Smith" class="w-full px-4 py-3 rounded-xl bg-[var(--bg-secondary)] border border-[var(--border-light)] text-[var(--text-main)] text-sm outline-none focus:border-[var(--accent)]" />
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-[var(--text-main)] mb-1.5">Phone Number</label>
+                                <input type="tel" required placeholder="(555) 000-0000" class="w-full px-4 py-3 rounded-xl bg-[var(--bg-secondary)] border border-[var(--border-light)] text-[var(--text-main)] text-sm outline-none focus:border-[var(--accent)]" />
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-semibold text-[var(--text-main)] mb-1.5">Email Address</label>
+                                <input type="email" required placeholder="john@example.com" class="w-full px-4 py-3 rounded-xl bg-[var(--bg-secondary)] border border-[var(--border-light)] text-[var(--text-main)] text-sm outline-none focus:border-[var(--accent)]" />
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-[var(--text-main)] mb-1.5">Property Zip Code</label>
+                                <input type="text" required placeholder="90210" class="w-full px-4 py-3 rounded-xl bg-[var(--bg-secondary)] border border-[var(--border-light)] text-[var(--text-main)] text-sm outline-none focus:border-[var(--accent)]" />
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-semibold text-[var(--text-main)] mb-1.5">Service Category</label>
+                                <select class="w-full px-4 py-3 rounded-xl bg-[var(--bg-secondary)] border border-[var(--border-light)] text-[var(--text-main)] text-sm outline-none focus:border-[var(--accent)]">
+                                    <option>Switchboard & Panel Upgrade</option>
+                                    <option>Smart Home Automation Setup</option>
+                                    <option>EV Charger / Solar Installation</option>
+                                    <option>Urgent Safety Inspection</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-[var(--text-main)] mb-1.5">Preferred Time Window</label>
+                                <select class="w-full px-4 py-3 rounded-xl bg-[var(--bg-secondary)] border border-[var(--border-light)] text-[var(--text-main)] text-sm outline-none focus:border-[var(--accent)]">
+                                    <option>Morning (8AM - 12PM)</option>
+                                    <option>Afternoon (12PM - 4PM)</option>
+                                    <option>Evening (4PM - 7PM)</option>
+                                    <option>Emergency Immediate Dispatch</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-[var(--text-main)] mb-1.5">Project Notes or Details</label>
+                            <textarea rows="3" placeholder="Briefly describe your home power setup or any specific installation goals..." class="w-full px-4 py-3 rounded-xl bg-[var(--bg-secondary)] border border-[var(--border-light)] text-[var(--text-main)] text-sm outline-none focus:border-[var(--accent)] resize-none"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-solid w-full !py-3.5 text-xs tracking-wider shadow-lg">
+                            <i class="fas fa-calendar-check mr-2"></i> Confirm Consultation Booking
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- FOOTER COMPONENT[cite: 6, 8]              -->
+    <!-- ========================================== -->
+    <footer>
+        <div class="max-w-[1440px] mx-auto px-6 lg:px-12">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+                
+                <!-- Brand Profile -->
+                <div>
+                    <a href="index.html" class="brand-link inline-flex">
+                        <div class="brand-icon-wrapper"><i class="fa-solid fa-bolt"></i></div>
+                        <div class="brand-logo text-white"><span class="text-[var(--accent)]">Volt</span>Nest</div>
+                    </a>
+                    <p class="text-[#94a3b8] text-sm leading-relaxed mt-4">Professional residential electrical and classic home wiring services. Dedicated to protecting your property and family with straightforward, safety-focused electrical installations and prompt repairs.</p>
+                    <div class="flex gap-3 mt-5">
+                        <a href="#" class="social-circle"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-circle"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-circle"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h4>Navigation</h4>
+                    <ul class="space-y-2.5">
+                        <li><a href="home-2.html" class="hover:pl-2 inline-flex items-center gap-2"><i class="fas fa-chevron-right text-[8px] text-[var(--accent)]"></i> Home</a></li>
+                        <li><a href="about.html" class="hover:pl-2 inline-flex items-center gap-2"><i class="fas fa-chevron-right text-[8px] text-[var(--accent)]"></i> About Us</a></li>
+                        <li><a href="services.html" class="hover:pl-2 inline-flex items-center gap-2"><i class="fas fa-chevron-right text-[8px] text-[var(--accent)]"></i> Services</a></li>
+                        <li><a href="gallery.html" class="hover:pl-2 inline-flex items-center gap-2"><i class="fas fa-chevron-right text-[8px] text-[var(--accent)]"></i> Gallery</a></li>
+                        <li><a href="contact.html" class="hover:pl-2 inline-flex items-center gap-2"><i class="fas fa-chevron-right text-[8px] text-[var(--accent)]"></i> Contact & Booking</a></li>
+                    </ul>
+                </div>
+
+                <!-- Offerings -->
+                <div>
+                    <h4>Core Services</h4>
+                    <ul class="space-y-2.5">
+                        <li><a href="services.html" class="hover:pl-2 inline-flex items-center gap-2"><i class="fas fa-chevron-right text-[8px] text-[var(--accent)]"></i> Home Wiring & Rewiring</a></li>
+                        <li><a href="fittings.html" class="hover:pl-2 inline-flex items-center gap-2"><i class="fas fa-chevron-right text-[8px] text-[var(--accent)]"></i> Fan & Light Fitting</a></li>
+                        <li><a href="switchboards.html" class="hover:pl-2 inline-flex items-center gap-2"><i class="fas fa-chevron-right text-[8px] text-[var(--accent)]"></i> Switchboard Repair</a></li>
+                        <li><a href="gallery.html" class="hover:pl-2 inline-flex items-center gap-2"><i class="fas fa-chevron-right text-[8px] text-[var(--accent)]"></i> Project Gallery</a></li>
+                        <li><a href="contact.html" class="hover:pl-2 inline-flex items-center gap-2"><i class="fas fa-chevron-right text-[8px] text-[var(--accent)]"></i> 24/7 Emergency Repairs</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Info -->
+                <div>
+                    <h4>Dispatch Headquarters</h4>
+                    <ul class="space-y-3 text-sm">
+                        <li class="flex items-start gap-3"><i class="fas fa-map-marker-alt text-[var(--accent)] mt-0.5"></i> <span class="text-[#94a3b8]">1200 Industrial Pkwy, Suite 400, Metro Area</span></li>
+                        <li class="flex items-start gap-3"><i class="fas fa-phone text-[var(--accent)] mt-0.5"></i> <span class="text-[#94a3b8]"><a href="tel:+18005559473">(800) 555-WIRE (9473)</a></span></li>
+                        <li class="flex items-start gap-3"><i class="fas fa-envelope text-[var(--accent)] mt-0.5"></i> <span class="text-[#94a3b8]"><a href="mailto:service@voltnest.com">service@voltnest.com</a></span></li>
+                        <li class="flex items-start gap-3"><i class="fas fa-clock text-[var(--accent)] mt-0.5"></i> <span class="text-[#94a3b8]">24/7 Emergency Dispatch Available</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Copyright -->
+            <div class="border-t border-[rgba(180,83,9,0.15)] py-6 mt-10 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-sm text-[#64748b]">&copy; 2026 <span class="text-[var(--accent)] font-semibold">VoltNest</span> Electrical Services. All rights reserved.</p>
+                <div class="flex gap-6 text-sm">
+                    <a href="" class="text-[#64748b] hover:text-[var(--accent)]">Workmanship Warranty</a>
+                    <a href="#" class="text-[#64748b] hover:text-[var(--accent)]">Privacy Policy</a>
+                    <a href="#" class="text-[#64748b] hover:text-[var(--accent)]">Safety Standards</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive Scripts -->
+    <script>
+        // Scroll Behavior
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('main-nav');
+            window.scrollY > 30 ? nav.classList.add('scrolled') : nav.classList.remove('scrolled');
+        });
+
+        // Mobile Menu
+        const menu = document.getElementById('fullscreen-menu');
+        const overlay = document.getElementById('drawer-overlay');
+        function toggleMenu() {
+            menu.classList.toggle('active');
+            overlay.classList.toggle('active');
+            document.body.style.overflow = menu.classList.contains('active') ? 'hidden' : 'auto';
+        }
+
+        // Theme Toggle (Syncs Desktop & Mobile Buttons)
+        const themeBtnDesk = document.getElementById('theme-toggle');
+        const themeBtnMob = document.getElementById('theme-toggle-mobile');
+
+        function toggleTheme() {
+            document.body.classList.toggle('dark-mode');
+            const isDark = document.body.classList.contains('dark-mode');
+            const iconClass = isDark ? 'fas fa-sun' : 'fas fa-moon';
+            
+            if(themeBtnDesk) themeBtnDesk.querySelector('i').className = iconClass;
+            if(themeBtnMob) themeBtnMob.querySelector('i').className = iconClass;
+        }
+
+        if(themeBtnDesk) themeBtnDesk.addEventListener('click', toggleTheme);
+        if(themeBtnMob) themeBtnMob.addEventListener('click', toggleTheme);
+
+        // RTL Toggle (Syncs Desktop & Mobile Buttons)
+        const rtlBtnDesk = document.getElementById('rtl-btn');
+        const rtlBtnMob = document.getElementById('rtl-btn-mobile');
+
+        function toggleRTL() {
+            const html = document.documentElement;
+            html.dir = html.dir === 'rtl' ? 'ltr' : 'rtl';
+            const dirText = html.dir.toUpperCase();
+            
+            if(rtlBtnDesk) rtlBtnDesk.textContent = dirText;
+            if(rtlBtnMob) rtlBtnMob.textContent = dirText;
+        }
+
+        if(rtlBtnDesk) rtlBtnDesk.addEventListener('click', toggleRTL);
+        if(rtlBtnMob) rtlBtnMob.addEventListener('click', toggleRTL);
+    </script>
+</body>
+</html>

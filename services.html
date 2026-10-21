@@ -1,0 +1,1116 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Services · VoltNest Classic Home Wiring Services</title>
+
+    <!-- Favicon (Thunder Icon) -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23b45309' rx='20'/%3E%3Ctext x='50' y='68' font-size='56' text-anchor='middle' fill='white' font-family='Arial'%3E⚡%3C/text%3E%3C/svg%3E" />
+
+    <!-- Fonts & Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Inter"', 'system-ui', 'sans-serif'],
+                        display: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Custom Professional Styles -->
+    <style>
+        :root {
+            --bg-color: #f8fafc;
+            --bg-secondary: #f0f7ff;
+            --bg-card: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --text-dim: #94a3b8;
+            --accent: #b45309;
+            --accent-dark: #78350f;
+            --accent-light: #fef3c7;
+            --border-light: rgba(180, 83, 9, 0.22);
+            --nav-bg: rgba(248, 250, 252, 0.94);
+            --drawer-bg: rgba(255, 255, 255, 0.98);
+            --menu-hover-bg: rgba(180, 83, 9, 0.10);
+            --shadow-color: rgba(180, 83, 9, 0.16);
+            --gradient-accent: linear-gradient(135deg, #b45309 0%, #78350f 100%);
+        }
+
+        body.dark-mode {
+            --bg-color: #0f172a;
+            --bg-secondary: #1e293b;
+            --bg-card: #0f172a;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --text-dim: #64748b;
+            --accent: #f59e0b;
+            --accent-dark: #b45309;
+            --border-light: rgba(245, 158, 11, 0.22);
+            --nav-bg: rgba(15, 23, 42, 0.94);
+            --drawer-bg: rgba(15, 23, 42, 0.98);
+            --menu-hover-bg: rgba(245, 158, 11, 0.12);
+            --gradient-accent: linear-gradient(135deg, #f59e0b 0%, #b45309 100%);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            padding-top: 84px;
+            transition: all 0.3s ease;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, .brand-logo, .font-display { font-family: 'Plus Jakarta Sans', sans-serif; letter-spacing: -0.02em; }
+
+        /* Navbar Styles */
+        .navbar {
+            position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
+            background: var(--nav-bg); height: 84px; display: flex; align-items: center;
+            backdrop-filter: blur(16px); transition: all 0.3s ease; border-bottom: 1px solid transparent;
+        }
+        .navbar.scrolled {
+            height: 70px; border-bottom: 1px solid var(--border-light);
+            box-shadow: 0 10px 40px var(--shadow-color);
+        }
+        .brand-link { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+        .brand-icon-wrapper { width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(180, 83, 9, 0.35); background: rgba(180, 83, 9, 0.10); color: var(--accent); font-size: 1.15rem; transition: transform 0.3s ease; }
+        .brand-link:hover .brand-icon-wrapper { transform: scale(1.05) rotate(5deg); }
+        .brand-logo { font-size: 1.6rem; font-weight: 800; color: var(--text-main); }
+        .brand-logo span { color: var(--accent); }
+
+        .nav-pills {
+            display: flex; align-items: center; gap: 4px;
+            background: var(--bg-card);
+            padding: 6px;
+            border-radius: 60px;
+            border: 1px solid var(--border-light);
+            box-shadow: 0 4px 20px var(--shadow-color);
+        }
+        .nav-pill {
+            padding: 10px 18px;
+            color: var(--text-main);
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-radius: 40px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none;
+            display: inline-flex; align-items: center; gap: 6px;
+            white-space: nowrap;
+        }
+        .nav-pill:hover {
+            color: var(--accent);
+            background: var(--menu-hover-bg);
+            transform: translateY(-2px);
+        }
+        .nav-pill.active {
+            background: var(--gradient-accent);
+            color: #ffffff !important;
+            box-shadow: 0 6px 16px rgba(180, 83, 9, 0.35);
+            transform: translateY(-1px);
+        }
+
+        .dropdown-pill { position: relative; display: flex; align-items: center; }
+        .dropdown-pill .nav-pill { padding-right: 14px; }
+        .dropdown-pill .nav-pill .fa-chevron-down { font-size: 10px; margin-left: 2px; transition: transform 0.25s ease; opacity: 0.7; }
+        .dropdown-pill:hover .nav-pill .fa-chevron-down { transform: rotate(180deg); opacity: 1; }
+        .dropdown-pill-menu {
+            position: absolute; top: calc(100% + 12px); left: 0; min-width: 190px;
+            background: var(--bg-card); border: 1px solid var(--border-light); border-radius: 16px;
+            padding: 8px; box-shadow: 0 20px 48px rgba(0, 0, 0, 0.15);
+            opacity: 0; visibility: hidden; transform: translateY(10px) scale(0.96);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); z-index: 100;
+        }
+        .dropdown-pill:hover .dropdown-pill-menu { opacity: 1; visibility: visible; transform: translateY(0) scale(1); }
+        .dropdown-pill-item {
+            display: block; padding: 12px 18px; color: var(--text-main); text-decoration: none;
+            font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px;
+            border-radius: 12px; transition: all 0.2s ease;
+        }
+        .dropdown-pill-item:hover { background: var(--menu-hover-bg); color: var(--accent); padding-left: 24px; }
+        .dropdown-pill-item.active { color: var(--accent); background: rgba(180, 83, 9, 0.08); }
+
+        .btn { padding: 12px 26px; font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: 1.2px; border-radius: 40px; transition: all 0.3s ease; display: inline-flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none; }
+        .btn-solid { background: var(--gradient-accent); color: #ffffff !important; border: none; box-shadow: 0 4px 15px rgba(180, 83, 9, 0.25); }
+        .btn-solid:hover { transform: translateY(-3px); box-shadow: 0 8px 26px rgba(180, 83, 9, 0.4); }
+        .btn-outline { background: var(--bg-card); border: 2px solid var(--border-light); color: var(--text-main); box-shadow: 0 4px 15px var(--shadow-color); }
+        .btn-outline:hover { border-color: var(--accent); color: var(--accent) !important; background: var(--menu-hover-bg); transform: translateY(-2px); }
+
+        .theme-btn, .rtl-toggle { height: 42px; border-radius: 40px; background: var(--bg-card); border: 1px solid var(--border-light); color: var(--text-main); cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px var(--shadow-color); }
+        .theme-btn { width: 42px; border-radius: 50%; font-size: 14px; }
+        .rtl-toggle { padding: 0 18px; font-size: 11px; font-weight: 800; gap: 6px; letter-spacing: 0.5px; }
+        .theme-btn:hover, .rtl-toggle:hover { background: var(--accent); border-color: var(--accent); color: #fff; transform: translateY(-2px); }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--bg-secondary); }
+        ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 3px; }
+
+        /* Mobile Drawer */
+        .drawer-overlay { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.75); z-index: 999; opacity: 0; visibility: hidden; transition: all 0.4s ease; backdrop-filter: blur(6px); }
+        .drawer-overlay.active { opacity: 1; visibility: visible; }
+        .fullscreen-menu { position: fixed; top: 0; right: 0; width: 100%; max-width: 380px; height: 100dvh; background: var(--drawer-bg); z-index: 1001; display: flex; flex-direction: column; transform: translateX(100%); transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); border-left: 1px solid var(--border-light); box-shadow: -10px 0 40px rgba(0,0,0,0.1); }
+        .fullscreen-menu.active { transform: translateX(0); }
+        .mobile-link { display: block; padding: 18px 28px; font-weight: 700; color: var(--text-main); font-size: 15px; border-bottom: 1px solid var(--border-light); transition: all 0.2s; text-decoration: none; }
+        .mobile-link:hover { color: var(--accent); padding-left: 36px; background: var(--menu-hover-bg); }
+        .mobile-link.active { color: var(--accent); background: var(--menu-hover-bg); border-left: 3px solid var(--accent); padding-left: 25px; }
+        .mobile-dropdown-items { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; background: var(--bg-secondary); }
+        .mobile-dropdown-items.open { max-height: 150px; padding: 6px 0 10px 16px; }
+
+        /* Full Viewport Hero */
+        .page-hero {
+            position: relative;
+            min-height: calc(100vh - 84px);
+            display: flex; align-items: center; justify-content: center;
+            overflow: hidden;
+            isolation: isolate;
+        }
+        .page-hero-bg {
+            position: absolute; inset: 0;
+            background-image: url('https://images.unsplash.com/photo-1621905252507-b35492cc74b4?auto=format&fit=crop&q=80&w=2000');
+            background-size: cover; background-position: center; background-repeat: no-repeat;
+            z-index: -2;
+            transform: scale(1.04);
+            animation: heroZoom 18s ease-in-out infinite alternate;
+        }
+        @keyframes heroZoom { from { transform: scale(1.04); } to { transform: scale(1.14); } }
+        .page-hero-overlay {
+            position: absolute; inset: 0; z-index: -1;
+            background:
+                linear-gradient(180deg, rgba(15, 23, 42, 0.88) 0%, rgba(15, 23, 42, 0.70) 45%, rgba(15, 23, 42, 0.93) 100%),
+                radial-gradient(circle at 80% 24%, rgba(180, 83, 9, 0.44) 0%, transparent 58%),
+                radial-gradient(circle at 10% 84%, rgba(180, 83, 9, 0.26) 0%, transparent 52%);
+        }
+        .page-hero-inner {
+            position: relative; z-index: 2;
+            width: 100%; max-width: 1100px;
+            padding: 70px 24px;
+            text-align: center; color: #ffffff;
+        }
+        .hero-breadcrumb {
+            display: inline-flex; align-items: center; gap: 10px;
+            padding: 9px 20px; border-radius: 999px;
+            background: rgba(255, 255, 255, 0.10);
+            border: 1px solid rgba(255, 255, 255, 0.22);
+            backdrop-filter: blur(10px);
+            font-size: 11px; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 1.6px;
+            color: #fef3c7;
+        }
+        .hero-breadcrumb a { color: #fef3c7; text-decoration: none; transition: color 0.25s ease; }
+        .hero-breadcrumb a:hover { color: #ffffff; }
+        .hero-breadcrumb .sep { opacity: 0.55; font-size: 9px; }
+        .hero-breadcrumb .current { color: #ffffff; }
+
+        .page-hero h1 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 800; letter-spacing: -0.03em;
+            line-height: 1.04;
+            font-size: clamp(2.35rem, 6vw, 4.7rem);
+            margin-top: 26px;
+            text-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
+        }
+        .page-hero h1 em { font-style: italic; font-weight: 400; color: #fbbf24; }
+
+        .page-hero p.lead {
+            max-width: 680px; margin: 22px auto 0;
+            font-size: 1rem; line-height: 1.8;
+            color: rgba(241, 245, 249, 0.88);
+        }
+        @media (min-width: 640px) { .page-hero p.lead { font-size: 1.075rem; } }
+
+        .page-hero-cta { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; margin-top: 36px; }
+        .page-hero-cta .btn-solid { box-shadow: 0 12px 34px rgba(180, 83, 9, 0.45); }
+        .page-hero-cta .btn-ghost {
+            padding: 12px 26px; border-radius: 40px;
+            font-weight: 700; font-size: 11px;
+            text-transform: uppercase; letter-spacing: 1.2px;
+            display: inline-flex; align-items: center; gap: 8px;
+            text-decoration: none; color: #ffffff;
+            background: rgba(255, 255, 255, 0.09);
+            border: 1px solid rgba(255, 255, 255, 0.28);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+        .page-hero-cta .btn-ghost:hover {
+            background: rgba(255, 255, 255, 0.18);
+            border-color: rgba(255, 255, 255, 0.55);
+            transform: translateY(-2px);
+        }
+
+        .hero-stat-strip {
+            display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 12px; max-width: 660px;
+            margin: 54px auto 0; padding-top: 28px;
+            border-top: 1px solid rgba(255, 255, 255, 0.18);
+        }
+        .hero-stat-strip .num { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.55rem; font-weight: 800; color: #ffffff; }
+        .hero-stat-strip .lbl { font-size: 9.5px; font-weight: 700; letter-spacing: 1.4px; text-transform: uppercase; color: rgba(254, 243, 199, 0.78); margin-top: 4px; }
+
+        .scroll-cue {
+            position: absolute; bottom: 26px; left: 50%; transform: translateX(-50%);
+            z-index: 3; display: flex; flex-direction: column; align-items: center; gap: 8px;
+            color: rgba(255, 255, 255, 0.62);
+            font-size: 9px; font-weight: 700;
+            letter-spacing: 2px; text-transform: uppercase;
+            text-decoration: none;
+            animation: cueFloat 2.4s ease-in-out infinite;
+        }
+        .scroll-cue:hover { color: #fbbf24; }
+        @keyframes cueFloat { 0%, 100% { transform: translate(-50%, 0); } 50% { transform: translate(-50%, 8px); } }
+
+        @media (prefers-reduced-motion: reduce) {
+            .page-hero-bg { animation: none; }
+            .scroll-cue { animation: none; }
+        }
+
+        /* Footer */
+        footer { background: #0f172a; border-top: 1px solid rgba(180, 83, 9, 0.25); padding-top: 60px; color: #f1f5f9; }
+        footer h4 { color: #f8fafc; font-weight: 700; font-size: 1.1rem; margin-bottom: 18px; }
+        footer a, footer li { color: #94a3b8; text-decoration: none; transition: all 0.3s; font-size: 0.9rem; }
+        footer a:hover { color: var(--accent); }
+        footer .social-circle { width: 40px; height: 40px; border-radius: 50%; border: 1px solid rgba(180, 83, 9, 0.25); display: flex; align-items: center; justify-content: center; transition: all 0.3s; color: #94a3b8; }
+        footer .social-circle:hover { background: var(--gradient-accent); border-color: var(--accent); color: #fff; transform: translateY(-3px); }
+    </style>
+</head>
+<body>
+
+    <!-- ========================================== -->
+    <!-- NAVBAR COMPONENT (Services active)         -->
+    <!-- ========================================== -->
+    <nav class="navbar" id="main-nav">
+        <div class="w-full flex items-center justify-between max-w-[1440px] mx-auto px-6">
+            <!-- Brand (Thunder/Wire Logo) -->
+            <a href="index.html" class="brand-link">
+                <div class="brand-icon-wrapper"><i class="fa-solid fa-bolt"></i></div>
+                <div class="brand-logo"><span>Volt</span>Nest</div>
+            </a>
+
+            <!-- Desktop Links -->
+            <div class="hidden xl:flex items-center justify-center flex-1 px-4">
+                <div class="nav-pills">
+                    <div class="dropdown-pill">
+                        <a href="#" class="nav-pill">
+                            Home <i class="fas fa-chevron-down"></i>
+                        </a>
+                        <div class="dropdown-pill-menu">
+                            <a href="index.html" class="dropdown-pill-item">Home 1</a>
+                            <a href="home-2.html" class="dropdown-pill-item">Home 2</a>
+                        </div>
+                    </div>
+                    <a href="about.html" class="nav-pill">About Us</a>
+                    <a href="services.html" class="nav-pill active">Services</a>
+                    <a href="fittings.html" class="nav-pill">Fan &amp; Light</a>
+                    <a href="switchboards.html" class="nav-pill">Switchboards</a>
+                    <a href="price.html" class="nav-pill">Price</a>
+                    <a href="contact.html" class="nav-pill">Contact</a>
+                </div>
+            </div>
+
+            <!-- Desktop Actions -->
+            <div class="hidden xl:flex items-center gap-4">
+                <a href="contact.html" class="btn btn-outline"><i class="fas fa-calendar-check text-[var(--accent)]"></i> Book</a>
+                <div class="w-px h-6 bg-[var(--border-light)] mx-1"></div>
+                <!-- Desktop Toggles -->
+                <button id="theme-toggle" class="theme-btn" aria-label="Toggle theme"><i class="fas fa-moon"></i></button>
+                <button id="rtl-btn" class="rtl-toggle">LTR</button>
+            </div>
+
+            <!-- Mobile Trigger -->
+            <button class="xl:hidden text-2xl text-[var(--text-main)] w-10 h-10 flex items-center justify-center rounded-full bg-[var(--bg-card)] border border-[var(--border-light)] shadow-md" onclick="toggleMenu()">
+                <i class="fas fa-bars text-[var(--accent)]"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Drawer -->
+    <div class="drawer-overlay" id="drawer-overlay" onclick="toggleMenu()"></div>
+    <div class="fullscreen-menu" id="fullscreen-menu">
+        <div class="p-6 flex justify-between items-center border-b border-[var(--border-light)]">
+            <a href="index.html" class="brand-link"><div class="brand-icon-wrapper"><i class="fa-solid fa-bolt"></i></div><div class="brand-logo"><span>Volt</span>Nest</div></a>
+            <button class="text-2xl text-[var(--text-main)] hover:text-[var(--accent)] transition-colors w-10 h-10 flex items-center justify-center rounded-full bg-[var(--bg-secondary)]" onclick="toggleMenu()"><i class="fas fa-times"></i></button>
+        </div>
+
+        <div class="flex-1 overflow-y-auto py-4">
+            <div class="px-8 py-4 font-bold text-[15px] text-[var(--text-main)] flex justify-between items-center cursor-pointer border-b border-[var(--border-light)]" onclick="document.getElementById('mobile-home-menu').classList.toggle('open')">
+                Home <i class="fas fa-chevron-down text-sm text-[var(--accent)]"></i>
+            </div>
+            <div id="mobile-home-menu" class="mobile-dropdown-items">
+                <a href="index.html" class="mobile-link !text-[13px] !py-3 !border-none text-[var(--text-muted)] hover:text-[var(--accent)]"><i class="fas fa-arrow-right text-[10px] mr-2"></i> Home 1</a>
+                <a href="home-2.html" class="mobile-link !text-[13px] !py-3 !border-none text-[var(--text-muted)] hover:text-[var(--accent)]"><i class="fas fa-arrow-right text-[10px] mr-2"></i> Home 2</a>
+            </div>
+            <a href="about.html" class="mobile-link">About Us</a>
+            <a href="services.html" class="mobile-link active">Services</a>
+            <a href="fittings.html" class="mobile-link">Fan &amp; Light</a>
+            <a href="switchboards.html" class="mobile-link">Switchboards</a>
+            <a href="price.html" class="mobile-link">price</a>
+            <a href="contact.html" class="mobile-link">Contact</a>
+        </div>
+
+        <div class="p-6 border-t border-[var(--border-light)] bg-[var(--bg-secondary)] space-y-5">
+            <!-- Mobile Toggles added here -->
+            <div class="flex justify-between items-center w-full pb-2">
+                <div class="flex items-center gap-3">
+                    <span class="text-[var(--text-main)] font-bold text-[11px] uppercase tracking-widest">Theme Mode</span>
+                    <button id="theme-toggle-mobile" class="theme-btn" aria-label="Toggle theme">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </div>
+                <div class="flex items-center gap-3">
+                    <span class="text-[var(--text-main)] font-bold text-[11px] uppercase tracking-widest">Layout</span>
+                    <button id="rtl-btn-mobile" class="rtl-toggle">
+                        LTR
+                    </button>
+                </div>
+            </div>
+            <a href="contact.html" class="btn btn-outline w-full !py-3.5 justify-center"><i class="fas fa-calendar-check mr-2 text-[var(--accent)]"></i> Book Service</a>
+            <a href="tel:+18005559473" class="btn btn-solid w-full !py-3.5 justify-center"><i class="fas fa-phone-volume mr-2"></i> Emergency Call</a>
+        </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- HERO — FULL VIEWPORT BACKGROUND IMAGE      -->
+    <!-- ========================================== -->
+    <section class="page-hero" id="services-hero">
+        <div class="page-hero-bg" aria-hidden="true"></div>
+        <div class="page-hero-overlay" aria-hidden="true"></div>
+
+        <div class="page-hero-inner">
+            <div class="hero-breadcrumb">
+                <a href="index.html">Home</a>
+                <i class="fas fa-chevron-right sep"></i>
+                <span class="current">Services</span>
+            </div>
+
+            <h1>
+                Complete wiring services,<br />
+                <em>done right the first time.</em>
+            </h1>
+
+            <p class="lead">
+                From a single socket to a full home rewire, our licensed master electricians deliver
+                safe, code-compliant and neatly finished electrical work — backed by upfront pricing
+                and a 12-month workmanship warranty.
+            </p>
+
+            <div class="page-hero-cta">
+                <a href="contact.html" class="btn btn-solid !py-3.5 !px-8">
+                    <span>Book a Service</span> <i class="fas fa-arrow-right"></i>
+                </a>
+                <a href="price.html" class="btn-ghost">
+                    <i class="fas fa-tags"></i> <span>View Pricing</span>
+                </a>
+            </div>
+
+            <div class="hero-stat-strip">
+                <div>
+                    <div class="num">6+</div>
+                    <div class="lbl">Core Services</div>
+                </div>
+                <div>
+                    <div class="num">24/7</div>
+                    <div class="lbl">Emergency Response</div>
+                </div>
+                <div>
+                    <div class="num">12 mo</div>
+                    <div class="lbl">Workmanship Warranty</div>
+                </div>
+            </div>
+        </div>
+
+        <a href="#main-nav" class="scroll-cue" aria-label="Scroll">
+            <span>Scroll</span>
+            <i class="fas fa-chevron-down text-[11px]"></i>
+        </a>
+    </section>
+
+<!-- ============================================================ -->
+    <!-- SECTION 1: CORE ELECTRICAL SERVICES GRID                     -->
+    <!-- ============================================================ -->
+    <section class="py-24 bg-[var(--bg-color)] transition-colors">
+        <div class="max-w-[1380px] mx-auto px-6 sm:px-8 lg:px-12">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-xs font-bold uppercase tracking-widest text-[var(--accent)]">What We Do</span>
+                <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[var(--text-main)] font-display mt-3">
+                    Master-Grade Residential Services
+                </h2>
+                <p class="text-[var(--text-muted)] text-sm sm:text-base mt-4 leading-relaxed">
+                    Every installation and repair is executed to strict National Electrical Code standards using heavy-duty, commercial-grade components.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="rounded-[28px] bg-[var(--bg-card)] border border-[var(--border-light)] shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group overflow-hidden">
+                    <div>
+                        <div class="h-48 overflow-hidden relative">
+                            <img src="img/oi6.webp" alt="Home Wiring & Rewiring" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <div class="absolute top-4 left-4 w-10 h-10 rounded-xl bg-[var(--bg-card)] border border-[var(--border-light)] flex items-center justify-center text-[var(--accent)] shadow-md">
+                                <i class="fas fa-plug-circle-bolt"></i>
+                            </div>
+                        </div>
+                        <div class="p-8 pb-4">
+                            <h3 class="text-xl font-bold text-[var(--text-main)] font-display mb-3">Home Wiring &amp; Rewiring</h3>
+                            <p class="text-sm text-[var(--text-muted)] leading-relaxed">
+                                Complete replacement of aging cloth, knob-and-tube, or aluminum wiring with modern copper Romex circuits and grounded outlets.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="p-8 pt-0">
+                        <a href="contact.html" class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[var(--accent)] group-hover:gap-3 transition-all">
+                            Request Quote <i class="fas fa-arrow-right text-[10px]"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="rounded-[28px] bg-[var(--bg-card)] border border-[var(--border-light)] shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group overflow-hidden">
+                    <div>
+                        <div class="h-48 overflow-hidden relative">
+                            <img src="img/oi7.webp" alt="Switchboard & Panel Upgrades" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <div class="absolute top-4 left-4 w-10 h-10 rounded-xl bg-[var(--bg-card)] border border-[var(--border-light)] flex items-center justify-center text-[var(--accent)] shadow-md">
+                                <i class="fas fa-server"></i>
+                            </div>
+                        </div>
+                        <div class="p-8 pb-4">
+                            <h3 class="text-xl font-bold text-[var(--text-main)] font-display mb-3">Switchboard &amp; Panel Upgrades</h3>
+                            <p class="text-sm text-[var(--text-muted)] leading-relaxed">
+                                Upgrading overloaded 60A–100A fuse boxes to modern 200A circuit breaker panels with whole-home surge protection and AFCI/GFCI safety.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="p-8 pt-0">
+                        <a href="switchboards.html" class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[var(--accent)] group-hover:gap-3 transition-all">
+                            Explore Panels <i class="fas fa-arrow-right text-[10px]"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="rounded-[28px] bg-[var(--bg-card)] border border-[var(--border-light)] shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group overflow-hidden">
+                    <div>
+                        <div class="h-48 overflow-hidden relative">
+                            <img src="https://images.unsplash.com/photo-1540932239986-30128078f3c5?auto=format&fit=crop&q=80&w=800" alt="Fan & Custom Light Fitting" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <div class="absolute top-4 left-4 w-10 h-10 rounded-xl bg-[var(--bg-card)] border border-[var(--border-light)] flex items-center justify-center text-[var(--accent)] shadow-md">
+                                <i class="fas fa-fan"></i>
+                            </div>
+                        </div>
+                        <div class="p-8 pb-4">
+                            <h3 class="text-xl font-bold text-[var(--text-main)] font-display mb-3">Fan &amp; Custom Light Fitting</h3>
+                            <p class="text-sm text-[var(--text-muted)] leading-relaxed">
+                                Precision mounting and balancing for ceiling fans, statement chandeliers, recessed architectural LEDs, and smart dimmer ecosystems.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="p-8 pt-0">
+                        <a href="fittings.html" class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[var(--accent)] group-hover:gap-3 transition-all">
+                            View Fittings <i class="fas fa-arrow-right text-[10px]"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="rounded-[28px] bg-[var(--bg-card)] border border-[var(--border-light)] shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group overflow-hidden">
+                    <div>
+                        <div class="h-48 overflow-hidden relative">
+                            <img src="img/pic2.webp" alt="EV Charger Installation" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <div class="absolute top-4 left-4 w-10 h-10 rounded-xl bg-[var(--bg-card)] border border-[var(--border-light)] flex items-center justify-center text-[var(--accent)] shadow-md">
+                                <i class="fas fa-charging-station"></i>
+                            </div>
+                        </div>
+                        <div class="p-8 pb-4">
+                            <h3 class="text-xl font-bold text-[var(--text-main)] font-display mb-3">EV Charger Installation</h3>
+                            <p class="text-sm text-[var(--text-muted)] leading-relaxed">
+                                Dedicated 240V Level-2 charging circuits engineered for Tesla, Rivian, and universal J1772 electric vehicles with load calculation.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="p-8 pt-0">
+                        <a href="contact.html" class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[var(--accent)] group-hover:gap-3 transition-all">
+                            Book Install <i class="fas fa-arrow-right text-[10px]"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="rounded-[28px] bg-[var(--bg-card)] border border-[var(--border-light)] shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group overflow-hidden">
+                    <div>
+                        <div class="h-48 overflow-hidden relative">
+                            <img src="https://images.unsplash.com/photo-1558002038-1055907df827?auto=format&fit=crop&q=80&w=800" alt="Smart Home & Automation" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <div class="absolute top-4 left-4 w-10 h-10 rounded-xl bg-[var(--bg-card)] border border-[var(--border-light)] flex items-center justify-center text-[var(--accent)] shadow-md">
+                                <i class="fas fa-house-signal"></i>
+                            </div>
+                        </div>
+                        <div class="p-8 pb-4">
+                            <h3 class="text-xl font-bold text-[var(--text-main)] font-display mb-3">Smart Home &amp; Automation</h3>
+                            <p class="text-sm text-[var(--text-muted)] leading-relaxed">
+                                Hardwired smart switches, automated blinds wiring, whole-home Wi-Fi access point drops, and structured Cat6a ethernet cabling.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="p-8 pt-0">
+                        <a href="contact.html" class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[var(--accent)] group-hover:gap-3 transition-all">
+                            Request Quote <i class="fas fa-arrow-right text-[10px]"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Card 6 -->
+                <div class="rounded-[28px] bg-[var(--bg-card)] border border-[var(--border-light)] shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group overflow-hidden">
+                    <div>
+                        <div class="h-48 overflow-hidden relative">
+                            <img src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&fit=crop&q=80&w=800" alt="24/7 Emergency Fault Finding" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <div class="absolute top-4 left-4 w-10 h-10 rounded-xl bg-[var(--bg-card)] border border-[var(--border-light)] flex items-center justify-center text-[var(--accent)] shadow-md">
+                                <i class="fas fa-triangle-exclamation"></i>
+                            </div>
+                        </div>
+                        <div class="p-8 pb-4">
+                            <h3 class="text-xl font-bold text-[var(--text-main)] font-display mb-3">24/7 Emergency Fault Finding</h3>
+                            <p class="text-sm text-[var(--text-muted)] leading-relaxed">
+                                Rapid thermal imaging and diagnostic dispatch for tripping breakers, burning smells, sparking outlets, and partial power outages.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="p-8 pt-0">
+                        <a href="tel:+18005559473" class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[var(--accent)] group-hover:gap-3 transition-all">
+                            Call Dispatch <i class="fas fa-phone text-[10px]"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- SECTION 2: ELECTRICAL HAZARD SYMPTOMS & DIAGNOSTIC           -->
+    <!-- ============================================================ -->
+    <section class="py-24 bg-[var(--bg-secondary)] border-y border-[var(--border-light)] transition-colors">
+        <div class="max-w-[1380px] mx-auto px-6 sm:px-8 lg:px-12">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-14 gap-6">
+                <div class="max-w-xl">
+                    <span class="text-xs uppercase tracking-widest text-[var(--accent)] font-bold">Home Safety Audit</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-[var(--text-main)] font-display mt-2">
+                        Warning Signs Your Wiring Needs Immediate Attention
+                    </h2>
+                </div>
+                <p class="text-[var(--text-muted)] text-sm max-w-md leading-relaxed">
+                    Hidden electrical faults are the leading cause of residential structure fires. Never ignore these early warning indicators inside your home.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="p-7 rounded-3xl bg-[var(--bg-card)] border border-[var(--border-light)] hover:border-[var(--accent)] transition-all">
+                    <div class="w-12 h-12 rounded-xl bg-rose-500/10 text-rose-500 flex items-center justify-center mb-5 text-xl">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-[var(--text-main)] mb-2 font-display">Frequent Tripping</h3>
+                    <p class="text-xs text-[var(--text-muted)] leading-relaxed mb-4">
+                        Circuit breakers that repeatedly trip when running kitchen appliances or HVAC units indicate dangerous circuit overloads or short circuits.
+                    </p>
+                    <span class="text-[11px] font-bold text-rose-500 uppercase tracking-wider flex items-center gap-1.5">
+                        <i class="fas fa-circle-exclamation"></i> High Fire Risk
+                    </span>
+                </div>
+
+                <div class="p-7 rounded-3xl bg-[var(--bg-card)] border border-[var(--border-light)] hover:border-[var(--accent)] transition-all">
+                    <div class="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-500 flex items-center justify-center mb-5 text-xl">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-[var(--text-main)] mb-2 font-display">Flickering &amp; Dimming</h3>
+                    <p class="text-xs text-[var(--text-muted)] leading-relaxed mb-4">
+                        Lights that dim when the AC kicks on or flicker randomly point to loose neutral connections or deteriorating service lugs.
+                    </p>
+                    <span class="text-[11px] font-bold text-amber-500 uppercase tracking-wider flex items-center gap-1.5">
+                        <i class="fas fa-triangle-exclamation"></i> Arcing Hazard
+                    </span>
+                </div>
+
+                <div class="p-7 rounded-3xl bg-[var(--bg-card)] border border-[var(--border-light)] hover:border-[var(--accent)] transition-all">
+                    <div class="w-12 h-12 rounded-xl bg-rose-500/10 text-rose-500 flex items-center justify-center mb-5 text-xl">
+                        <i class="fas fa-temperature-high"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-[var(--text-main)] mb-2 font-display">Warm or Scorched Outlets</h3>
+                    <p class="text-xs text-[var(--text-muted)] leading-relaxed mb-4">
+                        Wall plates that feel warm to the touch, emit a faint fishy or plastic odor, or show brown discoloration require immediate shutoff.
+                    </p>
+                    <span class="text-[11px] font-bold text-rose-500 uppercase tracking-wider flex items-center gap-1.5">
+                        <i class="fas fa-circle-exclamation"></i> Critical Emergency
+                    </span>
+                </div>
+
+                <div class="p-7 rounded-3xl bg-[var(--bg-card)] border border-[var(--border-light)] hover:border-[var(--accent)] transition-all">
+                    <div class="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-500 flex items-center justify-center mb-5 text-xl">
+                        <i class="fas fa-wave-square"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-[var(--text-main)] mb-2 font-display">Buzzing Switchboards</h3>
+                    <p class="text-xs text-[var(--text-muted)] leading-relaxed mb-4">
+                        Audible humming, crackling, or buzzing sounds inside your main breaker panel mean a breaker is failing to trip under load.
+                    </p>
+                    <span class="text-[11px] font-bold text-amber-500 uppercase tracking-wider flex items-center gap-1.5">
+                        <i class="fas fa-triangle-exclamation"></i> Panel Failure
+                    </span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- SECTION 3: 4-STEP SERVICE WORKFLOW                           -->
+    <!-- ============================================================ -->
+    <section class="py-24 bg-[var(--bg-color)] transition-colors">
+        <div class="max-w-[1380px] mx-auto px-6 sm:px-8 lg:px-12">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-xs font-bold uppercase tracking-widest text-[var(--accent)]">How We Work</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-[var(--text-main)] font-display mt-2">
+                    Our 4-Step Craftsmanship Standard
+                </h2>
+                <p class="text-[var(--text-muted)] text-sm mt-3">
+                    No surprise bills, no messy drywall dust left behind. Just clean, methodical electrical engineering.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="p-8 rounded-3xl bg-[var(--bg-card)] border border-[var(--border-light)] relative overflow-hidden">
+                    <div class="text-4xl font-extrabold text-[var(--accent)]/15 font-display absolute top-5 right-6">01</div>
+                    <div class="w-11 h-11 rounded-full bg-[var(--bg-secondary)] border border-[var(--border-light)] flex items-center justify-center text-[var(--accent)] font-bold text-sm mb-5">
+                        <i class="fas fa-magnifying-glass-chart"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-[var(--text-main)] font-display mb-2">On-Site Load Audit</h3>
+                    <p class="text-xs text-[var(--text-muted)] leading-relaxed">
+                        We test circuit continuity, grounding resistance, and thermal load across your switchboard before touching a single wire.
+                    </p>
+                </div>
+
+                <div class="p-8 rounded-3xl bg-[var(--bg-card)] border border-[var(--border-light)] relative overflow-hidden">
+                    <div class="text-4xl font-extrabold text-[var(--accent)]/15 font-display absolute top-5 right-6">02</div>
+                    <div class="w-11 h-11 rounded-full bg-[var(--bg-secondary)] border border-[var(--border-light)] flex items-center justify-center text-[var(--accent)] font-bold text-sm mb-5">
+                        <i class="fas fa-file-invoice-dollar"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-[var(--text-main)] font-display mb-2">Upfront Fixed Quote</h3>
+                    <p class="text-xs text-[var(--text-muted)] leading-relaxed">
+                        You receive a clear, itemized written quote before work begins. We charge by the job—never by the padded hour.
+                    </p>
+                </div>
+
+                <div class="p-8 rounded-3xl bg-[var(--bg-card)] border border-[var(--border-light)] relative overflow-hidden">
+                    <div class="text-4xl font-extrabold text-[var(--accent)]/15 font-display absolute top-5 right-6">03</div>
+                    <div class="w-11 h-11 rounded-full bg-[var(--bg-secondary)] border border-[var(--border-light)] flex items-center justify-center text-[var(--accent)] font-bold text-sm mb-5">
+                        <i class="fas fa-screwdriver-wrench"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-[var(--text-main)] font-display mb-2">Code-Compliant Install</h3>
+                    <p class="text-xs text-[var(--text-muted)] leading-relaxed">
+                        Our master electricians route cables cleanly, label every breaker legibly, and wear shoe covers to protect your floors.
+                    </p>
+                </div>
+
+                <div class="p-8 rounded-3xl bg-[var(--bg-card)] border border-[var(--border-light)] relative overflow-hidden">
+                    <div class="text-4xl font-extrabold text-[var(--accent)]/15 font-display absolute top-5 right-6">04</div>
+                    <div class="w-11 h-11 rounded-full bg-[var(--bg-secondary)] border border-[var(--border-light)] flex items-center justify-center text-[var(--accent)] font-bold text-sm mb-5">
+                        <i class="fas fa-shield-check fa-solid fa-certificate"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-[var(--text-main)] font-display mb-2">Safety Certification</h3>
+                    <p class="text-xs text-[var(--text-muted)] leading-relaxed">
+                        We run final voltage drop and RCD trip-time diagnostics and issue your 12-month workmanship warranty certificate.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- SECTION 4: SPECIALIZED PACKAGES & TRANSPARENT RATES          -->
+    <!-- ============================================================ -->
+    <section class="py-24 bg-[var(--bg-secondary)] border-y border-[var(--border-light)] transition-colors">
+        <div class="max-w-[1380px] mx-auto px-6 sm:px-8 lg:px-12">
+            <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-14 gap-6">
+                <div>
+                    <span class="text-xs uppercase tracking-widest text-[var(--accent)] font-bold">Upfront Estimates</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-[var(--text-main)] font-display mt-2">
+                        Popular Service Packages
+                    </h2>
+                </div>
+                <a href="price.html" class="btn btn-outline self-start sm:self-auto">
+                    Full Pricing Guide <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Package 1 -->
+                <div class="p-8 rounded-[28px] bg-[var(--bg-card)] border border-[var(--border-light)] flex flex-col justify-between">
+                    <div>
+                        <span class="inline-block px-3 py-1 rounded-full bg-[var(--bg-secondary)] border border-[var(--border-light)] text-[10px] font-bold uppercase tracking-wider text-[var(--accent)] mb-4">
+                            Fixture &amp; Outlet Pack
+                        </span>
+                        <h3 class="text-2xl font-bold text-[var(--text-main)] font-display">Room Refresh Bundle</h3>
+                        <p class="text-xs text-[var(--text-muted)] mt-2 leading-relaxed">
+                            Ideal for bedroom or living room upgrades requiring modern lighting and USB-C power outlets.
+                        </p>
+                        <div class="my-6 pt-6 border-t border-[var(--border-light)]">
+                            <span class="text-3xl font-extrabold text-[var(--text-main)] font-display">$280</span>
+                            <span class="text-xs text-[var(--text-muted)]"> / starting flat rate</span>
+                        </div>
+                        <ul class="space-y-3 text-xs text-[var(--text-muted)] mb-8">
+                            <li class="flex items-center gap-2.5"><i class="fas fa-check text-[var(--accent)]"></i> 1x Ceiling fan or chandelier install</li>
+                            <li class="flex items-center gap-2.5"><i class="fas fa-check text-[var(--accent)]"></i> Up to 3x new wall switches or dimmers</li>
+                            <li class="flex items-center gap-2.5"><i class="fas fa-check text-[var(--accent)]"></i> 2x Tamper-resistant outlet replacements</li>
+                            <li class="flex items-center gap-2.5"><i class="fas fa-check text-[var(--accent)]"></i> Circuit polarity &amp; ground safety check</li>
+                        </ul>
+                    </div>
+                    <a href="contact.html" class="btn btn-outline w-full justify-center">Book This Package</a>
+                </div>
+
+                <!-- Package 2 (Featured) -->
+                <div class="p-8 rounded-[28px] bg-[var(--bg-card)] border-2 border-[var(--accent)] shadow-xl flex flex-col justify-between relative">
+                    <span class="absolute -top-3.5 right-6 px-4 py-1 rounded-full bg-[var(--accent)] text-white text-[10px] font-bold uppercase tracking-widest shadow">
+                        Most Popular
+                    </span>
+                    <div>
+                        <span class="inline-block px-3 py-1 rounded-full bg-[var(--bg-secondary)] border border-[var(--border-light)] text-[10px] font-bold uppercase tracking-wider text-[var(--accent)] mb-4">
+                            Core Protection
+                        </span>
+                        <h3 class="text-2xl font-bold text-[var(--text-main)] font-display">200A Panel Upgrade</h3>
+                        <p class="text-xs text-[var(--text-muted)] mt-2 leading-relaxed">
+                            Complete switchboard replacement engineered for modern high-draw homes, EVs, and heat pumps.
+                        </p>
+                        <div class="my-6 pt-6 border-t border-[var(--border-light)]">
+                            <span class="text-3xl font-extrabold text-[var(--text-main)] font-display">$1,850</span>
+                            <span class="text-xs text-[var(--text-muted)]"> / turnkey installation</span>
+                        </div>
+                        <ul class="space-y-3 text-xs text-[var(--text-muted)] mb-8">
+                            <li class="flex items-center gap-2.5"><i class="fas fa-check text-[var(--accent)]"></i> 200-Amp copper bus main breaker panel</li>
+                            <li class="flex items-center gap-2.5"><i class="fas fa-check text-[var(--accent)]"></i> Type-2 whole-house surge arrestor</li>
+                            <li class="flex items-center gap-2.5"><i class="fas fa-check text-[var(--accent)]"></i> New dual ground rods &amp; bonding loop</li>
+                            <li class="flex items-center gap-2.5"><i class="fas fa-check text-[var(--accent)]"></i> Municipal permit &amp; inspection handling</li>
+                        </ul>
+                    </div>
+                    <a href="contact.html" class="btn btn-solid w-full justify-center">Schedule Panel Audit</a>
+                </div>
+
+                <!-- Package 3 -->
+                <div class="p-8 rounded-[28px] bg-[var(--bg-card)] border border-[var(--border-light)] flex flex-col justify-between">
+                    <div>
+                        <span class="inline-block px-3 py-1 rounded-full bg-[var(--bg-secondary)] border border-[var(--border-light)] text-[10px] font-bold uppercase tracking-wider text-[var(--accent)] mb-4">
+                            Diagnostic &amp; Safety
+                        </span>
+                        <h3 class="text-2xl font-bold text-[var(--text-main)] font-display">Whole-Home Safety Audit</h3>
+                        <p class="text-xs text-[var(--text-muted)] mt-2 leading-relaxed">
+                            Comprehensive 40-point inspection for older homes, pre-purchase buyers, or insurance compliance.
+                        </p>
+                        <div class="my-6 pt-6 border-t border-[var(--border-light)]">
+                            <span class="text-3xl font-extrabold text-[var(--text-main)] font-display">$149</span>
+                            <span class="text-xs text-[var(--text-muted)]"> / waived with any repair</span>
+                        </div>
+                        <ul class="space-y-3 text-xs text-[var(--text-muted)] mb-8">
+                            <li class="flex items-center gap-2.5"><i class="fas fa-check text-[var(--accent)]"></i> Thermal camera switchboard scan</li>
+                            <li class="flex items-center gap-2.5"><i class="fas fa-check text-[var(--accent)]"></i> Smoke &amp; CO hardwired detector test</li>
+                            <li class="flex items-center gap-2.5"><i class="fas fa-check text-[var(--accent)]"></i> GFCI wet-area trip response testing</li>
+                            <li class="flex items-center gap-2.5"><i class="fas fa-check text-[var(--accent)]"></i> Digital compliance report &amp; photos</li>
+                        </ul>
+                    </div>
+                    <a href="contact.html" class="btn btn-outline w-full justify-center">Book Inspection</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- SECTION 5: LIVE DIAGNOSTIC & SAFETY COMPLIANCE SHOWCASE      -->
+    <!-- ============================================================ -->
+    <section class="py-24 bg-[var(--bg-color)] transition-colors">
+        <div class="max-w-[1380px] mx-auto px-6 sm:px-8 lg:px-12">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <div class="lg:col-span-6 space-y-6">
+                    <span class="text-xs uppercase tracking-widest text-[var(--accent)] font-bold">Precision Testing</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-[var(--text-main)] font-display leading-tight">
+                        We Test Every Circuit To The Millisecond.
+                    </h2>
+                    <p class="text-[var(--text-muted)] text-sm sm:text-base leading-relaxed">
+                        Visual inspections aren't enough. Our vans carry calibrated Fluke multifunction testers and infrared thermography cameras to spot high-resistance joints behind walls before they fail.
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+                        <div class="p-5 rounded-2xl bg-[var(--bg-card)] border border-[var(--border-light)]">
+                            <div class="text-sm font-bold text-[var(--text-main)] mb-1 flex items-center gap-2">
+                                <i class="fas fa-Fire-flame-simple text-[var(--accent)]"></i> Thermal Load Scan
+                            </div>
+                            <p class="text-xs text-[var(--text-muted)]">Pinpoints hot spots and loose breaker lugs under peak amperage load.</p>
+                        </div>
+                        <div class="p-5 rounded-2xl bg-[var(--bg-card)] border border-[var(--border-light)]">
+                            <div class="text-sm font-bold text-[var(--text-main)] mb-1 flex items-center gap-2">
+                                <i class="fas fa-stopwatch text-[var(--accent)]"></i> RCD Trip Timing
+                            </div>
+                            <p class="text-xs text-[var(--text-muted)]">Verifies safety switches cut power in under 40 milliseconds during faults.</p>
+                        </div>
+                        <div class="p-5 rounded-2xl bg-[var(--bg-card)] border border-[var(--border-light)]">
+                            <div class="text-sm font-bold text-[var(--text-main)] mb-1 flex items-center gap-2">
+                                <i class="fas fa-shield-halved text-[var(--accent)]"></i> Insulation Resistance
+                            </div>
+                            <p class="text-xs text-[var(--text-muted)]">500V megger testing to detect nicked or rodent-damaged cable sheathing.</p>
+                        </div>
+                        <div class="p-5 rounded-2xl bg-[var(--bg-card)] border border-[var(--border-light)]">
+                            <div class="text-sm font-bold text-[var(--text-main)] mb-1 flex items-center gap-2">
+                                <i class="fas fa-anchor text-[var(--accent)]"></i> Earth Loop Impedance
+                            </div>
+                            <p class="text-xs text-[var(--text-muted)]">Confirms a low-resistance path to ground for lightning and surge dissipation.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-6">
+                    <div class="p-8 rounded-[28px] bg-[var(--bg-card)] border border-[var(--border-light)] shadow-xl">
+                        <div class="flex flex-wrap items-center justify-between border-b border-[var(--border-light)] pb-5 mb-6 gap-4">
+                            <div class="flex items-center gap-3">
+                                <div class="w-11 h-11 rounded-full bg-emerald-500/10 text-emerald-500 flex items-center justify-center font-bold text-lg">
+                                    <i class="fas fa-check-double"></i>
+                                </div>
+                                <div>
+                                    <div class="text-sm font-bold text-[var(--text-main)]">Post-Service Safety Scorecard</div>
+                                    <div class="text-xs text-[var(--text-muted)]">Sample Residential Commissioning Report</div>
+                                </div>
+                            </div>
+                            <span class="text-[10px] bg-emerald-500 text-white font-bold px-3 py-1 rounded-full uppercase tracking-wider">NEC Compliant</span>
+                        </div>
+
+                        <div class="space-y-5">
+                            <div>
+                                <div class="flex justify-between text-xs font-semibold text-[var(--text-main)] mb-2">
+                                    <span>GFCI / RCD Trip Response Time</span>
+                                    <span class="text-emerald-500 font-bold">18 ms (Optimal &lt; 40 ms)</span>
+                                </div>
+                                <div class="w-full bg-[var(--bg-secondary)] h-2.5 rounded-full overflow-hidden">
+                                    <div class="bg-emerald-500 h-full rounded-full" style="width: 94%"></div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="flex justify-between text-xs font-semibold text-[var(--text-main)] mb-2">
+                                    <span>Cable Insulation Integrity (Megger)</span>
+                                    <span class="text-emerald-500 font-bold">&gt; 200 MΩ (Zero Leakage)</span>
+                                </div>
+                                <div class="w-full bg-[var(--bg-secondary)] h-2.5 rounded-full overflow-hidden">
+                                    <div class="bg-emerald-500 h-full rounded-full" style="width: 98%"></div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="flex justify-between text-xs font-semibold text-[var(--text-main)] mb-2">
+                                    <span>Panel Busbar Thermal Load</span>
+                                    <span class="text-[var(--accent)] font-bold">31°C (Cool &amp; Balanced)</span>
+                                </div>
+                                <div class="w-full bg-[var(--bg-secondary)] h-2.5 rounded-full overflow-hidden">
+                                    <div class="bg-[var(--accent)] h-full rounded-full" style="width: 88%"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <p class="text-xs text-[var(--text-dim)] mt-6 text-center italic">
+                            *Every VoltNest installation includes a signed digital test certificate for your home insurance records.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- SECTION 6: SERVICE FAQS & EMERGENCY DISPATCH BANNER          -->
+    <!-- ============================================================ -->
+    <section class="py-24 bg-[var(--bg-secondary)] border-t border-[var(--border-light)] transition-colors">
+        <div class="max-w-[1380px] mx-auto px-6 sm:px-8 lg:px-12">
+            <div class="text-center max-w-2xl mx-auto mb-14">
+                <span class="text-xs uppercase tracking-widest text-[var(--accent)] font-bold">Common Questions</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-[var(--text-main)] font-display mt-2">
+                    Electrical Service FAQs
+                </h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
+                <div class="p-7 rounded-3xl bg-[var(--bg-card)] border border-[var(--border-light)]">
+                    <h3 class="text-base font-bold text-[var(--text-main)] font-display mb-2 flex items-center gap-2.5">
+                        <i class="fas fa-circle-question text-[var(--accent)]"></i> Do I need a permit for a panel upgrade?
+                    </h3>
+                    <p class="text-xs text-[var(--text-muted)] leading-relaxed">
+                        Yes. All main switchboard upgrades and new sub-panels require a municipal permit and utility coordination. Our team handles 100% of the paperwork and inspector sign-off for you.
+                    </p>
+                </div>
+
+                <div class="p-7 rounded-3xl bg-[var(--bg-card)] border border-[var(--border-light)]">
+                    <h3 class="text-base font-bold text-[var(--text-main)] font-display mb-2 flex items-center gap-2.5">
+                        <i class="fas fa-circle-question text-[var(--accent)]"></i> Can you rewire my home without tearing down walls?
+                    </h3>
+                    <p class="text-xs text-[var(--text-muted)] leading-relaxed">
+                        In most homes, yes. We use flexible fiberglass fish tapes, attic/crawlspace access, and existing conduit paths to pull new copper wiring with minimal to zero drywall cutting.
+                    </p>
+                </div>
+
+                <div class="p-7 rounded-3xl bg-[var(--bg-card)] border border-[var(--border-light)]">
+                    <h3 class="text-base font-bold text-[var(--text-main)] font-display mb-2 flex items-center gap-2.5">
+                        <i class="fas fa-circle-question text-[var(--accent)]"></i> How fast is your emergency response?
+                    </h3>
+                    <p class="text-xs text-[var(--text-muted)] leading-relaxed">
+                        Our on-call master electricians are stationed across the metro area and typically arrive within 60 to 90 minutes for urgent power outages, sparking panels, or storm damage.
+                    </p>
+                </div>
+
+                <div class="p-7 rounded-3xl bg-[var(--bg-card)] border border-[var(--border-light)]">
+                    <h3 class="text-base font-bold text-[var(--text-main)] font-display mb-2 flex items-center gap-2.5">
+                        <i class="fas fa-circle-question text-[var(--accent)]"></i> What does your 12-month warranty cover?
+                    </h3>
+                    <p class="text-xs text-[var(--text-muted)] leading-relaxed">
+                        Every circuit, breaker, switch, or fixture we supply and install is covered for 12 full months. If any connection or component fails, we return and replace it free of charge.
+                    </p>
+                </div>
+            </div>
+
+            <!-- CTA Banner -->
+            <div class="p-8 sm:p-12 rounded-[28px] bg-gradient-to-r from-[#0f172a] to-[#1e293b] border border-[var(--border-light)] text-white flex flex-col lg:flex-row items-center justify-between gap-8 shadow-2xl">
+                <div class="space-y-2 text-center lg:text-left max-w-xl">
+                    <span class="text-[11px] font-bold uppercase tracking-widest text-[#fbbf24]">Ready When You Are</span>
+                    <h3 class="text-2xl sm:text-3xl font-extrabold font-display">Need a Licensed Electrician Today?</h3>
+                    <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                        Book an appointment online for upfront pricing or call our 24/7 dispatch line for immediate same-day assistance.
+                    </p>
+                </div>
+                <div class="flex flex-wrap justify-center gap-4 shrink-0">
+                    <a href="contact.html" class="btn btn-solid !py-4 !px-8">
+                        <span>Book Online Now</span> <i class="fas fa-calendar-check"></i>
+                    </a>
+                    <a href="tel:+18005559473" class="btn !bg-white/10 !text-white !border !border-white/20 hover:!bg-white/20 !py-4 !px-8">
+                        <i class="fas fa-phone-volume text-[#fbbf24]"></i> <span>(800) 555-WIRE</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- FOOTER COMPONENT (exact)                   -->
+    <!-- ========================================== -->
+    <footer>
+        <div class="max-w-[1440px] mx-auto px-6 lg:px-12">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+
+                <!-- Brand Profile -->
+                <div>
+                    <a href="index.html" class="brand-link inline-flex">
+                        <div class="brand-icon-wrapper"><i class="fa-solid fa-bolt"></i></div>
+                        <div class="brand-logo text-white"><span class="text-[var(--accent)]">Volt</span>Nest</div>
+                    </a>
+                    <p class="text-[#94a3b8] text-sm leading-relaxed mt-4">Professional residential electrical and classic home wiring services. Dedicated to protecting your property and family with straightforward, safety-focused electrical installations and prompt repairs.</p>
+                    <div class="flex gap-3 mt-5">
+                        <a href="#" class="social-circle"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-circle"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-circle"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h4>Navigation</h4>
+                    <ul class="space-y-2.5">
+                        <li><a href="home-2.html" class="hover:pl-2 inline-flex items-center gap-2"><i class="fas fa-chevron-right text-[8px] text-[var(--accent)]"></i> Home</a></li>
+                        <li><a href="about.html" class="hover:pl-2 inline-flex items-center gap-2"><i class="fas fa-chevron-right text-[8px] text-[var(--accent)]"></i> About Us</a></li>
+                        <li><a href="services.html" class="hover:pl-2 inline-flex items-center gap-2"><i class="fas fa-chevron-right text-[8px] text-[var(--accent)]"></i> Services</a></li>
+                        <li><a href="gallery.html" class="hover:pl-2 inline-flex items-center gap-2"><i class="fas fa-chevron-right text-[8px] text-[var(--accent)]"></i> Gallery</a></li>
+                        <li><a href="contact.html" class="hover:pl-2 inline-flex items-center gap-2"><i class="fas fa-chevron-right text-[8px] text-[var(--accent)]"></i> Contact & Booking</a></li>
+                    </ul>
+                </div>
+
+                <!-- Offerings -->
+                <div>
+                    <h4>Core Services</h4>
+                    <ul class="space-y-2.5">
+                        <li><a href="services.html" class="hover:pl-2 inline-flex items-center gap-2"><i class="fas fa-chevron-right text-[8px] text-[var(--accent)]"></i> Home Wiring & Rewiring</a></li>
+                        <li><a href="fittings.html" class="hover:pl-2 inline-flex items-center gap-2"><i class="fas fa-chevron-right text-[8px] text-[var(--accent)]"></i> Fan & Light Fitting</a></li>
+                        <li><a href="switchboards.html" class="hover:pl-2 inline-flex items-center gap-2"><i class="fas fa-chevron-right text-[8px] text-[var(--accent)]"></i> Switchboard Repair</a></li>
+                        <li><a href="gallery.html" class="hover:pl-2 inline-flex items-center gap-2"><i class="fas fa-chevron-right text-[8px] text-[var(--accent)]"></i> Project Gallery</a></li>
+                        <li><a href="contact.html" class="hover:pl-2 inline-flex items-center gap-2"><i class="fas fa-chevron-right text-[8px] text-[var(--accent)]"></i> 24/7 Emergency Repairs</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Info -->
+                <div>
+                    <h4>Dispatch Headquarters</h4>
+                    <ul class="space-y-3 text-sm">
+                        <li class="flex items-start gap-3"><i class="fas fa-map-marker-alt text-[var(--accent)] mt-0.5"></i> <span class="text-[#94a3b8]">1200 Industrial Pkwy, Suite 400, Metro Area</span></li>
+                        <li class="flex items-start gap-3"><i class="fas fa-phone text-[var(--accent)] mt-0.5"></i> <span class="text-[#94a3b8]"><a href="tel:+18005559473">(800) 555-WIRE (9473)</a></span></li>
+                        <li class="flex items-start gap-3"><i class="fas fa-envelope text-[var(--accent)] mt-0.5"></i> <span class="text-[#94a3b8]"><a href="mailto:service@voltnest.com">service@voltnest.com</a></span></li>
+                        <li class="flex items-start gap-3"><i class="fas fa-clock text-[var(--accent)] mt-0.5"></i> <span class="text-[#94a3b8]">24/7 Emergency Dispatch Available</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Copyright -->
+            <div class="border-t border-[rgba(180,83,9,0.15)] py-6 mt-10 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-sm text-[#64748b]">&copy; 2026 <span class="text-[var(--accent)] font-semibold">VoltNest</span> Electrical Services. All rights reserved.</p>
+                <div class="flex gap-6 text-sm">
+                    <a href="" class="text-[#64748b] hover:text-[var(--accent)]">Workmanship Warranty</a>
+                    <a href="#" class="text-[#64748b] hover:text-[var(--accent)]">Privacy Policy</a>
+                    <a href="#" class="text-[#64748b] hover:text-[var(--accent)]">Safety Standards</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive Scripts -->
+    <script>
+        // Scroll Behavior
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('main-nav');
+            window.scrollY > 30 ? nav.classList.add('scrolled') : nav.classList.remove('scrolled');
+        });
+
+        // Mobile Menu
+        const menu = document.getElementById('fullscreen-menu');
+        const overlay = document.getElementById('drawer-overlay');
+        function toggleMenu() {
+            menu.classList.toggle('active');
+            overlay.classList.toggle('active');
+            document.body.style.overflow = menu.classList.contains('active') ? 'hidden' : 'auto';
+        }
+
+        // Theme Toggle (Syncs Desktop & Mobile Buttons)
+        const themeBtnDesk = document.getElementById('theme-toggle');
+        const themeBtnMob = document.getElementById('theme-toggle-mobile');
+
+        function toggleTheme() {
+            document.body.classList.toggle('dark-mode');
+            const isDark = document.body.classList.contains('dark-mode');
+            const iconClass = isDark ? 'fas fa-sun' : 'fas fa-moon';
+
+            if(themeBtnDesk) themeBtnDesk.querySelector('i').className = iconClass;
+            if(themeBtnMob) themeBtnMob.querySelector('i').className = iconClass;
+        }
+
+        if(themeBtnDesk) themeBtnDesk.addEventListener('click', toggleTheme);
+        if(themeBtnMob) themeBtnMob.addEventListener('click', toggleTheme);
+
+        // RTL Toggle (Syncs Desktop & Mobile Buttons)
+        const rtlBtnDesk = document.getElementById('rtl-btn');
+        const rtlBtnMob = document.getElementById('rtl-btn-mobile');
+
+        function toggleRTL() {
+            const html = document.documentElement;
+            html.dir = html.dir === 'rtl' ? 'ltr' : 'rtl';
+            const dirText = html.dir.toUpperCase();
+
+            if(rtlBtnDesk) rtlBtnDesk.textContent = dirText;
+            if(rtlBtnMob) rtlBtnMob.textContent = dirText;
+        }
+
+        if(rtlBtnDesk) rtlBtnDesk.addEventListener('click', toggleRTL);
+        if(rtlBtnMob) rtlBtnMob.addEventListener('click', toggleRTL);
+    </script>
+</body>
+</html>
